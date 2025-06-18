@@ -1,0 +1,7 @@
+
+@font-face {
+    font-family:"ft22 Normal";
+    src:url("ft22.woff2") format("woff2"),url("ft22.woff") format("woff"),url("ft22.otf") format("opentype");
+    font-style:normal;font-weight:400;
+}
+        

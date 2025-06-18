@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="icon" type="image/svg+xml" href="/static"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Литературные классики</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=7">
+</head>
+<body>
+    <div id="app" class="wrapper"></div>
+    <script type="module">
+        import { Game } from "./js/app.js";
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const game = new Game();
+            window.game = game;
+        });
+    </script>
+</body>
+</html>
