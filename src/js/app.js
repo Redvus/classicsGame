@@ -1,6 +1,7 @@
 import '../scss/main.scss';
 import { Intro } from "./Intro.js";
 import { Category } from "./Category.js";
+import { ChoiceCategory } from "./ChoiceCategory.js";
 
 export class Game {
     constructor(parameters) {
@@ -10,7 +11,8 @@ export class Game {
         // new Intro();
 
         //Develop
-        new Category('Ученик', 'Знаток', 'Хранитель');
+        // new Category(45,'Ученик', 'Знаток', 'Хранитель');
+        new ChoiceCategory();
     }
 
     initLayout() {
