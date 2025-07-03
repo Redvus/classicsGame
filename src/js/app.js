@@ -1,12 +1,16 @@
 import '../scss/main.scss';
 import { Intro } from "./Intro.js";
+import { Category } from "./Category.js";
 
 export class Game {
     constructor(parameters) {
         this.initLayout();
         this.initLayoutBack();
         this.initAppend();
-        new Intro();
+        // new Intro();
+
+        //Develop
+        new Category('Ученик', 'Знаток', 'Хранитель');
     }
 
     initLayout() {
@@ -45,6 +49,39 @@ export class Game {
         this.wrapperBack.appendChild(this.wrapperBackFirst);
         this.wrapperBack.appendChild(this.wrapperBackSecond);
         this.wrapperBack.appendChild(this.wrapperBackThird);
+    }
+
+    initMobile() {
+        /* Mobile */
+        this.wrapperMobile = document.createElement('div');
+        this.wrapperMobile.className = 'wrapper__mobile';
+        this.wrapperMobile.innerHTML = `
+            <p>Ваше устройство, к сожалению, не поддерживается&nbsp;– ширина экрана по большей стороне должна быть не&nbsp;менее&nbsp;1000&nbsp;пикселей для&nbsp;полного восприятия&nbsp;игры.<br><br>
+            Если устройство в&nbsp;вертикальной ориентации и по большей стороне имеет более&nbsp;1000&nbsp;пикселей, тогда переверните его и&nbsp;перезагрузите&nbsp;страницу.</p>
+        `;
+
+        /* Game Container */
+        this.wrapperContainer = document.createElement('div');
+        this.wrapperContainer.className = 'wrapper__mobile';
+        this.wrapperContainer.innerHTML = `
+            <p>Если ваше устройство находится в&nbsp;горизонтальной ориентации, вероятно, ширина экрана менее допустимых 1000&nbsp;пикселей.<br><br>
+            Если вы запускаете игру на&nbsp;компьютере, видимо, ширина браузера менее&nbsp;1000&nbsp;пикселей.<br>
+            Увеличьте ширину браузера и&nbsp;перезагрузите&nbsp;страницу.</p>
+        `;
+
+        if (document.body.clientWidth < 820 || screen.width < 820) {
+            // this.wrapper.removeChild(this.wrapperBack);
+            this.wrapper.appendChild(this.wrapperMobile);
+        } else if (document.body.clientWidth < 1000 || screen.width < 1000) {
+            this.wrapper.appendChild(this.wrapperContainer);
+        }
+
+        // if (document.body.clientWidth >= 1200 ||
+        //     screen.width >= 1200) {
+        //     window.onresize = function () {
+        //         location.reload();
+        //     }
+        // }
     }
 
     // const container = document.querySelector('.container'),

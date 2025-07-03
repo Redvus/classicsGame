@@ -1,4 +1,43 @@
-class ChoiceCategory {
+import { gsap } from "gsap";
+
+export class ChoiceCategory {
+
+    constructor() {
+        this.initLayout();
+        this.choiceCategory();
+        // this.choiceCategoryAnimation();
+    }
+
+    initLayout() {
+        this.wrapper = document.querySelector('.wrapper');
+        this.wrapperBack = document.querySelector('.wrapper__back');
+        this.wrapperBottom = document.querySelector('.wrapper__bottom');
+        this.wrapperTop = document.querySelector('.wrapper__top');
+        this.wrapperIntro = document.querySelector('.wrapper__back_intro');
+        this.container = document.querySelector('.container');
+        // this.backgroundMusicID = document.getElementById('backgroundMusicID');
+
+        // this.wrapperTopTitle = document.createElement('div');
+
+        // this.wrapperTop.className += ' wrapper__top_intro';
+        // this.wrapperTopTitle.className = 'wrapper__top_title wrapper__top_title--intro';
+
+        // this.wrapperTopTitle.innerHTML = `
+        //     <h1>Марина Цветаева:<br />путешествие в поэзию</h1>
+        // `;
+
+        // // Кнопки
+        // this.introBlockButtons = document.createElement('ul');
+        // this.introBlockButtons.className = 'wrapper__bottom_menu';
+        // this.introBlockButtons.innerHTML = `
+        //     <li><a href="javascript:void(0);" id="clickAboutLibrary">О библиотеке</a></li>
+        //     <li><a href="javascript:void(0);" id="clickAboutAuthors">Авторы</a></li>
+        //     <li><a href="javascript:void(0);" id="clickLoadGame">Начать игру</a></li>
+        // `;
+
+        // this.wrapperTop.appendChild(this.wrapperTopTitle);
+        // this.wrapperBottom.appendChild(this.introBlockButtons);
+    }
 
     choiceCategory(choiceCategoryName,
                    choiceCategoryBack,
@@ -13,13 +52,15 @@ class ChoiceCategory {
                    choiceCategoryTitle_8,
                    choiceCategoryTitle_9,
                    choiceCategoryTitle_10) {
-        const containerWrapper = document.createElement('div'),
+
+        const
+            containerWrapper = document.createElement('div'),
             choiceCategoryTitle = document.createElement('div'),
             containerWrapperSubcategory = document.createElement('div'),
             wrapperCategoryBack = document.createElement('div'),
             wrapperTopTitle = document.createElement('div')
         ;
-        container.className = 'container container--wide';
+        // container.className = 'container container--wide';
         containerWrapper.className = 'container__wrapper';
         containerWrapperSubcategory.className = 'container__wrapper_subcategory';
         choiceCategoryTitle.className = 'container__title';
@@ -103,54 +144,55 @@ class ChoiceCategory {
             </a>
         `;
 
-        container.appendChild(containerWrapper);
+        this.container.appendChild(containerWrapper);
 
-        wrapper.appendChild(wrapperTopTitle);
+        // this.wrapper.appendChild(wrapperTopTitle);
         containerWrapper.appendChild(containerWrapperSubcategory);
         containerWrapperSubcategory.appendChild(choiceCategoryTitle);
 
-        function choiceCategoryAnimation() {
-            let tl = gsap.timeline();
 
-            const categorySub_1 = document.querySelector('.category__element_1'),
-                categorySub_2 = document.querySelector('.category__element_2'),
-                categorySub_3 = document.querySelector('.category__element_3'),
-                categorySub_4 = document.querySelector('.category__element_4'),
-                categorySub_5 = document.querySelector('.category__element_5'),
-                categorySub_6 = document.querySelector('.category__element_6'),
-                categorySub_7 = document.querySelector('.category__element_7'),
-                categorySub_8 = document.querySelector('.category__element_8'),
-                categorySub_9 = document.querySelector('.category__element_9'),
-                categorySub_10 = document.querySelector('.category__element_10'),
-                containerWrapper = document.querySelector('.container__wrapper'),
-                categorySubAll = [categorySub_1, categorySub_2, categorySub_3, categorySub_4, categorySub_5, categorySub_6, categorySub_7, categorySub_8, categorySub_9, categorySub_10]
-            ;
+    }
 
-            tl
-                .from(containerWrapper, {
-                    autoAlpha: 0,
-                    duration: "0.6",
-                })
-                // .from(wrapperCategoryBack, {
-                //     autoAlpha: 0,
-                //     duration: 0.4,
-                //     delay: '-0.2'
-                //     // scale: '0.98'
-                // })
-                .to(wrapperTopTitle, {
-                    autoAlpha: 1,
-                    duration: 0.4,
-                    delay: '-0.2'
-                })
-                .from(categorySubAll, {
-                    autoAlpha: 0,
-                    duration: "0.3",
-                    delay: "-0.6",
-                    stagger: 0.1
-                })
-            ;
-        }
+    choiceCategoryAnimation() {
+        let tl = gsap.timeline();
 
-        choiceCategoryAnimation();
+        const
+            categorySub_1 = document.querySelector('.category__element_1'),
+            categorySub_2 = document.querySelector('.category__element_2'),
+            categorySub_3 = document.querySelector('.category__element_3'),
+            categorySub_4 = document.querySelector('.category__element_4'),
+            categorySub_5 = document.querySelector('.category__element_5'),
+            categorySub_6 = document.querySelector('.category__element_6'),
+            categorySub_7 = document.querySelector('.category__element_7'),
+            categorySub_8 = document.querySelector('.category__element_8'),
+            categorySub_9 = document.querySelector('.category__element_9'),
+            categorySub_10 = document.querySelector('.category__element_10'),
+            containerWrapper = document.querySelector('.container__wrapper'),
+            categorySubAll = [categorySub_1, categorySub_2, categorySub_3, categorySub_4, categorySub_5, categorySub_6, categorySub_7, categorySub_8, categorySub_9, categorySub_10]
+        ;
+
+        tl
+            .from(containerWrapper, {
+                autoAlpha: 0,
+                duration: "0.6",
+            })
+            // .from(wrapperCategoryBack, {
+            //     autoAlpha: 0,
+            //     duration: 0.4,
+            //     delay: '-0.2'
+            //     // scale: '0.98'
+            // })
+            .to(wrapperTopTitle, {
+                autoAlpha: 1,
+                duration: 0.4,
+                delay: '-0.2'
+            })
+            .from(categorySubAll, {
+                autoAlpha: 0,
+                duration: "0.3",
+                delay: "-0.6",
+                stagger: 0.1
+            })
+        ;
     }
 }
