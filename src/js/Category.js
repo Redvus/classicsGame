@@ -1,103 +1,131 @@
-class Category {
+import { gsap } from "gsap";
 
-    categoryMain() {
-        const categoryBlock = document.createElement('div'),
-            wrapperTopTitle = document.createElement('div'),
-            categoryStarsCount = '50'
-        ;
-        categoryBlock.className = 'container__category';
-        container.className = 'container container--wide';
-        wrapperTopTitle.className = 'wrapper__top';
-        wrapperTopTitle.innerHTML = `
+export class Category {
+
+    constructor(
+        category_1,
+        category_2,
+        category_3) {
+        this.category_1 = category_1;
+        this.category_2 = category_2;
+        this.category_3 = category_3;
+        this.initLayout();
+        this.initAppend();
+        // this.categoryAnimation();
+        // this.categoryProgress('progressCitizenValue', 'progressCitizen');
+        // this.categoryProgress('progressChicheroneValue', 'progressChicherone');
+        // this.categoryProgress('progressKraevedValue', 'progressKraeved');
+    }
+
+    initLayout() {
+        this.wrapper = document.querySelector('.wrapper');
+        this.container = document.querySelector('.container');
+        this.wrapperBack = document.querySelector('.wrapper__back');
+        this.wrapperBottom = document.querySelector('.wrapper__bottom');
+        this.wrapperTop = document.querySelector('.wrapper__top');
+
+        this.categoryBlock = document.createElement('div');
+        this.wrapperTopTitle = document.createElement('div');
+        this.categoryStarsCount = '50';
+
+        this.introBlockBack = document.createElement('div');
+        this.introBlockBack.className = 'wrapper__service';
+
+        this.categoryBlock.className = 'container__category';
+        this.wrapperTopTitle.className = 'wrapper__top';
+
+        this.wrapperTopTitle.innerHTML = `
             <picture id="authorsTitle" class="wrapper__top_title">
                 <img src="assets/games/kraevedia/images/kraevedia_catChoiceTitle.png" alt="Краеведия. Выбор уровня">
             </picture>
         `;
-        categoryBlock.innerHTML = `
-            <div class="category__main" id="categoryCitizen">
-                <div class="category__main_image">
+
+        this.categoryBlock.innerHTML = `
+            <div class="container__category_category" id="categoryCitizen">
+                <div class="category__main">
                     <div class="category__main_title">
-                        <h3>I<br />Житель</h3>
+                        <h3>I<br />${this.category_1}</h3>
                     </div>
                     <div class="category__main_stars">
                         <picture>
                             <img src="assets/games/kraevedia/images/kraevedia_starFill.png" alt="Количество набранных очков">
                         </picture>
                         <div class="category__main_value">
-                            <span id="progressCitizenValue"></span>&nbsp;/&nbsp;${categoryStarsCount}
+                            <span id="progressCitizenValue"></span>&nbsp;/&nbsp;${this.categoryStarsCount}
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <div class="category__main" id="categoryChicherone">
-                <div class="category__main_image">
+
+            <div class="container__category_category" id="categoryChicherone">
+                <div class="category__main">
                     <div class="category__main_title">
-                        <h3>II<br />Чичероне</h3>
-                        <p><i><sup>*</sup>&nbsp;Переводчик, показывающий иностранцам местные достопримечательности</i></p>
+                        <h3>II<br />${this.category_2}</h3>
                     </div>
                     <div class="category__main_stars">
                         <picture>
                             <img src="assets/games/kraevedia/images/kraevedia_starFill.png" alt="Количество набранных очков">
                         </picture>
                         <div class="category__main_value">
-                            <span id="progressChicheroneValue"></span>&nbsp;/&nbsp;${categoryStarsCount}
+                            <span id="progressChicheroneValue"></span>&nbsp;/&nbsp;${this.categoryStarsCount}
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <div class="category__main" id="categoryKraeved">
-                <div class="category__main_image">
+
+            <div class="container__category_category" id="categoryKraeved">
+                <div class="category__main">
                     <div class="category__main_title">
-                        <h3>III<br />Краевед</h3>
+                        <h3>III<br />${this.category_3}</h3>
                     </div>
                     <div class="category__main_stars">
                         <picture>
                             <img src="assets/games/kraevedia/images/kraevedia_starFill.png" alt="Количество набранных очков">
                         </picture>
                         <div class="category__main_value">
-                            <span id="progressKraevedValue"></span>&nbsp;/&nbsp;${categoryStarsCount}
+                            <span id="progressKraevedValue"></span>&nbsp;/&nbsp;${this.categoryStarsCount}
                         </div>
                     </div>
                 </div>
             </div>
         `;
-        container.appendChild(categoryBlock);
+    }
 
-        const introBlockBack = document.createElement('div');
-        introBlockBack.className = 'wrapper__service';
-        wrapper.appendChild(introBlockBack);
-        wrapper.appendChild(wrapperTopTitle);
+    initAppend() {
+        this.container.appendChild(this.categoryBlock);
+        this.wrapper.appendChild(this.introBlockBack);
+        this.wrapper.appendChild(this.wrapperTopTitle);
+    }
 
-        function categoryAnimation() {
-            let tl = gsap.timeline();
-            const categoryCitizen = document.getElementById('categoryCitizen'),
-                categoryChicherone = document.getElementById('categoryChicherone'),
-                categoryKraeved = document.getElementById('categoryKraeved'),
-                wrapperService = document.querySelector('.wrapper__service')
-            ;
-            tl
-                .from(wrapperService, {
-                    autoAlpha: 0,
-                    duration: 0.6
-                })
-                .to(wrapperTopTitle, {
-                    autoAlpha: 1,
-                    duration: 0.4,
-                    delay: '-0.2'
-                })
-                .from([categoryCitizen, categoryChicherone, categoryKraeved], {
-                    autoAlpha: 0,
-                    duration: 0.6,
-                    delay: '-0.3',
-                    y: "-0.5rem",
-                    stagger: 0.2
-                })
-            ;
-        }
+    categoryAnimation() {
+        this.categoryCitizen = document.getElementById('categoryCitizen')
+        this.categoryChicherone = document.getElementById('categoryChicherone');
+        this.categoryKraeved = document.getElementById('categoryKraeved');
+        this.wrapperService = document.querySelector('.wrapper__service');
+        ;
 
-        categoryAnimation();
+        let tl = gsap.timeline();
+        tl
+            .from(this.wrapperService, {
+                autoAlpha: 0,
+                duration: 0.6
+            })
+            .to(this.wrapperTopTitle, {
+                autoAlpha: 1,
+                duration: 0.4,
+                delay: '-0.2'
+            })
+            .from([
+                this.categoryCitizen,
+                this.categoryChicherone,
+                this.categoryKraeved], {
+                autoAlpha: 0,
+                duration: 0.6,
+                delay: '-0.3',
+                y: "-0.5rem",
+                stagger: 0.2
+            })
+        ;
     }
 
     categoryProgress(progressID, progressNameValue) {
