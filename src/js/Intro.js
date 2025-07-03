@@ -94,8 +94,7 @@ export class Intro {
                     //     autoAlpha: 1,
                     //     zIndex: 1
                     // });
-                    new CategoryLoad();
-                    // initCategoryLoad.initCategory();
+                    // new CategoryLoad();
                 }
             });
             tl
