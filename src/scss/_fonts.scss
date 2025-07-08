@@ -22,8 +22,8 @@
 
 $primary-font:          "Kurale";
 $primary-font-second:   "Kurale";
-$heading-font:          "ft22 Normal";
-$heading-font-second:   "ft22 Normal";
+$heading-font:          "Kurale";
+$heading-font-second:   "Kurale";
 
 $body-font-color     : $secondary;
 
@@ -43,9 +43,9 @@ $font-size-base:    $body-font-size !default;
 $font-size-large:   calc(#{$body-font-size} + 0.3rem) !default; // ~18px
 $font-size-small:   calc(#{$body-font-size} - 0.15rem) !default; // ~14px
 
-$font-size-h1:      calc(#{$body-font-size} + 5vmin) !default; // ~3rem 48px modular-scale(6)
-$font-size-h2:      calc(#{$body-font-size} * 2.5) !default; // ~2.5rem 40px modular-scale(5)
-$font-size-h3:      calc(#{$body-font-size} + 0.6rem) !default; // ~2rem 33px
+$font-size-h1:      5vmin !default; // ~3rem 48px modular-scale(6)
+$font-size-h2:      4vmin !default; // ~2.5rem 40px modular-scale(5)
+$font-size-h3:      3vmin !default; // ~2rem 33px
 $font-size-h4:      calc(#{$body-font-size} + 1vmin) !default; // ~1.728rem 28px
 $font-size-h5:      calc(#{$body-font-size} + 0.75vmin) !default; // ~1.44rem 23px
 $font-size-h6:      calc(#{$body-font-size} + 0.5vmin) !default; // ~1.2rem 19px

@@ -11,8 +11,19 @@ export class Game {
         // new Intro();
 
         //Develop
-        // new Category(45,'Ученик', 'Знаток', 'Хранитель');
-        new ChoiceCategory();
+        // new Category(
+        //     45,
+        //     'Ученик',
+        //     'Student',
+        //     'Знаток',
+        //     'Connoisseur',
+        //     'Хранитель',
+        //     'Keeper');
+        new ChoiceCategory(
+            'Ученик',
+            15,
+            '',
+            'Student');
     }
 
     initLayout() {

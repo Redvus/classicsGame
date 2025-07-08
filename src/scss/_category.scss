@@ -71,6 +71,146 @@
         }
     }
 
+    &__element {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        padding: 0.6rem;
+        transition: transform $base-duration;
+
+        &_stars {
+            min-height: 2rem;
+            list-style: none;
+            display: flex;
+            flex-direction: row;
+            position: absolute;
+            margin-left: 0;
+            bottom: calc(#{$paddingBase} * 1.5);
+            z-index: 5;
+
+            li {
+                width: 2vmin;
+                height: 2vmin;
+                margin-right: 0.5rem;
+                background-image: url("../images/cp_stars_empty.png");
+                background-position: 0 0;
+                background-size: auto 100%;
+
+                &.fill {
+                    background-image: url("../images/cp_stars_fill.png");
+                }
+
+                picture {
+                    width: 100%;
+                    height: 100%;
+                    display: block;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-position: center;
+                        object-fit: cover;
+                    }
+                }
+
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+
+        &_image {
+            width: auto;
+            height: 18vmin;
+            display: block;
+            position: relative;
+
+            img {
+                width: 100%;
+                height: 100%;
+                display: block;
+                object-position: center;
+                object-fit: cover;
+            }
+        }
+
+        &--hidden {
+            cursor: default;
+            user-select: none;
+            pointer-events: none;
+
+            &:after {
+                content: "";
+                width: 4vmin;
+                height: 4vmin;
+                display: block;
+                position: absolute;
+                top: 47%;
+                transform: translateY(-50%);
+                background: url("../images/cp_lock.png") 50% 0 no-repeat;
+                background-size: auto 100%;
+                z-index: 2;
+            }
+
+            picture {
+                opacity: 0.5;
+            }
+
+            .category__element_title {
+                display: none;
+                visibility: hidden;
+            }
+        }
+
+        &--lock {
+            cursor: default;
+            user-select: none;
+            pointer-events: none;
+
+            &:after {
+                content: "";
+                width: 4vmin;
+                height: 4vmin;
+                display: block;
+                position: absolute;
+                top: 47%;
+                transform: translateY(-50%);
+                background: url("../images/cp_ok_3.png") 50% 0 no-repeat;
+                background-size: auto 100%;
+                z-index: 2;
+            }
+
+            .category__element_title {
+                display: none;
+                visibility: hidden;
+            }
+
+            //.category__element_image {
+            //    opacity: 0.5;
+            //}
+
+        }
+
+        &_title {
+            width: calc(100% - (#{$paddingBase} * 4));
+            position: absolute;
+            color: $secondary;
+            font-size: $font-size-h2;
+            text-align: center;
+            padding: 0 calc(#{$paddingBase} * 2);
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        &:hover {
+            transform: scale(0.98);
+        }
+    }
+
     @include grid-media($Small) {
 
         &__main {

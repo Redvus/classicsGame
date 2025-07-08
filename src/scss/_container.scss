@@ -29,8 +29,8 @@
 		//background: url('images/is_categoryBack.png') 50% 50% / 90% auto no-repeat;
 
 		&_category {
-			width: calc(100% / 3);
-			height: 60%;
+			width: calc(100vmin / 3);
+			height: 45vmin;
 			display: flex;
 			flex-direction: row;
 			//margin-bottom: calc(#{$paddingBase} * 2);
@@ -583,7 +583,7 @@
 			flex-wrap: wrap;
 			justify-content: center;
 			position: relative;
-			margin-top: 7vh;
+			// margin-top: 7vh;
 		}
 
 		&_about {

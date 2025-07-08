@@ -5,18 +5,24 @@ export class Category {
     constructor(
         categoryStarsCount,
         category_1,
+        category_1ID,
         category_2,
-        category_3) {
+        category_2ID,
+        category_3,
+        category_3ID) {
         this.categoryStarsCount = categoryStarsCount;
         this.category_1 = category_1;
         this.category_2 = category_2;
         this.category_3 = category_3;
+        this.category_1ID = category_1ID;
+        this.category_2ID = category_2ID;
+        this.category_3ID = category_3ID;
         this.initLayout();
         this.initAppend();
         // this.categoryAnimation();
-        this.categoryProgress('progressStudentValue', 'progressStudent');
-        this.categoryProgress('progressConnoisseurValue', 'progressConnoisseur');
-        this.categoryProgress('progressKeeperValue', 'progressKeeper');
+        this.categoryProgress(`progress${this.category_1ID}Value`, `progress${this.category_1ID}`);
+        this.categoryProgress(`progress${this.category_2ID}Value`, `progress${this.category_2ID}`);
+        this.categoryProgress(`progress${this.category_3ID}Value`, `progress${this.category_3ID}`);
     }
 
     initLayout() {
@@ -36,55 +42,75 @@ export class Category {
         this.wrapperTopTitle.className = 'wrapper__top';
 
         this.wrapperTopTitle.innerHTML = `
-            <picture id="authorsTitle" class="wrapper__top_title">
-                <img src="assets/games/classics/images/Keeperia_catChoiceTitle.png" alt="Краеведия. Выбор уровня">
-            </picture>
+            <h2 id="authorsTitle" class="wrapper__top_title">Выберите уровень</h2>
         `;
 
+        // for (let i = 0; i < 3; i++) {
+        //     this.categoryBlockIns = document.createElement('div');
+        //     this.categoryBlockIns.className = 'container__category_category';
+        //     this.categoryBlockIns.id = `category${this[`category_{i + 1}`]}`;
+        //     this.categoryBlockIns.innerHTML = `
+        //         <div class="category__main">
+        //             <div class="category__main_title">
+        //                 <h3>${this[`category_{i + 1}`]}</h3>
+        //             </div>
+        //             <div class="category__main_stars">
+        //                 <picture>
+        //                     <img src="assets/games/classics/images/cp_stars_fill.png" alt="Количество набранных очков">
+        //                 </picture>
+        //                 <div class="category__main_value">
+        //                     <span id="progress${i + 1}Value"></span>&nbsp;/&nbsp;${this.categoryStarsCount}
+        //                 </div>
+        //             </div>
+        //         </div>
+        //     `;
+        //     this.categoryBlock.appendChild(this.categoryBlockIns);
+        // }
+
         this.categoryBlock.innerHTML = `
-            <div class="container__category_category" id="categoryStudent">
+            <div class="container__category_category" id="category${this.category_1ID}">
                 <div class="category__main">
                     <div class="category__main_title">
-                        <h3>I<br />${this.category_1}</h3>
+                        <h3>${this.category_1}</h3>
                     </div>
                     <div class="category__main_stars">
                         <picture>
                             <img src="assets/games/classics/images/cp_stars_fill.png" alt="Количество набранных очков">
                         </picture>
                         <div class="category__main_value">
-                            <span id="progressStudentValue"></span>&nbsp;/&nbsp;${this.categoryStarsCount}
+                            <span id="progress${this.category_1ID}Value"></span>&nbsp;/&nbsp;${this.categoryStarsCount}
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="container__category_category" id="categoryConnoisseur">
+            <div class="container__category_category" id="category${this.category_2ID}">
                 <div class="category__main">
                     <div class="category__main_title">
-                        <h3>II<br />${this.category_2}</h3>
+                        <h3>${this.category_2}</h3>
                     </div>
                     <div class="category__main_stars">
                         <picture>
                             <img src="assets/games/classics/images/cp_stars_fill.png" alt="Количество набранных очков">
                         </picture>
                         <div class="category__main_value">
-                            <span id="progressConnoisseurValue"></span>&nbsp;/&nbsp;${this.categoryStarsCount}
+                            <span id="progress${this.category_2ID}Value"></span>&nbsp;/&nbsp;${this.categoryStarsCount}
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="container__category_category" id="categoryKeeper">
+            <div class="container__category_category" id="category${this.category_3ID}">
                 <div class="category__main">
                     <div class="category__main_title">
-                        <h3>III<br />${this.category_3}</h3>
+                        <h3>${this.category_3}</h3>
                     </div>
                     <div class="category__main_stars">
                         <picture>
                             <img src="assets/games/classics/images/cp_stars_fill.png" alt="Количество набранных очков">
                         </picture>
                         <div class="category__main_value">
-                            <span id="progressKeeperValue"></span>&nbsp;/&nbsp;${this.categoryStarsCount}
+                            <span id="progress${this.category_3ID}Value"></span>&nbsp;/&nbsp;${this.categoryStarsCount}
                         </div>
                     </div>
                 </div>
