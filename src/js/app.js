@@ -1,4 +1,9 @@
-import '../scss/main.scss';
+import '/scss/app.scss';
+import '/fonts/fontawesome-free-7.0.0-web/scss/fontawesome.scss';
+import '/fonts/fontawesome-free-7.0.0-web/scss/regular.scss';
+import '/fonts/fontawesome-free-7.0.0-web/scss/solid.scss';
+import '/fonts/fontawesome-free-7.0.0-web/scss/brands.scss';
+
 import { Intro } from "./Intro.js";
 import { Category } from "./Category.js";
 import { ChoiceCategory } from "./ChoiceCategory.js";
@@ -8,7 +13,12 @@ export class Game {
         this.initLayout();
         this.initLayoutBack();
         this.initAppend();
-        // new Intro();
+        new Intro();
+        // if (import.meta.env.DEV
+        //     || import.meta.env.PROD
+        // ) {
+        //     this.initLayoutDev(); // Скрывать для build
+        // }
 
         //Develop
         // new Category(
@@ -19,11 +29,11 @@ export class Game {
         //     'Connoisseur',
         //     'Хранитель',
         //     'Keeper');
-        new ChoiceCategory(
-            'Ученик',
-            15,
-            '',
-            'Student');
+        // new ChoiceCategory(
+        //     'Ученик',
+        //     15,
+        //     '',
+        //     'Student');
     }
 
     initLayout() {

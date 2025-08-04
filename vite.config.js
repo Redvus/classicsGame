@@ -11,7 +11,7 @@ export default defineConfig({
         },
     build: {
         // sourcemap: true, // Add sourcemap
-        outDir: '../dist/', // Output in the dist/ folder
+        outDir: '../public/', // Output in the dist/ folder
         // emptyOutDir: true, // Empty the folder first
         rollupOptions: {
             output: {
@@ -20,13 +20,17 @@ export default defineConfig({
                 chunkFileNames: 'app-min.js',
                 entryFileNames: 'app-min.js',
 
-                assetFileNames: ({name}) => {
-                    if (/\.(gif|jpg|jpe?g|png|svg)$/.test(name ?? '')){
+                assetFileNames: ({names}) => {
+                    if (/\.(gif|jpg|jpe?g|png|svg)$/.test(names ?? '')){
                         return 'images/[name]-[hash][extname]';
                     }
 
-                    if (/\.css$/.test(name ?? '')) {
-                        return 'main.css';
+                    if (/\.css$/.test(names ?? '')) {
+                        return 'app.css';
+                    }
+
+                    if (/\.(woff2?|ttf|otf|eot)$/.test(names ?? '')) {
+                        return 'fonts/[name][extname]';
                     }
 
                     // default value

@@ -1,19 +1,24 @@
-/*=============================
-=            Media            =
-=============================*/
-$imac27 : 2560px;
-$imac21 : 1920px;
-$cinema : 1680px;
-$pad_g : 1160px;
-$pad_v : 768px;
-$mobile : 570px;
+@use "sass:map";
 
-$XXLarge: (media: "(min-width: #{$imac21})");
-$XLarge: (media: "(min-width: #{$cinema}) and (max-width: #{$imac21})");
-$Large: (media: "(min-width: #{$pad_g}) and (max-width: #{$cinema})");
-$Medium: (media: "(max-width: #{$pad_g})");
-$XSmall: (media: "(max-width: #{$pad_v})");
-$Small: (media: "(max-width: #{$mobile})");
-$HSmall: (media: "(max-height: 735px)");
+$breakpoints: (
+	'Small': 576px,
+	'XSmall': 768px,
+	'Medium': 1080px,
+	'Large': 1680px,
+	'XLarge': 1920px
+);
 
-/*=====  End of Media  ======*/
+@function breakpoint($key) {
+	@return map.get($breakpoints, $key);
+}
+
+@mixin media-up($key) {
+	$size: breakpoint($key);
+		@if $size != 0 {
+	@media (max-width: $size) {
+		@content;
+	}
+	} @else {
+		@content;
+	}
+}

@@ -1,108 +1,148 @@
+@use 'media' as bp;
+
 /*================================
 =            Variable            =
 ================================*/
+:root {
+    --border_thin: 0.07rem;
+    --border_normal: 0.15rem;
+    --border_bold: 0.3rem;
+    --border_heavy: 0.6rem;
 
-$border_1: 0.15rem solid $primary;
-$border_2: 0.3rem solid $primary;
-$border_3: 0.6rem solid $primary;
-$border_4: 0.1rem solid $secondary;
+    --base-duration: 0.2s;
+    --base-timing: 0.3s;
 
-$base-duration: 0.2s;
-$base-timing: 0.2s;
+    --marginBase: 1rem;
 
-// Layout
-$containerWidth: 80vmin;
-$containerHeight: 70vh;
-$containerQuestHeight: 28rem;
-$containerCategoryWidth: 55rem;
-$containerCategoryWidthLarge: 75rem;
-$containerCategoryHeight: 75vh;
-$containerInsideWidth: 72%;
-$containerIncrease: 5;
+    /*----------  Header  ----------*/
+    --header-height: 6vmax;
+    --headerLogoAmount: 1.2;
+    --headerLogoPadding: 0.7vmax;
 
-$containerPadding: 2rem;
-$paddingBase: 1rem;
+    /*----------  Layout  ----------*/
+    --paddingMobile: 1rem;
+    --wrapperTopTitleHeight: 3.5rem;
+    --wrapperBottomHeight: 3.5rem;
+    --introTitleBlockWidth: 80%;
+    --introTopBlockWidth: 60%;
 
-$frameWidth: 46%;
-$frameHeight: 64vh;
-$frameLeft: 25%;
-$frameRight: 75%;
+    --containerWidth: 50vmax;
 
-$frameBackWidth: 85.5%;
-$frameBackLeftTop: 47%;
-$frameBackRightTop: 50%;
+    --buttonWidth: 10rem;
 
-// Layout
-$backgroundColor: $third;
-$wrapperBottomHeight: 8rem;
-$settingsWidth: 40rem;
-//$containerQuestWidth: ;
 
-// Intro
-$introTopBlockHeight: 40vh;
-$introTopBlockWidth: 60vw;
-$introTitleBlockHeight: 40vh;
-$introTitleBlockWidth: 100vmin;
-$introTitleSymbolWidth: calc(#{$containerWidth} / 11);
-$introTitleSymbolLeft: calc((-#{$containerWidth} / 11) / 5.8);
+    /*----------  Nav  ----------*/
 
-$introButtonTextColor: $secondary;
-$introButtonTextColorHover: $secondary;
 
-// Settings
-$buttonWidth: 3rem;
+    /*----------  Footer  ----------*/
+}
 
-//Intro Mobile
-$introTopBlockWidthMobile: 100vw;
-$introLetterHeightMobile: 35%;
-$introTextHeightMobile: 7%;
-$introButtonHeightMobile: 25%;
+@include bp.media-up('XLarge') {
+    :root {
+        --header-height: 5vmax;
+        --headerLogoPadding: 0.5vmax;
+    }
+}
 
-//About
-$containerAboutWidth: 110vmin;
-$containerAboutWidthMobile: 70vh;
-$containerAboutPadding: 8vh;
-$containerAboutPaddingTop: 6vh;
+@include bp.media-up('Large') {
+    :root {
+        --header-height: 5.3vmax;
+        --headerLogoPadding: 0.5vmax;
+    }
+}
 
-// Quest
-$containerQuestTopWidth: 60vmin;
-$containerQuestTopProp: 1.139;
-$containerQuestBottomHeight: 12rem;
-$containerQuestBottomProp: 4.849;
-$wrapperTopTitleHeight: 5rem;
+@include bp.media-up('Medium') {
+    :root {
+        --header-height: 7vmax;
+        --headerLogoPadding: 0.5vmax;
+    }
+}
 
-// Mobile
-$wrapperTopHeightMobile: 4rem;
-$wrapperTopTitleHeightMobile: 3.7rem;
-
-$containerQuestTopWidthMobile: 80vmin;
-$containerQuestTopHeightMobile: 80vmin;
-$containerQuestTopBottomMobile: 80%;
+@include bp.media-up('Small') {
+    :root {
+        --header-height: 7vmax;
+        --headerLogoPadding: 0.7vmax;
+    }
+}
 
 /*=====  End of Variable  ======*/
 
 /*==============================
 =            Layout            =
 ==============================*/
-body {
-    @extend %px;
-    margin: 0;
-    background-color: $third;
+button, i, svg {
+    transition: all var(--base-duration);
 }
 
-svg {
+%input {
+    outline: none;
+    margin-bottom: 1rem;
+    font-family: var(--primary-font);
+    font-size: var(--font-size-base);
+    // text-align: center;
+    border: 0.15rem solid var(--primary);
+    border-radius: 0;
+    background-color: transparent;
+    color: var(--secondary);
     transition: all 0.3s;
+    // -webkit-appearance: none;
+
+    &:focus {
+        background-color: var(--fourth);
+        border-color: var(--secondary);
+    }
+
+    &:focus::-webkit-input-placeholder {
+        opacity: 0;
+        transition: all 0.3s;
+    }
+
+    &:focus::-moz-placeholder {
+        opacity: 0;
+        transition: all 0.3s;
+    }
+
+    &:focus::-ms-input-placeholder {
+        opacity: 0;
+        transition: all 0.3s;
+    }
+
+    &::-webkit-input-placeholder {
+        /* WebKit browsers */
+        color: var(--secondary);
+    }
+
+    &::-moz-placeholder {
+        /* Mozilla Firefox 4 to 18 */
+        color: var(--secondary);
+        opacity: 1;
+    }
+
+    &::-moz-placeholder {
+        /* Mozilla Firefox 19+ */
+        color: var(--secondary);
+        opacity: 1;
+    }
+
+    &::-ms-input-placeholder {
+        /* Internet Explorer 10+ */
+        color: var(--secondary);
+    }
 }
 
-a {
-    cursor: pointer;
-}
-
-%imgCenter {
+select {
+    // A reset of styles, including removing the default dropdown arrow
+    appearance: none;
+    // Additional resets for further consistency
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
     width: 100%;
-    height: 100%;
-    display: block;
-    object-position: center;
-    object-fit: contain;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: inherit;
+    line-height: inherit;
 }
 /*=====  End of Layout  ======*/
+

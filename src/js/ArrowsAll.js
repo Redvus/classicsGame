@@ -2,13 +2,21 @@ import { gsap } from "gsap";
 
 export class ArrowsAll {
 
+    constructor(params) {
+        this.initLayout();
+        this.arrowBack();
+        this.arrowBackAnim();
+    }
+
+    initLayout() {
+        this.wrapper = document.querySelector('.wrapper');
+    }
+
     arrowBack() {
-        const containerArrowBack = document.createElement('a'),
-            wrapper = document.querySelector('.wrapper')
-        ;
-        containerArrowBack.className = 'wrapper__service_arrow';
-        containerArrowBack.id = 'arrowBack';
-        containerArrowBack.innerHTML = `
+        this.containerArrowBack = document.createElement('a');
+        this.containerArrowBack.className = 'wrapper__service_arrow';
+        this.containerArrowBack.id = 'arrowBack';
+        this.containerArrowBack.innerHTML = `
             <?xml version="1.0" encoding="UTF-8"?>
             <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 255.12 170.08">
               <g id="Layer_1-2" data-name="Layer 1">
@@ -16,18 +24,17 @@ export class ArrowsAll {
               </g>
             </svg>
         `;
-        wrapper.appendChild(containerArrowBack);
+        this.wrapper.appendChild(this.containerArrowBack);
+    }
 
-        const arrowBackLoad = document.getElementById('arrowBack');
+    arrowBackAnim() {
+        this.arrowBackLoad = document.getElementById('arrowBack');
 
-        function arrowBackAnim() {
-            let arrowAnim = gsap.from(arrowBackLoad, {
-                duration: 0.3,
-                delay: '-0.1',
-                autoAlpha: 0
-            });
-        }
-        // arrowBackAnim();
+        gsap.from(this.arrowBackLoad, {
+            duration: 0.3,
+            delay: '-0.1',
+            autoAlpha: 0
+        });
     }
 
     clearStorage() {

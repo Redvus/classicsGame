@@ -8,7 +8,8 @@ import { Category } from './Category.js'
 
 export class Intro {
 
-    constructor() {
+    constructor(titleIntro = 'Классики') {
+        this.titleIntro = titleIntro;
         this.sounds = new Sounds();
         this.arrowsAll = new ArrowsAll();
         this.initLayout();
@@ -29,7 +30,11 @@ export class Intro {
         this.wrapperTopTitle.className = 'wrapper__top_title wrapper__top_title--intro';
 
         this.wrapperTopTitle.innerHTML = `
-            <h1>Марина Цветаева:<br />путешествие в поэзию</h1>
+            <h1>${this.titleIntro}</h1>
+        `;
+
+        this.wrapperIntro.innerHTML = `
+            <img src="assets/games/classics/images/c_introBack_1.jpg" alt="Intro Background">
         `;
 
         // Кнопки

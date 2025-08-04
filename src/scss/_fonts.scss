@@ -1,241 +1,185 @@
+@use 'media' as bp;
+@use "sass:color";
+
 /*=============================
 =            Fonts            =
 =============================*/
+// @font-face {
+// 	font-family: 'FontAwesome';
+// 	src: url('/assets/dev/fonts/fa-regular-400.woff2') format('woff2');
+// 	src: url('/assets/dev/fonts/fa-regular-400.woff2') format('woff2');
+// 	font-weight: normal;
+// 	// font-stretch: 75% 125%;
+// 	// font-style: oblique 0deg 10deg;
+// 	font-display: swap;
+// }
+
+// @font-face {
+// 	font-family: 'FontAwesome';
+// 	src: url('/assets/dev/fonts/fa-solid-900.woff2') format('woff2');
+// 	src: url('/assets/dev/fonts/fa-solid-900.woff2') format('woff2');
+// 	font-weight: 900;
+// 	// font-stretch: 75% 125%;
+// 	// font-style: oblique 0deg 10deg;
+// 	font-display: swap;
+// }
 
 @font-face {
-    font-family: "ft22 Normal";
-    src: local("ft22 Normal"),
-    url("fonts/ft22/ft22.woff2") format("woff2"),
-    url("fonts/ft22/ft22.woff") format("woff");
-    font-style:normal;
-    font-weight:400;
+    font-family: 'Great Vibes Regular';
+    src: url('fonts/Great_Vibes/GreatVibes-Regular.woff2') format('woff2');
+    src: url('fonts/Great_Vibes/GreatVibes-Regular.woff2') format('woff2');
+    font-weight: 44;
+    font-style: normal;
+    font-display: swap;
 }
 
-@font-face {
-    font-family: "Kurale";
-    src: local("Kurale"),
-    url("fonts/Kurale/Kurale.woff2") format("woff2"),
-    url("fonts/Kurale/Kurale.woff") format("woff");
-    font-style:normal;
-    font-weight:400;
+// Weight axis (typically 100-900)
+$font-weight-thin: 100;
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+$font-weight-black: 900;
+
+$font-width-condensed: 75%;
+$font-width-normal: 100%;
+$font-width-extended: 125%;
+
+:root {
+    --primary-font      : "Roboto Flex", sans-serif;
+    --heading-font      : 'Great Vibes Regular';
+    --heading-font-light: 'Great Vibes Regular';
+
+    --body-font-color: var(--third);
+    --heading-font-color: var(--third);
+
+    --body-font-size     : 1rem;
+    --body-font-weight   : normal;
+    --body-line-height   : 1.4;
+    --heading-line-height: 1;
+
+    --font-size-base:    var(--body-font-size);
+    --font-size-large:   calc(var(--font-size-base) + (var(--font-size-base) / 5));
+    // --font-size-small:   calc(var(--font-size-base) - (var(--font-size-base) / 5));
+    --font-size-small:   0.7vmax;
+    --font-size-h1:      calc(var(--font-size-base) + 5vmax);
+    --font-size-h2:      calc(var(--font-size-base) + 3vmax);
+    --font-size-h3:      calc(var(--font-size-base) + 2vmax);
+    --font-size-h4:      calc(var(--font-size-base) + 1vmax);
+    --font-size-h5:      calc(var(--font-size-base) + 0.5vmax);
+    --font-size-h6:      calc(var(--font-size-base) + 0.3vmax);
 }
 
-$primary-font:          "Kurale";
-$primary-font-second:   "Kurale";
-$heading-font:          "Kurale";
-$heading-font-second:   "Kurale";
-
-$body-font-color     : $secondary;
-
-$body-font-size      : 1rem !default;
-$body-font-weight    : normal !default;
-$body-line-height    : 1.2 !default;
-$heading-line-height : 1.2 !default;
-
-$heading-font-modular : 1vw !default;
-
-$bourbon: (
-        "modular-scale-base": $heading-font-modular,
-        "modular-scale-ratio": $major-third,
-);
-
-$font-size-base:    $body-font-size !default;
-$font-size-large:   calc(#{$body-font-size} + 0.3rem) !default; // ~18px
-$font-size-small:   calc(#{$body-font-size} - 0.15rem) !default; // ~14px
-
-$font-size-h1:      5vmin !default; // ~3rem 48px modular-scale(6)
-$font-size-h2:      4vmin !default; // ~2.5rem 40px modular-scale(5)
-$font-size-h3:      3vmin !default; // ~2rem 33px
-$font-size-h4:      calc(#{$body-font-size} + 1vmin) !default; // ~1.728rem 28px
-$font-size-h5:      calc(#{$body-font-size} + 0.75vmin) !default; // ~1.44rem 23px
-$font-size-h6:      calc(#{$body-font-size} + 0.5vmin) !default; // ~1.2rem 19px
-
-%px {
-    font: {
-        family: $primary-font;
-        weight: $body-font-weight;
-        size: $font-size-large;
-    };
-    line-height: $body-line-height;
-    color: $body-font-color;
-    margin: 0;
-    //text-indent: 1rem;
-
-    @include grid-media($XXLarge) {
-        font-size: $font-size-large;
-    }
-
-    @include grid-media($XLarge) {
-        font-size: $font-size-large;
-    }
-
-    @include grid-media($Large) {
-        font-size: $font-size-large;
-    }
-
-    @include grid-media($Medium) {
-        font-size: $font-size-large;
-        //line-height: 1;
-    }
-
-    @include grid-media($HSmall) {
-        font-size: $font-size-small;
-    }
-
-    @include grid-media($XSmall) {
-        font-size: $font-size-base;
-    }
-
-    @include grid-media($Small) {
-        font-size: $font-size-base;
-        //line-height: 1.1;
+@include bp.media-up('XLarge') {
+    :root {
+        --font-size-small: 0.7vmax;
     }
 }
 
-%hx {
-    font: {
-        family: $heading-font-second;
-        weight: 500;
-    };
-    //letter-spacing: 0.04em;
-    line-height: $heading-line-height;
-    text-transform: uppercase;
-    margin: 0;
+@include bp.media-up('Small') {
+    :root {
+        --font-size-small:   2.5vmin;
+    }
 }
-/*=====  End of Fonts  ======*/
+
+// Base fonts styles
+@mixin px($size: base) {
+    font-family: var(--primary-font);
+    font-weight: $font-weight-regular;
+    font-stretch: $font-width-normal;
+    line-height: var(--body-line-height);
+    color: var(--body-font-color);
+
+    @if $size == base {
+        font-size: var(--font-size-base);
+    } @else if $size == large {
+        font-size: var(--font-size-large);
+    } @else if $size == small {
+        font-size: var(--font-size-small);
+
+        @include bp.media-up('XLarge') {
+            font-weight: $font-weight-medium;
+        }
+
+        @include bp.media-up('Large') {
+            font-weight: $font-weight-regular;
+            line-height: 1.2;
+        }
+    }
+}
+
+// Headings mixin
+@mixin hx($size) {
+    font-family: var(--heading-font);
+    font-weight: $font-weight-regular;
+    color: var(--heading-font-color);
+    display: block;
+    line-height: var(--heading-line-height);
+    margin-top: 0;
+    // margin-bottom: -(var(--border_thin));
+
+    @if $size == h1 {
+        font-size: var(--font-size-h1);
+    } @else if $size == h2 {
+        font-size: var(--font-size-h2);
+    } @else if $size == h3 {
+        font-size: var(--font-size-h3);
+    } @else if $size == h4 {
+        font-size: var(--font-size-h4);
+    } @else if $size == h5 {
+        font-size: var(--font-size-h5);
+    } @else if $size == h6 {
+        font-size: var(--font-size-h6);
+    }
+}
 
 h1 {
-    @extend %hx;
-    font-family: $heading-font;
-    font-size: $font-size-h1;
-    color: $primary;
-    letter-spacing: 0.2rem;
-    //margin-bottom: 1em;
-    //text-align: center;
-    //transition: all .3s;
-
-    @include grid-media($Small) {
-        font-size: calc(1rem + 2vmin);
-        text-align: center;
-    }
+    @include hx(h1);
+    font-weight: $font-weight-medium;
+    font-stretch: $font-width-normal;
 }
 
 h2 {
-    @extend %hx;
-    font-family: $heading-font;
-    font-size: $font-size-h2;
-    color: $primary;
-    letter-spacing: 0.2rem;
-
-    @include grid-media($Small) {
-        font-size: calc(1rem + 2vmin);
-    }
+    @include hx(h2);
+    font-weight: $font-weight-regular;
+    font-stretch: $font-width-normal;
 }
 
 h3 {
-    @extend %hx;
-    font-size: $font-size-h3;
-    color: $primary;
-
-    @include grid-media($Small) {
-        font-size: calc(1rem + 2vmin);
-    }
+    @include hx(h3);
+    font-weight: $font-weight-thin;
+    font-stretch: $font-width-extended;
 }
 
 h4 {
-    @extend %hx;
-    font-size: $font-size-h4;
-    line-height: 0.2;
+    @include hx(h4);
 }
 
 h5 {
-    @extend %hx;
-    font-size: $font-size-h5;
+    @include hx(h5);
 }
 
 h6 {
-    @extend %hx;
-    font-size: $font-size-h6;
-}
-
-.large-text {
-    font-size: $font-size-large;
-}
-
-.small-text {
-    font-size: $font-size-small;
+    @include hx(h6);
 }
 
 ul {
     margin: 0;
     padding: 0;
     list-style: none;
-    //margin-left: 0.9rem;
-    //padding-left: -0.9rem;
 
-    li {
-        font-size: $font-size-base;
-    }
+    // li {
 
-    //@include grid-media($XXLarge) {
-    //    li {
-    //        font-size: $font-size-large;
-    //    }
-    //}
-    //
-    //@include grid-media($XLarge) {
-    //    li {
-    //        font-size: $font-size-large;
-    //    }
-    //}
-    //
-    //@include grid-media($Large) {
-    //    li {
-    //        font-size: $font-size-large;
-    //    }
-    //}
-    //
-    //@include grid-media($Medium) {
-    //    margin-left: 0.6rem;
-    //    padding-left: -0.6rem;
-    //
-    //    li {
-    //        font-size: $font-size-small;
-    //    }
-    //}
-    //
-    //@include grid-media($HSmall) {
-    //    margin-left: 0.6rem;
-    //    padding-left: -0.6rem;
-    //
-    //    li {
-    //        font-size: $font-size-small;
-    //    }
-    //}
-    //
-    //@include grid-media($XSmall) {
-    //    margin-left: 0.6rem;
-    //    padding-left: -0.6rem;
-    //
-    //    li {
-    //        font-size: $font-size-base;
-    //    }
-    //}
-    //
-    //@include grid-media($Small) {
-    //    margin-left: 0.9rem;
-    //    padding-left: -0.9rem;
-    //
-    //    li {
-    //        font-size: $font-size-base;
-    //    }
-    //}
+    //     @include grid-media($Medium) {
+    //         font-size: var(--font-size-large;
+    //     }
+    // }
 }
 
 a {
-    color: $primary;
+    color: var(--secondary);
     text-decoration: none;
-    transition: color $base-duration, background $base-duration;
+    transition: all var(--base-duration);
     outline: none;
 
     // &:active,
