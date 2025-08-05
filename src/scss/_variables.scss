@@ -14,6 +14,9 @@
 
     --marginBase: 1rem;
 
+    /*----------  Buttons  ----------*/
+    --buttonHeight: 2rem;
+
     /*----------  Header  ----------*/
     --header-height: 6vmax;
     --headerLogoAmount: 1.2;
@@ -21,15 +24,16 @@
 
     /*----------  Layout  ----------*/
     --paddingMobile: 1rem;
-    --wrapperTopTitleHeight: 3.5rem;
-    --wrapperBottomHeight: 3.5rem;
+    --wrapperTopTitleHeight: 6vmax;
+    --wrapperBottomHeight: 5vmax;
     --introTitleBlockWidth: 80%;
     --introTopBlockWidth: 60%;
 
     --containerWidth: 50vmax;
 
-    --buttonWidth: 10rem;
-
+    /*----------  Container  ----------*/
+    --containerWidth: 50vmax;
+    --containerHeight: 70vh;
 
     /*----------  Nav  ----------*/
 
@@ -55,6 +59,8 @@
     :root {
         --header-height: 7vmax;
         --headerLogoPadding: 0.5vmax;
+
+        --containerWidth: 70vmax;
     }
 }
 
@@ -62,6 +68,8 @@
     :root {
         --header-height: 7vmax;
         --headerLogoPadding: 0.7vmax;
+
+        --containerWidth: calc(100vw - 2rem);
     }
 }
 

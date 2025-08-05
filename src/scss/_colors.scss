@@ -2,8 +2,8 @@
 
 $colors: (
 	primary  : #830800,
-	secondary: #000000,
-	third    : #eeeeee,
+	secondary: #f0f3bc,
+	third    : #000000,
 	fourth   : #ffffff,
 	five     : #7a97ab
 );
@@ -18,23 +18,16 @@ $colors: (
 		--#{$name}-lighten-10: #{color.adjust($color, $lightness: 10%)};
 		--#{$name}-lighten-20: #{color.adjust($color, $lightness: 20%)};
 		--#{$name}-lighten-30: #{color.adjust($color, $lightness: 30%)};
+		--#{$name}-opacity-5: #{color.change($color, $alpha: 0.05)};
+		--#{$name}-opacity-10: #{color.change($color, $alpha: 0.1)};
+		--#{$name}-opacity-20: #{color.change($color, $alpha: 0.2)};
+		--#{$name}-opacity-30: #{color.change($color, $alpha: 0.3)};
+		--#{$name}-opacity-50: #{color.change($color, $alpha: 0.5)};
+		--#{$name}-opacity-70: #{color.change($color, $alpha: 0.7)};
 	}
 
 	--layoutBackground : var(--third);
 	--elementBackground : var(--fourth);
 	// --error : var(--third);
 	// --success : var(--fourth);
-
-	/*----------  Blind Color  ----------*/
-	--blindBackgroundBW: var(--third);
-	--blindColorBW: var(--fourth);
-
-	--blindBackgroundWB: var(--fourth);
-	--blindColorWB: var(--third);
-
-	--blindBackgroundCW: #0099CC;
-	--blindColorCW: var(--third);
-
-	--blindBackgroundYB: #FFCC33;
-	--blindColorYB: var(--third);
 }

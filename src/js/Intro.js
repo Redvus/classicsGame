@@ -1,6 +1,5 @@
 import { gsap } from "gsap";
 import { Sounds } from "./Sounds.js";
-import { ArrowsAll } from "./ArrowsAll.js";
 import { About } from "./About.js";
 import { Authors } from "./Authors.js";
 import { Category } from './Category.js'
@@ -11,7 +10,6 @@ export class Intro {
     constructor(titleIntro = 'Классики') {
         this.titleIntro = titleIntro;
         this.sounds = new Sounds();
-        this.arrowsAll = new ArrowsAll();
         this.initLayout();
         this.introAnim();
         this.initGame();
@@ -21,7 +19,7 @@ export class Intro {
         this.wrapperBack = document.querySelector('.wrapper__back');
         this.wrapperBottom = document.querySelector('.wrapper__bottom');
         this.wrapperTop = document.querySelector('.wrapper__top');
-        this.wrapperIntro = document.querySelector('.wrapper__back_intro');
+        this.wrapperBackIntro = document.querySelector('.wrapper__back_intro');
         // this.backgroundMusicID = document.getElementById('backgroundMusicID');
 
         this.wrapperTopTitle = document.createElement('div');
@@ -31,10 +29,6 @@ export class Intro {
 
         this.wrapperTopTitle.innerHTML = `
             <h1>${this.titleIntro}</h1>
-        `;
-
-        this.wrapperIntro.innerHTML = `
-            <img src="assets/games/classics/images/c_introBack_1.jpg" alt="Intro Background">
         `;
 
         // Кнопки
@@ -89,7 +83,7 @@ export class Intro {
                     this.wrapperTop.innerHTML = '';
                     this.wrapperTop.className = 'wrapper__top';
                     this.wrapperBottom.removeChild(this.wrapperBottomMenu);
-                    // gsap.to(this.wrapperIntro, {
+                    // gsap.to(this.wrapperBackIntro, {
                     //     duration: '0.5',
                     //     // delay: '0.2',
                     //     autoAlpha: 0,
@@ -115,7 +109,7 @@ export class Intro {
                     // delay: '-0.4',
                     autoAlpha: 0
                 })
-                .to(this.wrapperIntro, {
+                .to(this.wrapperBackIntro, {
                     duration: '0.5',
                     // delay: '0.2',
                     autoAlpha: 0
@@ -129,15 +123,7 @@ export class Intro {
                     this.wrapperTop.innerHTML = '';
                     this.wrapperTop.className = 'wrapper__top';
                     this.wrapperBottom.removeChild(this.wrapperBottomMenu);
-                    new Authors(
-                        'Сценарист',
-                        'Инна Ямщикова',
-                        'Художники',
-                        'Елена Расторгуева',
-                        'Анастасия Полякова',
-                        'Программист',
-                        'Александр Суворов'
-                    );
+                    new Authors();
                 }
             });
             tl
@@ -151,7 +137,7 @@ export class Intro {
                     // delay: '-0.4',
                     autoAlpha: 0
                 })
-                .to(this.wrapperIntro, {
+                .to(this.wrapperBackIntro, {
                     duration: '0.5',
                     // delay: '0.2',
                     autoAlpha: 0
@@ -165,7 +151,7 @@ export class Intro {
                     this.wrapperTop.innerHTML = '';
                     this.wrapperTop.className = 'wrapper__top';
                     this.wrapperBottom.removeChild(this.wrapperBottomMenu);
-                    new About('МБУК г.о. Самара «Самарская муниципальная информационно-библиотечная система» была создана в декабре 1986 года. На сегодняшний день в ее составе&nbsp;– Центральная городская библиотека имени Н.К. Крупской и 35 библиотек-филиалов, нашими читателями являются жители всех 9 районов города. Библиотеки системы&nbsp;– это информационные, образовательные центры, место культурного отдыха и общения. СМИБС находится в центре мировых событий, активно участвует в общероссийских акциях и в жизни города.', 'В библиотеках системы можно получить информацию и литературу по любой теме, доступ к электронным базам данных, воспользоваться услугами Интернет-залов, Центрами общественного доступа, побывать на презентациях выставок и творческих встречах, а также воспользоваться дополнительными сервисными услугами:<ul><li>ксерокопированием</li><li>сканированием</li><li>ламинированием</li><li>документов</li><li>распечаткой информации</li><li>на принтере</li><li>записью на электронные</li><li>носители</li></ul>');
+                    new About();
                 }
             });
             tl
@@ -179,7 +165,7 @@ export class Intro {
                     // delay: '-0.4',
                     autoAlpha: 0
                 })
-                .to(this.wrapperIntro, {
+                .to(this.wrapperBackIntro, {
                     duration: '0.5',
                     // delay: '0.2',
                     autoAlpha: 0

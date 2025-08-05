@@ -65,17 +65,17 @@ body {
             }
 
             h1 {
-                padding-top: calc(#{var(--marginBase)} * 2);
-                text-shadow: 0.2rem 0.2rem 0.3rem rgba(var(--third), 0.5);
-                margin-left: 0.5rem;
+                margin-top: calc(#{var(--marginBase)} * 2);
+                margin-bottom: 0;
+                text-shadow: 0.2rem 0.2rem 0.3rem var(--third);
             }
         }
 
-        &_intro {
-            margin-top: 0;
-            top: initial;
-            bottom: calc(#{var(--wrapperBottomHeight)} + (#{var(--marginBase)} * 3));
-        }
+        // &_intro {
+        //     margin-top: 0;
+        //     top: initial;
+        //     bottom: calc(#{var(--wrapperBottomHeight)} + (#{var(--marginBase)} * 3));
+        // }
 
         span {
             font-size: var(--font-size-h4);
@@ -153,7 +153,7 @@ body {
         background: url("../images/mf_backAuthors.jpg") 50% 0 / auto 100% no-repeat;
         z-index: 1;
 
-        &_arrow {
+        &_button {
             width: var(--buttonWidth);
             height: var(--buttonWidth);
             display: flex;
@@ -162,10 +162,11 @@ body {
             position: relative;
             background: url("../images/is_buttonBack.png") 50% 50% / 100% no-repeat;
             z-index: 10;
+            cursor: pointer;
 
             svg {
-                width: calc(#{var(--buttonWidth)} * 1.5);
-                height: calc(#{var(--buttonWidth)} * 1.5);
+                width: calc(#{var(--buttonHeight)} * 1.5);
+                height: calc(#{var(--buttonHeight)} * 1.5);
                 display: block;
 
                 polygon,
@@ -260,21 +261,22 @@ body {
         justify-content: space-around;
         position: absolute;
         left: 0;
-        bottom: 0;
+        bottom: calc(var(--marginBase) * 3);
         margin: 0 calc((100vw - #{var(--containerWidth)}) / 2);
         z-index: 7;
         //opacity: 0;
 
         &_menu {
             width: 100%;
+            height: 100%;
             list-style: none;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            margin: 0 0 6vh;
+            margin: 0;
 
             li {
-                width: calc(100% / 3.5);
+                width: calc(100% / 3.2);
                 height: 100%;
                 display: block;
                 position: relative;
@@ -287,14 +289,11 @@ body {
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    padding: 1.5rem 1rem 0.5rem;
-                    //background: linear-gradient(var(--five), $secondary);
-                    background-color: rgba(var(--fourth), 0.85);
+                    border: var(--border_normal) solid var(--secondary);
+                    background-color: var(--fourth-opacity-20);
                     border-radius: 0.6rem;
-                    @include px(large);
-                    // color: $introButtonTextColorHover;
-                    // font-size: $font-size-large;
-                    //text-transform: uppercase;
+                    @include hx(h4);
+                    text-shadow: var(--border_thin) var(--border_thin) var(--border_normal) var(--third);
 
                     // transition: all $base-duration;
                 }
@@ -303,7 +302,7 @@ body {
 
                     a {
                         letter-spacing: 0.05rem;
-                        background-color: rgba(var(--fourth), 1);
+                        background-color: var(--fourth-opacity-10);
                     }
                 }
 
@@ -369,6 +368,7 @@ body {
         position: absolute;
         left: 0;
         top: 0;
+        z-index: 0;
 
         &_intro {
             width: 100%;
@@ -383,15 +383,15 @@ body {
             &_about {
                 background: url("../images/c_aboutBack.jpg") 50% 50% / auto 100% no-repeat;
             }
+        }
 
-            img {
+        img {
                 width: 100%;
                 height: 100%;
                 display: block;
                 object-position: center;
                 object-fit: cover;
             }
-        }
 
         // &_category {
         //     width: 100%;

@@ -7,6 +7,8 @@ import '/fonts/fontawesome-free-7.0.0-web/scss/brands.scss';
 import { Intro } from "./Intro.js";
 import { Category } from "./Category.js";
 import { ChoiceCategory } from "./ChoiceCategory.js";
+import { About } from './About.js';
+import { Authors } from './Authors.js';
 
 export class Game {
     constructor(parameters) {
@@ -34,6 +36,9 @@ export class Game {
         //     15,
         //     '',
         //     'Student');
+
+        // new About();
+        // new Authors();
     }
 
     initLayout() {
@@ -52,22 +57,34 @@ export class Game {
     }
 
     initLayoutBack() {
-        this.wrapperIntro = document.createElement('div');
+        this.wrapperBackIntro = document.createElement('div');
         this.wrapperCategoryBack = document.createElement('div');
-        this.wrapperIntro.classList = "wrapper__back_intro";
-        this.wrapperCategoryBack.classList = "wrapper__back_category";
+        this.wrapperBackAbout = document.createElement('div');
 
         this.wrapperBackFirst = document.createElement('div');
         this.wrapperBackSecond = document.createElement('div');
         this.wrapperBackThird = document.createElement('div');
 
-        this.wrapperBackFirst.classList = "wrapper__back_category--quest wrapper__back_category--first";
-        this.wrapperBackSecond.classList = "wrapper__back_category--quest wrapper__back_category--second";
-        this.wrapperBackThird.classList = "wrapper__back_category--quest wrapper__back_category--third";
+        this.wrapperBackIntro.classList = "wrapper__back wrapper__back--intro";
+        this.wrapperCategoryBack.classList = "wrapper__back wrapper__back--category";
+        this.wrapperBackAbout.classList = "wrapper__back wrapper__back--about";
+
+        this.wrapperBackFirst.classList = "wrapper__back wrapper__back_category--quest wrapper__back_category--first";
+        this.wrapperBackSecond.classList = "wrapper__back wrapper__back_category--quest wrapper__back_category--second";
+        this.wrapperBackThird.classList = "wrapper__back wrapper__back_category--quest wrapper__back_category--third";
+
+        this.wrapperBackIntro.innerHTML = `
+            <img src="assets/games/classics/images/c_introBack_1.jpg" alt="Intro Background">
+        `;
+
+        this.wrapperBackAbout.innerHTML = `
+            <img src="assets/games/classics/images/c_introBack_1.jpg" alt="Intro Background">
+        `;
     }
 
     initAppend() {
-        this.wrapperBack.appendChild(this.wrapperIntro);
+        this.wrapperBack.appendChild(this.wrapperBackIntro);
+        this.wrapperBack.appendChild(this.wrapperBackAbout);
         this.wrapperBack.appendChild(this.wrapperCategoryBack);
         this.wrapperBack.appendChild(this.wrapperBackFirst);
         this.wrapperBack.appendChild(this.wrapperBackSecond);
