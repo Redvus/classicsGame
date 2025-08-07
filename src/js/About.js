@@ -15,7 +15,7 @@ export class About {
         this.initAboutAnim();
         this.initAboutBack();
 
-        this.initDev();
+        // this.initDev();
     }
 
     initLayout() {
@@ -26,6 +26,8 @@ export class About {
         this.containerAboutRight = document.createElement('div');
         this.wrapperTop = document.querySelector('.wrapper__top');
         this.wrapperBottom = document.querySelector('.wrapper__bottom');
+        this.wrapperBackIntro = document.getElementById('backIntro');
+        this.wrapperBackAbout = document.getElementById('backAbout');
 
         // if (document.body.clientWidth < 570 || screen.width < 570) {
         //     container.style.width = 'calc(100% - 2rem)';
@@ -91,11 +93,6 @@ export class About {
                     autoAlpha: 0,
                     delay: '-0.1'
                 })
-                .to(this.wrapperBackAbout, {
-                    autoAlpha: 1,
-                    duration: '0.6',
-                    delay: '-0.3'
-                })
             ;
         });
     }
@@ -104,6 +101,11 @@ export class About {
         let tl = new gsap.timeline();
 
         tl
+            .to(this.wrapperBackAbout, {
+                autoAlpha: 1,
+                duration: '0.6',
+                delay: '-0.3'
+            })
             .from(this.containerAbout, {
                 autoAlpha: 0,
                 duration: 0.4,

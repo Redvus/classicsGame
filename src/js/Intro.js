@@ -16,10 +16,13 @@ export class Intro {
     }
 
     initLayout() {
+        this.wrapper = document.querySelector('.wrapper');
+        this.container = document.querySelector('.container');
         this.wrapperBack = document.querySelector('.wrapper__back');
         this.wrapperBottom = document.querySelector('.wrapper__bottom');
         this.wrapperTop = document.querySelector('.wrapper__top');
-        this.wrapperBackIntro = document.querySelector('.wrapper__back_intro');
+        this.wrapperBackIntro = document.getElementById('backIntro');
+        this.wrapperBackAbout = document.getElementById('backAbout');
         // this.backgroundMusicID = document.getElementById('backgroundMusicID');
 
         this.wrapperTopTitle = document.createElement('div');
@@ -33,7 +36,8 @@ export class Intro {
 
         // Кнопки
         this.introBlockButtons = document.createElement('ul');
-        this.introBlockButtons.className = 'wrapper__bottom_menu';
+        this.introBlockButtons.className = 'container__menu';
+        this.introBlockButtons.id = 'menuMain';
         this.introBlockButtons.innerHTML = `
             <li><a href="javascript:void(0);" id="clickAboutLibrary">О библиотеке</a></li>
             <li><a href="javascript:void(0);" id="clickAboutAuthors">Авторы</a></li>
@@ -41,12 +45,17 @@ export class Intro {
         `;
 
         this.wrapperTop.appendChild(this.wrapperTopTitle);
-        this.wrapperBottom.appendChild(this.introBlockButtons);
+        this.container.appendChild(this.introBlockButtons);
     }
 
     introAnim() {
         let tl = gsap.timeline();
         tl
+            .to(this.wrapperBackIntro, {
+                duration: '0.3',
+                // delay: '0.2',
+                autoAlpha: 1
+            })
             .from(this.wrapperTopTitle, {
                 duration: 0.5,
                 delay: 0.1,
@@ -65,7 +74,7 @@ export class Intro {
         this.clickLoadGame = document.getElementById('clickLoadGame');
         this.clickAuthors = document.getElementById('clickAboutAuthors');
         this.clickAbout = document.getElementById('clickAboutLibrary');
-        this.wrapperBottomMenu = document.querySelector('.wrapper__bottom_menu');
+        this.mainMenu = document.getElementById('menuMain');
 
         this.clickLoadGame.addEventListener('click', () => {
 
@@ -95,7 +104,14 @@ export class Intro {
                     //     autoAlpha: 1,
                     //     zIndex: 1
                     // });
-                    new Category('Ученик', 'Знаток', 'Хранитель');
+                    new Category(
+                        45,
+                        'Ученик',
+                        'Student',
+                        'Знаток',
+                        'Connoisseur',
+                        'Хранитель',
+                        'Keeper');
                 }
             });
             tl
@@ -132,12 +148,12 @@ export class Intro {
                     duration: 0.3,
                     y: '-10%'
                 })
-                .to(this.wrapperBottomMenu, {
+                .to(this.mainMenu, {
                     duration: 0.3,
                     // delay: '-0.4',
                     autoAlpha: 0
                 })
-                .to(this.wrapperBackIntro, {
+                .to([this.wrapperBackIntro, this.wrapperBackAbout], {
                     duration: '0.5',
                     // delay: '0.2',
                     autoAlpha: 0
@@ -160,7 +176,7 @@ export class Intro {
                     duration: 0.3,
                     y: '-10%'
                 })
-                .to(this.wrapperBottomMenu, {
+                .to(this.mainMenu, {
                     duration: 0.3,
                     // delay: '-0.4',
                     autoAlpha: 0

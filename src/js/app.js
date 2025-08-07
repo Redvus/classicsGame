@@ -58,34 +58,46 @@ export class Game {
 
     initLayoutBack() {
         this.wrapperBackIntro = document.createElement('div');
-        this.wrapperCategoryBack = document.createElement('div');
+        this.wrapperBackCategory = document.createElement('div');
         this.wrapperBackAbout = document.createElement('div');
+        this.wrapperBackAuthors = document.createElement('div');
 
         this.wrapperBackFirst = document.createElement('div');
         this.wrapperBackSecond = document.createElement('div');
         this.wrapperBackThird = document.createElement('div');
 
         this.wrapperBackIntro.classList = "wrapper__back wrapper__back--intro";
-        this.wrapperCategoryBack.classList = "wrapper__back wrapper__back--category";
+        this.wrapperBackCategory.classList = "wrapper__back wrapper__back--category";
         this.wrapperBackAbout.classList = "wrapper__back wrapper__back--about";
+        this.wrapperBackAuthors.classList = "wrapper__back wrapper__back--authors";
+
+        this.wrapperBackIntro.id = "backIntro";
+        this.wrapperBackCategory.id = "backCategory";
+        this.wrapperBackAbout.id = "backAbout";
+        this.wrapperBackAuthors.id = "backAuthors";
 
         this.wrapperBackFirst.classList = "wrapper__back wrapper__back_category--quest wrapper__back_category--first";
         this.wrapperBackSecond.classList = "wrapper__back wrapper__back_category--quest wrapper__back_category--second";
         this.wrapperBackThird.classList = "wrapper__back wrapper__back_category--quest wrapper__back_category--third";
 
         this.wrapperBackIntro.innerHTML = `
-            <img src="assets/games/classics/images/c_introBack_1.jpg" alt="Intro Background">
+            <img src="assets/games/classics/images/c_introBack_2.jpg" alt="Intro Background">
         `;
 
         this.wrapperBackAbout.innerHTML = `
-            <img src="assets/games/classics/images/c_introBack_1.jpg" alt="Intro Background">
+            <img src="assets/games/classics/images/c_aboutBack_1.jpg" alt="About Background">
+        `;
+
+        this.wrapperBackAuthors.innerHTML = `
+            <img src="assets/games/classics/images/c_authorsBack_1.jpg" alt="Authors Background">
         `;
     }
 
     initAppend() {
         this.wrapperBack.appendChild(this.wrapperBackIntro);
         this.wrapperBack.appendChild(this.wrapperBackAbout);
-        this.wrapperBack.appendChild(this.wrapperCategoryBack);
+        this.wrapperBack.appendChild(this.wrapperBackAuthors);
+        this.wrapperBack.appendChild(this.wrapperBackCategory);
         this.wrapperBack.appendChild(this.wrapperBackFirst);
         this.wrapperBack.appendChild(this.wrapperBackSecond);
         this.wrapperBack.appendChild(this.wrapperBackThird);

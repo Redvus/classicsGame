@@ -33,7 +33,9 @@ export class Authors {
 		this.containerAbout = document.createElement('div');
 		this.wrapperTop = document.querySelector('.wrapper__top');
 		this.wrapperBottom = document.querySelector('.wrapper__bottom');
-		this.wrapperIntro = document.querySelector('.wrapper__back_intro');
+		this.wrapperBackIntro = document.getElementById('backIntro');
+		this.wrapperBackAbout = document.getElementById('backAbout');
+		this.wrapperBackAuthors = document.getElementById('backAuthors');
 
 		// if (document.body.clientWidth < 570 || screen.width < 570) {
 		//     this.container.style.width = 'calc(100% - 2rem)';
@@ -89,6 +91,11 @@ export class Authors {
 						this.wrapperTop.removeChild(this.wrapperTopTitle);
 					// }, 500);
 					new Intro();
+					gsap.to(this.wrapperBackAbout, {
+						autoAlpha: 1,
+						duration: '0.3',
+						delay: '0.5'
+					})
 					// if (document.body.clientWidth < 570 || screen.width < 570) {
 					// 	containerAboutInside.style.height = 'initial';
 					// 	this.container.style.width = '';
@@ -110,11 +117,6 @@ export class Authors {
 					autoAlpha: 0,
 					delay: '-0.1'
 				})
-				.to(this.wrapperIntro, {
-					autoAlpha: 1,
-					duration: '0.6',
-					delay: '-0.3'
-				})
 			;
 		});
 	}
@@ -123,6 +125,11 @@ export class Authors {
 		let tl = new gsap.timeline();
 
 		tl
+			.to(this.wrapperBackAbout, {
+				duration: '0.3',
+				// delay: '0.2',
+				autoAlpha: 0
+			})
 			.from(this.containerAbout, {
 				autoAlpha: 0,
 				duration: 0.4,

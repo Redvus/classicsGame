@@ -18,6 +18,62 @@
 	//background-color: cornflowerblue;
 	z-index: 5;
 
+	&__menu {
+		// width: 100%;
+		// height: 100%;
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		align-content: center;
+		justify-content: center;
+		margin: 0;
+
+		li {
+			// width: calc(100% / 3.2);
+			height: 100%;
+			display: block;
+			position: relative;
+			margin-bottom: calc(var(--marginBase) * 2);
+			//background: url("../images/mf_buttonStart.png") 100% 100% no-repeat;
+			//background-size: 100% 100%;
+
+			a {
+				// width: max-content;
+				// height: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border: var(--border_normal) solid var(--secondary);
+				background-color: var(--fourth-opacity-30);
+				border-radius: 0.6rem;
+				padding: calc(var(--marginBase) * 2);
+				@include hx(h2);
+				text-shadow: var(--border_thin) var(--border_thin) var(--border_normal) var(--third);
+
+				// transition: all $base-duration;
+			}
+
+			&:hover {
+
+				a {
+					// letter-spacing: 0.05rem;
+					background-color: var(--fourth-opacity-10);
+				}
+			}
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+
+			//&:active {
+			//
+			//	a {
+			//		background: linear-gradient(lighten(var(--five), 15%), lighten(var(--five), 25%));
+			//	}
+			//}
+		}
+	}
+
 	// &__category {
 	// 	width: $containerCategoryWidth;
 	// 	height: $containerCategoryHeight;

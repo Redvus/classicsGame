@@ -10,6 +10,7 @@ export class Category {
         category_2ID,
         category_3,
         category_3ID) {
+
         this.categoryStarsCount = categoryStarsCount;
         this.category_1 = category_1;
         this.category_2 = category_2;
