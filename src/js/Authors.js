@@ -91,11 +91,11 @@ export class Authors {
 						this.wrapperTop.removeChild(this.wrapperTopTitle);
 					// }, 500);
 					new Intro();
-					gsap.to(this.wrapperBackAbout, {
+					gsap.to([this.wrapperBackAbout, this.wrapperBackAuthors], {
 						autoAlpha: 1,
 						duration: '0.3',
 						delay: '0.5'
-					})
+					});
 					// if (document.body.clientWidth < 570 || screen.width < 570) {
 					// 	containerAboutInside.style.height = 'initial';
 					// 	this.container.style.width = '';

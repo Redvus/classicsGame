@@ -26,7 +26,7 @@
 		flex-direction: column;
 		align-content: center;
 		justify-content: center;
-		margin: 0;
+		margin: calc(var(--marginBase) * 4) 0 0;
 
 		li {
 			// width: calc(100% / 3.2);
@@ -44,10 +44,10 @@
 				align-items: center;
 				justify-content: center;
 				border: var(--border_normal) solid var(--secondary);
-				background-color: var(--fourth-opacity-30);
+				background-color: var(--third-opacity-30);
 				border-radius: 0.6rem;
 				padding: calc(var(--marginBase) * 2);
-				@include hx(h2);
+				@include hx(h3);
 				text-shadow: var(--border_thin) var(--border_thin) var(--border_normal) var(--third);
 
 				// transition: all $base-duration;
@@ -57,7 +57,7 @@
 
 				a {
 					// letter-spacing: 0.05rem;
-					background-color: var(--fourth-opacity-10);
+					background-color: var(--third-opacity-50);
 				}
 			}
 
@@ -780,11 +780,13 @@
 			display: flex;
 			align-items: center;
 			flex-direction: column;
-			padding: calc(var(--marginBase) * 3);
+			padding: calc(var(--marginBase) * 1) calc(var(--marginBase) * 2);
 			text-align: center;
+			background-color: var(--third-opacity-70);
 
 			p {
 				@include px(--font-size-small);
+
 			}
 
 			ul {
@@ -814,12 +816,12 @@
 				width: 50%;
 				height: calc(var(--marginBase) * 3);
 				display: block;
-				position: absolute;
+				position: relative;
 				top: 0;
-				left: 50%;
-				transform: translateX(-50%);
+				// left: 50%;
+				// transform: translateX(-50%);
 				background: no-repeat 50% / cover url("images/decorTop_1.svg");
-				// opacity: 0.2;
+				margin-top: calc(var(--marginBase) * 1);
 				z-index: 1;
 
 				svg {
@@ -832,12 +834,12 @@
 				width: 50%;
 				height: calc(var(--marginBase) * 3);
 				display: block;
-				position: absolute;
+				position: relative;
 				bottom: 0;
-				left: 50%;
-				transform: translateX(-50%);
+				// left: 50%;
+				// transform: translateX(-50%);
 				background: no-repeat 50% / cover url("images/decorBottom_1.svg");
-				// opacity: 0.2;
+				margin-bottom: calc(var(--marginBase) * 1);
 				z-index: 1;
 
 				svg {

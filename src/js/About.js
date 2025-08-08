@@ -15,6 +15,12 @@ export class About {
         this.initAboutAnim();
         this.initAboutBack();
 
+        // this.library = new Info();
+        // this.library.loadInfo().then(info => {
+        //     this.libraryLeftText = info[0].info;
+        //     this.libraryRightText = info[1].info;
+        // });
+
         // this.initDev();
     }
 
@@ -78,6 +84,11 @@ export class About {
                     //     this.container.style.padding = '';
                     // }
                     new Intro();
+                    gsap.to(this.wrapperBackAbout, {
+                        autoAlpha: 1,
+                        duration: '0.3',
+                        delay: '0.5'
+                    });
                 }
             });
             tl
@@ -106,22 +117,16 @@ export class About {
                 duration: '0.6',
                 delay: '-0.3'
             })
-            .from(this.containerAbout, {
-                autoAlpha: 0,
-                duration: 0.4,
-                scale: 0.97
-            })
             .from(this.wrapperTopTitle, {
                 duration: '0.3',
                 delay: '-0.1',
                 autoAlpha: 0,
                 y: '-10%'
             })
-            .from(this.buttonBackClick, {
-                duration: '0.3',
-                delay: '-0.1',
+            .from(this.containerAbout, {
                 autoAlpha: 0,
-                y: '10%'
+                duration: 0.3,
+                scale: 0.97
             })
         ;
     }

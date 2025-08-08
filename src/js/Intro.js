@@ -1,5 +1,6 @@
 import { gsap } from "gsap";
 import { Sounds } from "./Sounds.js";
+import { Menu } from "./Buttons/Menu.js";
 import { About } from "./About.js";
 import { Authors } from "./Authors.js";
 import { Category } from './Category.js'
@@ -10,6 +11,7 @@ export class Intro {
     constructor(titleIntro = 'Классики') {
         this.titleIntro = titleIntro;
         this.sounds = new Sounds();
+        new Menu();
         this.initLayout();
         this.introAnim();
         this.initGame();
@@ -23,6 +25,7 @@ export class Intro {
         this.wrapperTop = document.querySelector('.wrapper__top');
         this.wrapperBackIntro = document.getElementById('backIntro');
         this.wrapperBackAbout = document.getElementById('backAbout');
+        this.wrapperBackAuthors = document.getElementById('backAuthors');
         // this.backgroundMusicID = document.getElementById('backgroundMusicID');
 
         this.wrapperTopTitle = document.createElement('div');
@@ -34,18 +37,7 @@ export class Intro {
             <h1>${this.titleIntro}</h1>
         `;
 
-        // Кнопки
-        this.introBlockButtons = document.createElement('ul');
-        this.introBlockButtons.className = 'container__menu';
-        this.introBlockButtons.id = 'menuMain';
-        this.introBlockButtons.innerHTML = `
-            <li><a href="javascript:void(0);" id="clickAboutLibrary">О библиотеке</a></li>
-            <li><a href="javascript:void(0);" id="clickAboutAuthors">Авторы</a></li>
-            <li><a href="javascript:void(0);" id="clickLoadGame">Начать игру</a></li>
-        `;
-
         this.wrapperTop.appendChild(this.wrapperTopTitle);
-        this.container.appendChild(this.introBlockButtons);
     }
 
     introAnim() {
@@ -91,7 +83,7 @@ export class Intro {
                 onComplete: () => {
                     this.wrapperTop.innerHTML = '';
                     this.wrapperTop.className = 'wrapper__top';
-                    this.wrapperBottom.removeChild(this.wrapperBottomMenu);
+                    this.container.removeChild(this.mainMenu);
                     // gsap.to(this.wrapperBackIntro, {
                     //     duration: '0.5',
                     //     // delay: '0.2',
@@ -120,12 +112,12 @@ export class Intro {
                     duration: 0.3,
                     y: '-10%'
                 })
-                .to(this.wrapperBottomMenu, {
+                .to(this.mainMenu, {
                     duration: 0.3,
                     // delay: '-0.4',
                     autoAlpha: 0
                 })
-                .to(this.wrapperBackIntro, {
+                .to([this.wrapperBackIntro, this.wrapperBackAbout, this.wrapperBackAuthors], {
                     duration: '0.5',
                     // delay: '0.2',
                     autoAlpha: 0
@@ -138,7 +130,7 @@ export class Intro {
                 onComplete: () => {
                     this.wrapperTop.innerHTML = '';
                     this.wrapperTop.className = 'wrapper__top';
-                    this.wrapperBottom.removeChild(this.wrapperBottomMenu);
+                    this.container.removeChild(this.mainMenu);
                     new Authors();
                 }
             });
@@ -166,7 +158,7 @@ export class Intro {
                 onComplete: () => {
                     this.wrapperTop.innerHTML = '';
                     this.wrapperTop.className = 'wrapper__top';
-                    this.wrapperBottom.removeChild(this.wrapperBottomMenu);
+                    this.container.removeChild(this.mainMenu);
                     new About();
                 }
             });

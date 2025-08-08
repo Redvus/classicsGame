@@ -91,6 +91,10 @@ export class Game {
         this.wrapperBackAuthors.innerHTML = `
             <img src="assets/games/classics/images/c_authorsBack_1.jpg" alt="Authors Background">
         `;
+
+        this.wrapperBackCategory.innerHTML = `
+            <img src="assets/games/classics/images/c_categoryChoiceBack_1.jpg" alt="Authors Background">
+        `;
     }
 
     initAppend() {

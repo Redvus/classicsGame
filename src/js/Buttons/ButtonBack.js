@@ -31,7 +31,7 @@ export class ButtonBack {
     buttonBackAnim() {
         gsap.to(this.containerButtonBack, {
             duration: 0.3,
-            delay: '-0.1',
+            delay: '0.3',
             autoAlpha: 1
         });
     }
