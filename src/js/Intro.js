@@ -28,6 +28,8 @@ export class Intro {
         this.wrapperBackAuthors = document.getElementById('backAuthors');
         // this.backgroundMusicID = document.getElementById('backgroundMusicID');
 
+        this.introBlockButtons = document.getElementById('menuMain');
+
         this.wrapperTopTitle = document.createElement('div');
 
         this.wrapperTop.className += ' wrapper__top_intro';
@@ -54,10 +56,10 @@ export class Intro {
                 autoAlpha: 0,
                 y: '-10%'
             })
-            .from(this.introBlockButtons, {
+            .to(this.introBlockButtons, {
                 duration: 0.3,
                 delay: '-0.2',
-                autoAlpha: 0
+                autoAlpha: 1
             })
         ;
     }

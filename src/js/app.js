@@ -16,11 +16,6 @@ export class Game {
         this.initLayoutBack();
         this.initAppend();
         new Intro();
-        // if (import.meta.env.DEV
-        //     || import.meta.env.PROD
-        // ) {
-        //     this.initLayoutDev(); // Скрывать для build
-        // }
 
         //Develop
         // new Category(
@@ -39,6 +34,12 @@ export class Game {
 
         // new About();
         // new Authors();
+
+        // if (import.meta.env.DEV
+        //     || import.meta.env.PROD
+        // ) {
+        //     this.initLayoutDev(); // Скрывать для build
+        // }
     }
 
     initLayout() {
@@ -57,14 +58,14 @@ export class Game {
     }
 
     initLayoutBack() {
-        this.wrapperBackIntro = document.createElement('div');
-        this.wrapperBackCategory = document.createElement('div');
-        this.wrapperBackAbout = document.createElement('div');
-        this.wrapperBackAuthors = document.createElement('div');
+        this.wrapperBackIntro = document.createElement('picture');
+        this.wrapperBackCategory = document.createElement('picture');
+        this.wrapperBackAbout = document.createElement('picture');
+        this.wrapperBackAuthors = document.createElement('picture');
 
-        this.wrapperBackFirst = document.createElement('div');
-        this.wrapperBackSecond = document.createElement('div');
-        this.wrapperBackThird = document.createElement('div');
+        this.wrapperBackFirst = document.createElement('picture');
+        this.wrapperBackSecond = document.createElement('picture');
+        this.wrapperBackThird = document.createElement('picture');
 
         this.wrapperBackIntro.classList = "wrapper__back wrapper__back--intro";
         this.wrapperBackCategory.classList = "wrapper__back wrapper__back--category";

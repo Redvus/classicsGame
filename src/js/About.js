@@ -126,7 +126,7 @@ export class About {
             .from(this.containerAbout, {
                 autoAlpha: 0,
                 duration: 0.3,
-                scale: 0.97
+                // scale: 0.97
             })
         ;
     }

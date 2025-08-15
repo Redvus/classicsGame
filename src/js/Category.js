@@ -20,14 +20,16 @@ export class Category {
         this.category_1ID = category_1ID;
         this.category_2ID = category_2ID;
         this.category_3ID = category_3ID;
+
         this.initLayout();
         new ButtonBack();
         this.initAppend();
-        this.initCategoryChoiceAnim();
         this.initCategoryBack();
-        this.categoryProgress(`progress${this.category_1ID}Value`, `progress${this.category_1ID}`);
-        this.categoryProgress(`progress${this.category_2ID}Value`, `progress${this.category_2ID}`);
-        this.categoryProgress(`progress${this.category_3ID}Value`, `progress${this.category_3ID}`);
+        this.initCategoryChoiceAnim();
+
+        // this.categoryProgress(`progress${this.category_1ID}Value`, `progress${this.category_1ID}`);
+        // this.categoryProgress(`progress${this.category_2ID}Value`, `progress${this.category_2ID}`);
+        // this.categoryProgress(`progress${this.category_3ID}Value`, `progress${this.category_3ID}`);
     }
 
     initLayout() {
@@ -54,77 +56,84 @@ export class Category {
             <h2 id="categoryChoiceTitle" class="wrapper__top_title">Выберите уровень</h2>
         `;
 
-        // for (let i = 0; i < 3; i++) {
-        //     this.categoryBlockIns = document.createElement('div');
-        //     this.categoryBlockIns.className = 'container__category_category';
-        //     this.categoryBlockIns.id = `category${this[`category_{i + 1}`]}`;
-        //     this.categoryBlockIns.innerHTML = `
+        for (let i = 0; i < 3; i++) {
+            this.categoryBlockIns = document.createElement('div');
+            this.categoryBlockIns.className = 'container__category_category';
+            this.categoryBlockIns.id = `category${this[`category_${i + 1}ID`]}`;
+            this.categoryBlockIns.innerHTML = `
+                <div class="container__category_inside">
+                    <div class="container__category_title">
+                        <h3>${this[`category_${i + 1}`]}</h3>
+                    </div>
+                    <div class="container__category_stars">
+                        <?xml version="1.0" encoding="utf-8"?>
+                        <!-- Generator: Adobe Illustrator 28.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                        <svg version="1.1" id="Layer_2_00000034071295812620418580000010800723389410754238_"
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
+                                style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                        <polygon class="st0" points="256,12.5 335.1,172.8 512,198.5 384,323.3 414.2,499.5 256,416.3 97.8,499.5 128,323.3 0,198.5
+                            176.9,172.8 "/>
+                            </svg>
+                        <div class="container__category_value">
+                            <span id="progress${i + 1}Value">0</span>&nbsp;/&nbsp;${this.categoryStarsCount}
+                        </div>
+                    </div>
+                </div>
+            `;
+            this.categoryBlock.appendChild(this.categoryBlockIns);
+        }
+
+        this.container.className += ' container--category';
+
+        // this.categoryBlock.innerHTML = `
+        //     <div class="container__category_category" id="category${this.category_1ID}">
         //         <div class="category__main">
         //             <div class="category__main_title">
-        //                 <h3>${this[`category_{i + 1}`]}</h3>
+        //                 <h3>${this.category_1}</h3>
         //             </div>
         //             <div class="category__main_stars">
         //                 <picture>
         //                     <img src="assets/games/classics/images/cp_stars_fill.png" alt="Количество набранных очков">
         //                 </picture>
         //                 <div class="category__main_value">
-        //                     <span id="progress${i + 1}Value"></span>&nbsp;/&nbsp;${this.categoryStarsCount}
+        //                     <span id="progress${this.category_1ID}Value"></span>&nbsp;/&nbsp;${this.categoryStarsCount}
         //                 </div>
         //             </div>
         //         </div>
-        //     `;
-        //     this.categoryBlock.appendChild(this.categoryBlockIns);
-        // }
+        //     </div>
 
-        this.categoryBlock.innerHTML = `
-            <div class="container__category_category" id="category${this.category_1ID}">
-                <div class="category__main">
-                    <div class="category__main_title">
-                        <h3>${this.category_1}</h3>
-                    </div>
-                    <div class="category__main_stars">
-                        <picture>
-                            <img src="assets/games/classics/images/cp_stars_fill.png" alt="Количество набранных очков">
-                        </picture>
-                        <div class="category__main_value">
-                            <span id="progress${this.category_1ID}Value"></span>&nbsp;/&nbsp;${this.categoryStarsCount}
-                        </div>
-                    </div>
-                </div>
-            </div>
+        //     <div class="container__category_category" id="category${this.category_2ID}">
+        //         <div class="category__main">
+        //             <div class="category__main_title">
+        //                 <h3>${this.category_2}</h3>
+        //             </div>
+        //             <div class="category__main_stars">
+        //                 <picture>
+        //                     <img src="assets/games/classics/images/cp_stars_fill.png" alt="Количество набранных очков">
+        //                 </picture>
+        //                 <div class="category__main_value">
+        //                     <span id="progress${this.category_2ID}Value"></span>&nbsp;/&nbsp;${this.categoryStarsCount}
+        //                 </div>
+        //             </div>
+        //         </div>
+        //     </div>
 
-            <div class="container__category_category" id="category${this.category_2ID}">
-                <div class="category__main">
-                    <div class="category__main_title">
-                        <h3>${this.category_2}</h3>
-                    </div>
-                    <div class="category__main_stars">
-                        <picture>
-                            <img src="assets/games/classics/images/cp_stars_fill.png" alt="Количество набранных очков">
-                        </picture>
-                        <div class="category__main_value">
-                            <span id="progress${this.category_2ID}Value"></span>&nbsp;/&nbsp;${this.categoryStarsCount}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container__category_category" id="category${this.category_3ID}">
-                <div class="category__main">
-                    <div class="category__main_title">
-                        <h3>${this.category_3}</h3>
-                    </div>
-                    <div class="category__main_stars">
-                        <picture>
-                            <img src="assets/games/classics/images/cp_stars_fill.png" alt="Количество набранных очков">
-                        </picture>
-                        <div class="category__main_value">
-                            <span id="progress${this.category_3ID}Value"></span>&nbsp;/&nbsp;${this.categoryStarsCount}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
+        //     <div class="container__category_category" id="category${this.category_3ID}">
+        //         <div class="category__main">
+        //             <div class="category__main_title">
+        //                 <h3>${this.category_3}</h3>
+        //             </div>
+        //             <div class="category__main_stars">
+        //                 <picture>
+        //                     <img src="assets/games/classics/images/cp_stars_fill.png" alt="Количество набранных очков">
+        //                 </picture>
+        //                 <div class="category__main_value">
+        //                     <span id="progress${this.category_3ID}Value"></span>&nbsp;/&nbsp;${this.categoryStarsCount}
+        //                 </div>
+        //             </div>
+        //         </div>
+        //     </div>
+        // `;
     }
 
     initAppend() {
@@ -147,7 +156,7 @@ export class Category {
             // })
             .from(this.wrapperTopTitle, {
                 duration: '0.3',
-                delay: '-0.1',
+                // delay: '-0.1',
                 autoAlpha: 0,
                 y: '-10%'
             })
@@ -157,8 +166,8 @@ export class Category {
                 this.categoryKeeper], {
                 autoAlpha: 0,
                 duration: 0.6,
-                delay: '-0.3',
-                y: "-0.5rem",
+                delay: '-0.1',
+                x: "1rem",
                 stagger: 0.2
             })
         ;

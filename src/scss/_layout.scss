@@ -400,6 +400,10 @@ body {
 
         &--intro {
             z-index: 7;
+
+            img {
+                width: 101%;
+            }
         }
 
         &--about {
@@ -412,6 +416,10 @@ body {
 
         &--category {
             z-index: 4;
+
+            img {
+                width: 105%;
+            }
         }
     }
 

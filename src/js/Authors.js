@@ -130,23 +130,23 @@ export class Authors {
 				// delay: '0.2',
 				autoAlpha: 0
 			})
-			.from(this.containerAbout, {
-				autoAlpha: 0,
-				duration: 0.4,
-				scale: 0.97
-			})
 			.from(this.wrapperTopTitle, {
 				duration: '0.3',
-				delay: '-0.1',
+				delay: '-0.2',
 				autoAlpha: 0,
 				y: '-10%'
 			})
-			.from(this.buttonBackClick, {
-				duration: '0.3',
-				delay: '-0.1',
+			.from(this.containerAbout, {
 				autoAlpha: 0,
-				y: '10%'
+				duration: 0.4,
+				// scale: 0.97
 			})
+			// .from(this.buttonBackClick, {
+			// 	duration: '0.3',
+			// 	// delay: '-0.1',
+			// 	autoAlpha: 0,
+			// 	y: '10%'
+			// })
 		;
 	}
 

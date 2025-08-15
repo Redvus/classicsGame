@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "bourbon": "^7.3.0",
-    "gsap": "^3.12.5",
+    "gsap": "^3.13.0",
     "sag-bourbon-neat": "^2.1.1"
   }
 }
