@@ -1,6 +1,7 @@
 import { gsap } from "gsap";
 import { ButtonBack } from "./Buttons/ButtonBack.js";
 import { Intro } from "./Intro.js";
+import { ChoiceCategory } from "./ChoiceCategory.js";
 
 export class Category {
 
@@ -25,7 +26,8 @@ export class Category {
         new ButtonBack();
         this.initAppend();
         this.initCategoryBack();
-        this.initCategoryChoiceAnim();
+        this.initCategoryAnim();
+        this.initCategoryChoice();
 
         // this.categoryProgress(`progress${this.category_1ID}Value`, `progress${this.category_1ID}`);
         // this.categoryProgress(`progress${this.category_2ID}Value`, `progress${this.category_2ID}`);
@@ -41,6 +43,11 @@ export class Category {
         this.wrapperBackCategory = document.getElementById('backCategory');
         this.wrapperBackAbout = document.getElementById('backAbout');
         this.wrapperBackAuthors = document.getElementById('backAuthors');
+
+        this.wrapperBackIntro = document.getElementById('backIntro');
+        this.wrapperBackAbout = document.getElementById('backAbout');
+        this.wrapperBackAuthors = document.getElementById('backAuthors');
+        this.wrapperBackCategory = document.getElementById('backCategory');
 
         this.categoryBlock = document.createElement('div');
         this.wrapperTopTitle = document.createElement('div');
@@ -69,11 +76,11 @@ export class Category {
                         <?xml version="1.0" encoding="utf-8"?>
                         <!-- Generator: Adobe Illustrator 28.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
                         <svg version="1.1" id="Layer_2_00000034071295812620418580000010800723389410754238_"
-                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
-                                style="enable-background:new 0 0 512 512;" xml:space="preserve">
-                        <polygon class="st0" points="256,12.5 335.1,172.8 512,198.5 384,323.3 414.2,499.5 256,416.3 97.8,499.5 128,323.3 0,198.5
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
+                            style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                            <polygon class="st0" points="256,12.5 335.1,172.8 512,198.5 384,323.3 414.2,499.5 256,416.3 97.8,499.5 128,323.3 0,198.5
                             176.9,172.8 "/>
-                            </svg>
+                        </svg>
                         <div class="container__category_value">
                             <span id="progress${i + 1}Value">0</span>&nbsp;/&nbsp;${this.categoryStarsCount}
                         </div>
@@ -142,7 +149,7 @@ export class Category {
         this.wrapperTop.appendChild(this.wrapperTopTitle);
     }
 
-    initCategoryChoiceAnim() {
+    initCategoryAnim() {
         this.categoryStudent = document.getElementById('categoryStudent')
         this.categoryConnoisseur = document.getElementById('categoryConnoisseur');
         this.categoryKeeper = document.getElementById('categoryKeeper');
@@ -171,6 +178,40 @@ export class Category {
                 stagger: 0.2
             })
         ;
+    }
+
+    initCategoryChoice() {
+        this.categoryStudent.addEventListener('click', () => {
+            let tl = gsap.timeline({
+                onComplete: () => {
+                    this.container.removeChild(this.categoryBlock);
+                    this.container.classList.remove('container--category');
+                    this.wrapperTop.removeChild(this.wrapperTopTitle);
+                    new ChoiceCategory(
+                        'Ученик',
+                        15,
+                        '',
+                        'Student');
+                }
+            });
+
+            tl
+                .to(this.wrapperTopTitle, {
+                    duration: '0.3',
+                    autoAlpha: 0,
+                    y: '-10%'
+                })
+                .to(this.categoryBlock, {
+                    autoAlpha: 0,
+                    duration: 0.3,
+                    delay: '-0.1'
+                })
+                .to(this.wrapperBackCategory, {
+                    duration: '0.5',
+                    autoAlpha: 0
+                })
+            ;
+        });
     }
 
     categoryProgress(progressID, progressNameValue) {

@@ -28,7 +28,7 @@ export class Game {
         //     'Keeper');
         // new ChoiceCategory(
         //     'Ученик',
-        //     15,
+        //     '',
         //     '',
         //     'Student');
 
@@ -95,6 +95,10 @@ export class Game {
 
         this.wrapperBackCategory.innerHTML = `
             <img src="assets/games/classics/images/c_categoryChoiceBack_1.jpg" alt="Authors Background">
+        `;
+
+        this.wrapperBackFirst.innerHTML = `
+            <img src="assets/games/classics/images/c_categoryFirstBack_1.jpg" alt="Authors Background">
         `;
     }
 
