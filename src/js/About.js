@@ -1,19 +1,25 @@
 import { gsap } from "gsap";
-import { ArrowsAll } from "./ArrowsAll.js";
+import { ButtonBack } from "./Buttons/ButtonBack.js";
 import { Intro } from "./Intro.js";
 
 export class About {
 
     constructor(
-        libraryLeftText,
-        libraryRightText
+        libraryLeftText = 'МБУК г.о. Самара «Самарская муниципальная информационно-библиотечная система» была создана в декабре 1986 года. На сегодняшний день в ее составе&nbsp;– Центральная городская библиотека имени Н.К. Крупской и 35 библиотек-филиалов, нашими читателями являются жители всех 9 районов города. Библиотеки системы&nbsp;– это информационные, образовательные центры, место культурного отдыха и общения. СМИБС находится в центре мировых событий, активно участвует в общероссийских акциях и в жизни города. В библиотеках системы можно получить информацию и литературу по любой теме, доступ к электронным базам данных, воспользоваться услугами Интернет-залов, Центрами общественного доступа, побывать на презентациях выставок и творческих встречах, а также воспользоваться дополнительными сервисными услугами:<br><br>ксерокопированием, сканированием документов, ламинированием документов, распечаткой информации на принтере, записью на электронные носители.',
+        libraryRightText = ''
     ) {
         this.libraryLeftText = libraryLeftText;
         this.libraryRightText = libraryRightText;
-        this.arrowBackLoad = new ArrowsAll();
         this.initLayout();
+        new ButtonBack();
         this.initAboutAnim();
         this.initAboutBack();
+
+        // this.library = new Info();
+        // this.library.loadInfo().then(info => {
+        //     this.libraryLeftText = info[0].info;
+        //     this.libraryRightText = info[1].info;
+        // });
 
         // this.initDev();
     }
@@ -26,7 +32,8 @@ export class About {
         this.containerAboutRight = document.createElement('div');
         this.wrapperTop = document.querySelector('.wrapper__top');
         this.wrapperBottom = document.querySelector('.wrapper__bottom');
-        this.wrapperIntro = document.querySelector('.wrapper__back_intro');
+        this.wrapperBackIntro = document.getElementById('backIntro');
+        this.wrapperBackAbout = document.getElementById('backAbout');
 
         // if (document.body.clientWidth < 570 || screen.width < 570) {
         //     container.style.width = 'calc(100% - 2rem)';
@@ -44,33 +51,31 @@ export class About {
             <h1>Библиотека</h1>
         `;
 
-        this.containerAboutLeft.innerHTML = `
-            <div class="container__about_text container__about_text--left">
+        this.containerAbout.innerHTML = `
+            <div class="container__about_text">
                 <p>${this.libraryLeftText}</p>
             </div>
         `;
 
-        this.containerAboutRight.innerHTML = `
-            <div class="container__about_text container__about_text--right">
-                <p>${this.libraryRightText}</p>
-            </div>
-        `;
+        // this.containerAboutRight.innerHTML = `
+        //     <div class="container__about_text container__about_text--right">
+        //         <p>${this.libraryRightText}</p>
+        //     </div>
+        // `;
 
         this.wrapperTop.appendChild(this.wrapperTopTitle);
         this.container.appendChild(this.containerAbout);
-        this.containerAbout.appendChild(this.containerAboutLeft);
-        this.containerAbout.appendChild(this.containerAboutRight);
-
-        this.arrowBackLoad.arrowBack();
-        this.arrowBackClick = document.getElementById('arrowBack');
-        this.wrapperBottom.appendChild(this.arrowBackClick);
+        // this.containerAbout.appendChild(this.containerAboutLeft);
+        // this.containerAbout.appendChild(this.containerAboutRight);
     }
 
     initAboutBack() {
-        this.arrowBackClick.addEventListener('click', () => {
+        this.buttonBackClick = document.getElementById('buttonBack');
+
+        this.buttonBackClick.addEventListener('click', () => {
             let tl = gsap.timeline({
                 onComplete: () => {
-                    this.wrapperBottom.removeChild(this.arrowBackClick);
+                    this.wrapperBottom.removeChild(this.buttonBackClick);
                     this.container.removeChild(this.containerAbout);
                     this.wrapperTop.removeChild(this.wrapperTopTitle);
                     // this.container.style.width = '45rem';
@@ -79,6 +84,11 @@ export class About {
                     //     this.container.style.padding = '';
                     // }
                     new Intro();
+                    gsap.to(this.wrapperBackAbout, {
+                        autoAlpha: 1,
+                        duration: '0.3',
+                        delay: '0.5'
+                    });
                 }
             });
             tl
@@ -89,15 +99,10 @@ export class About {
                 })
                 .to([
                     this.containerAbout,
-                    this.arrowBackClick
+                    this.buttonBackClick
                 ], {
                     autoAlpha: 0,
                     delay: '-0.1'
-                })
-                .to(this.wrapperIntro, {
-                    autoAlpha: 1,
-                    duration: '0.6',
-                    delay: '-0.3'
                 })
             ;
         });
@@ -107,10 +112,10 @@ export class About {
         let tl = new gsap.timeline();
 
         tl
-            .from(this.containerAbout, {
-                autoAlpha: 0,
-                duration: 0.4,
-                scale: 0.97
+            .to(this.wrapperBackAbout, {
+                autoAlpha: 1,
+                duration: '0.6',
+                delay: '-0.3'
             })
             .from(this.wrapperTopTitle, {
                 duration: '0.3',
@@ -118,17 +123,16 @@ export class About {
                 autoAlpha: 0,
                 y: '-10%'
             })
-            .from(this.arrowBackClick, {
-                duration: '0.3',
-                delay: '-0.1',
+            .from(this.containerAbout, {
                 autoAlpha: 0,
-                y: '10%'
+                duration: 0.3,
+                // scale: 0.97
             })
         ;
     }
 
     initDev() {
-        const introBack = document.querySelector('.wrapper__back_intro');
+        const introBack = document.querySelector('.wrapper__back--intro');
         introBack.style.opacity = '0';
         introBack.style.visibility = 'none';
     }

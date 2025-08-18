@@ -1,27 +1,25 @@
 import { gsap } from "gsap";
-import { ArrowsAll } from "./ArrowsAll.js";
+import { ButtonBack } from "./Buttons/ButtonBack.js";
 import { Intro } from "./Intro.js";
 
 export class Authors {
 
 	constructor(
-		personFirstTitle,
-		personFirstName,
-		personSecondTitle,
-		personSecondNameGone,
-		personSecondName,
-		personThirdTitle,
-		personThirdName
+		personFirstTitle = 'Сценарист',
+		personFirstName = 'Инна Ямщикова',
+		personSecondTitle = 'Дизайнер',
+		personSecondName = 'Александр Суворов',
+		personThirdTitle = 'Программист',
+		personThirdName = 'Александр Суворов'
 	) {
 		this.personFirstTitle = personFirstTitle;
 		this.personFirstName = personFirstName;
 		this.personSecondTitle = personSecondTitle;
-		this.personSecondNameGone = personSecondNameGone;
 		this.personSecondName = personSecondName;
 		this.personThirdTitle = personThirdTitle;
 		this.personThirdName = personThirdName;
 
-		this.arrowBackLoad = new ArrowsAll();
+		new ButtonBack();
 		this.initLayout();
 		this.initAuthorsAnim();
 		this.initAuthorsBack();
@@ -35,7 +33,9 @@ export class Authors {
 		this.containerAbout = document.createElement('div');
 		this.wrapperTop = document.querySelector('.wrapper__top');
 		this.wrapperBottom = document.querySelector('.wrapper__bottom');
-		this.wrapperIntro = document.querySelector('.wrapper__back_intro');
+		this.wrapperBackIntro = document.getElementById('backIntro');
+		this.wrapperBackAbout = document.getElementById('backAbout');
+		this.wrapperBackAuthors = document.getElementById('backAuthors');
 
 		// if (document.body.clientWidth < 570 || screen.width < 570) {
 		//     this.container.style.width = 'calc(100% - 2rem)';
@@ -59,7 +59,7 @@ export class Authors {
 				</li>
 				<li class="container__about_person">
 					<h4>${this.personSecondTitle}</h4>
-					<p class="container__about_person--gone">${this.personSecondNameGone}</p>
+					<p class="container__about_person">${this.personSecondName}</p>
 				</li>
 				<li class="container__about_person">
 					<h4>${this.personThirdTitle}</h4>
@@ -77,22 +77,25 @@ export class Authors {
 		// if (document.body.clientWidth < 570 || screen.width < 570) {
 		//     containerAboutInside.style.height = '100%';
 		// }
-
-		this.arrowBackLoad.arrowBack();
-		this.arrowBackClick = document.getElementById('arrowBack');
-		this.wrapperBottom.appendChild(this.arrowBackClick);
 	}
 
 	initAuthorsBack() {
-		this.arrowBackClick.addEventListener('click', () => {
+		this.buttonBackClick = document.getElementById('buttonBack');
+
+		this.buttonBackClick.addEventListener('click', () => {
 			let tl = gsap.timeline({
 				onComplete: () => {
 					// setTimeout(() => {
-						this.wrapperBottom.removeChild(this.arrowBackClick);
+						this.wrapperBottom.removeChild(this.buttonBackClick);
 						this.container.removeChild(this.containerAbout);
 						this.wrapperTop.removeChild(this.wrapperTopTitle);
 					// }, 500);
 					new Intro();
+					gsap.to([this.wrapperBackAbout, this.wrapperBackAuthors], {
+						autoAlpha: 1,
+						duration: '0.3',
+						delay: '0.5'
+					});
 					// if (document.body.clientWidth < 570 || screen.width < 570) {
 					// 	containerAboutInside.style.height = 'initial';
 					// 	this.container.style.width = '';
@@ -109,15 +112,10 @@ export class Authors {
 				})
 				.to([
 					this.containerAbout,
-					this.arrowBackClick
+					this.buttonBackClick
 				], {
 					autoAlpha: 0,
 					delay: '-0.1'
-				})
-				.to(this.wrapperIntro, {
-					autoAlpha: 1,
-					duration: '0.6',
-					delay: '-0.3'
 				})
 			;
 		});
@@ -127,23 +125,28 @@ export class Authors {
 		let tl = new gsap.timeline();
 
 		tl
-			.from(this.containerAbout, {
-				autoAlpha: 0,
-				duration: 0.4,
-				scale: 0.97
+			.to(this.wrapperBackAbout, {
+				duration: '0.3',
+				// delay: '0.2',
+				autoAlpha: 0
 			})
 			.from(this.wrapperTopTitle, {
 				duration: '0.3',
-				delay: '-0.1',
+				delay: '-0.2',
 				autoAlpha: 0,
 				y: '-10%'
 			})
-			.from(this.arrowBackClick, {
-				duration: '0.3',
-				delay: '-0.1',
+			.from(this.containerAbout, {
 				autoAlpha: 0,
-				y: '10%'
+				duration: 0.4,
+				// scale: 0.97
 			})
+			// .from(this.buttonBackClick, {
+			// 	duration: '0.3',
+			// 	// delay: '-0.1',
+			// 	autoAlpha: 0,
+			// 	y: '10%'
+			// })
 		;
 	}
 

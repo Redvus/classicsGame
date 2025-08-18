@@ -1,16 +1,45 @@
-import '../scss/main.scss';
+import '/scss/app.scss';
+import '/fonts/fontawesome-free-7.0.0-web/scss/fontawesome.scss';
+import '/fonts/fontawesome-free-7.0.0-web/scss/regular.scss';
+import '/fonts/fontawesome-free-7.0.0-web/scss/solid.scss';
+import '/fonts/fontawesome-free-7.0.0-web/scss/brands.scss';
+
 import { Intro } from "./Intro.js";
 import { Category } from "./Category.js";
+import { ChoiceCategory } from "./ChoiceCategory.js";
+import { About } from './About.js';
+import { Authors } from './Authors.js';
 
 export class Game {
     constructor(parameters) {
         this.initLayout();
         this.initLayoutBack();
         this.initAppend();
-        // new Intro();
+        new Intro();
 
         //Develop
-        new Category('Ученик', 'Знаток', 'Хранитель');
+        // new Category(
+        //     45,
+        //     'Ученик',
+        //     'Student',
+        //     'Знаток',
+        //     'Connoisseur',
+        //     'Хранитель',
+        //     'Keeper');
+        // new ChoiceCategory(
+        //     'Ученик',
+        //     '',
+        //     '',
+        //     'Student');
+
+        // new About();
+        // new Authors();
+
+        // if (import.meta.env.DEV
+        //     || import.meta.env.PROD
+        // ) {
+        //     this.initLayoutDev(); // Скрывать для build
+        // }
     }
 
     initLayout() {
@@ -29,23 +58,55 @@ export class Game {
     }
 
     initLayoutBack() {
-        this.wrapperIntro = document.createElement('div');
-        this.wrapperCategoryBack = document.createElement('div');
-        this.wrapperIntro.classList = "wrapper__back_intro";
-        this.wrapperCategoryBack.classList = "wrapper__back_category";
+        this.wrapperBackIntro = document.createElement('picture');
+        this.wrapperBackCategory = document.createElement('picture');
+        this.wrapperBackAbout = document.createElement('picture');
+        this.wrapperBackAuthors = document.createElement('picture');
 
-        this.wrapperBackFirst = document.createElement('div');
-        this.wrapperBackSecond = document.createElement('div');
-        this.wrapperBackThird = document.createElement('div');
+        this.wrapperBackFirst = document.createElement('picture');
+        this.wrapperBackSecond = document.createElement('picture');
+        this.wrapperBackThird = document.createElement('picture');
 
-        this.wrapperBackFirst.classList = "wrapper__back_category--quest wrapper__back_category--first";
-        this.wrapperBackSecond.classList = "wrapper__back_category--quest wrapper__back_category--second";
-        this.wrapperBackThird.classList = "wrapper__back_category--quest wrapper__back_category--third";
+        this.wrapperBackIntro.classList = "wrapper__back wrapper__back--intro";
+        this.wrapperBackCategory.classList = "wrapper__back wrapper__back--category";
+        this.wrapperBackAbout.classList = "wrapper__back wrapper__back--about";
+        this.wrapperBackAuthors.classList = "wrapper__back wrapper__back--authors";
+
+        this.wrapperBackIntro.id = "backIntro";
+        this.wrapperBackCategory.id = "backCategory";
+        this.wrapperBackAbout.id = "backAbout";
+        this.wrapperBackAuthors.id = "backAuthors";
+
+        this.wrapperBackFirst.classList = "wrapper__back wrapper__back_category--quest wrapper__back_category--first";
+        this.wrapperBackSecond.classList = "wrapper__back wrapper__back_category--quest wrapper__back_category--second";
+        this.wrapperBackThird.classList = "wrapper__back wrapper__back_category--quest wrapper__back_category--third";
+
+        this.wrapperBackIntro.innerHTML = `
+            <img src="assets/games/classics/images/c_introBack_2.jpg" alt="Intro Background">
+        `;
+
+        this.wrapperBackAbout.innerHTML = `
+            <img src="assets/games/classics/images/c_aboutBack_1.jpg" alt="About Background">
+        `;
+
+        this.wrapperBackAuthors.innerHTML = `
+            <img src="assets/games/classics/images/c_authorsBack_1.jpg" alt="Authors Background">
+        `;
+
+        this.wrapperBackCategory.innerHTML = `
+            <img src="assets/games/classics/images/c_categoryChoiceBack_1.jpg" alt="Authors Background">
+        `;
+
+        this.wrapperBackFirst.innerHTML = `
+            <img src="assets/games/classics/images/c_categoryFirstBack_1.jpg" alt="Authors Background">
+        `;
     }
 
     initAppend() {
-        this.wrapperBack.appendChild(this.wrapperIntro);
-        this.wrapperBack.appendChild(this.wrapperCategoryBack);
+        this.wrapperBack.appendChild(this.wrapperBackIntro);
+        this.wrapperBack.appendChild(this.wrapperBackAbout);
+        this.wrapperBack.appendChild(this.wrapperBackAuthors);
+        this.wrapperBack.appendChild(this.wrapperBackCategory);
         this.wrapperBack.appendChild(this.wrapperBackFirst);
         this.wrapperBack.appendChild(this.wrapperBackSecond);
         this.wrapperBack.appendChild(this.wrapperBackThird);

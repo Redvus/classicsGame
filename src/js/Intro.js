@@ -1,6 +1,6 @@
 import { gsap } from "gsap";
 import { Sounds } from "./Sounds.js";
-import { ArrowsAll } from "./ArrowsAll.js";
+import { Menu } from "./Buttons/Menu.js";
 import { About } from "./About.js";
 import { Authors } from "./Authors.js";
 import { Category } from './Category.js'
@@ -8,20 +8,27 @@ import { Category } from './Category.js'
 
 export class Intro {
 
-    constructor() {
+    constructor(titleIntro = 'Классики') {
+        this.titleIntro = titleIntro;
         this.sounds = new Sounds();
-        this.arrowsAll = new ArrowsAll();
+        new Menu();
         this.initLayout();
         this.introAnim();
         this.initGame();
     }
 
     initLayout() {
+        this.wrapper = document.querySelector('.wrapper');
+        this.container = document.querySelector('.container');
         this.wrapperBack = document.querySelector('.wrapper__back');
         this.wrapperBottom = document.querySelector('.wrapper__bottom');
         this.wrapperTop = document.querySelector('.wrapper__top');
-        this.wrapperIntro = document.querySelector('.wrapper__back_intro');
+        this.wrapperBackIntro = document.getElementById('backIntro');
+        this.wrapperBackAbout = document.getElementById('backAbout');
+        this.wrapperBackAuthors = document.getElementById('backAuthors');
         // this.backgroundMusicID = document.getElementById('backgroundMusicID');
+
+        this.introBlockButtons = document.getElementById('menuMain');
 
         this.wrapperTopTitle = document.createElement('div');
 
@@ -29,35 +36,30 @@ export class Intro {
         this.wrapperTopTitle.className = 'wrapper__top_title wrapper__top_title--intro';
 
         this.wrapperTopTitle.innerHTML = `
-            <h1>Марина Цветаева:<br />путешествие в поэзию</h1>
-        `;
-
-        // Кнопки
-        this.introBlockButtons = document.createElement('ul');
-        this.introBlockButtons.className = 'wrapper__bottom_menu';
-        this.introBlockButtons.innerHTML = `
-            <li><a href="javascript:void(0);" id="clickAboutLibrary">О библиотеке</a></li>
-            <li><a href="javascript:void(0);" id="clickAboutAuthors">Авторы</a></li>
-            <li><a href="javascript:void(0);" id="clickLoadGame">Начать игру</a></li>
+            <h1>${this.titleIntro}</h1>
         `;
 
         this.wrapperTop.appendChild(this.wrapperTopTitle);
-        this.wrapperBottom.appendChild(this.introBlockButtons);
     }
 
     introAnim() {
         let tl = gsap.timeline();
         tl
+            .to(this.wrapperBackIntro, {
+                duration: '0.3',
+                // delay: '0.2',
+                autoAlpha: 1
+            })
             .from(this.wrapperTopTitle, {
                 duration: 0.5,
                 delay: 0.1,
                 autoAlpha: 0,
                 y: '-10%'
             })
-            .from(this.introBlockButtons, {
+            .to(this.introBlockButtons, {
                 duration: 0.3,
                 delay: '-0.2',
-                autoAlpha: 0
+                autoAlpha: 1
             })
         ;
     }
@@ -66,7 +68,7 @@ export class Intro {
         this.clickLoadGame = document.getElementById('clickLoadGame');
         this.clickAuthors = document.getElementById('clickAboutAuthors');
         this.clickAbout = document.getElementById('clickAboutLibrary');
-        this.wrapperBottomMenu = document.querySelector('.wrapper__bottom_menu');
+        this.mainMenu = document.getElementById('menuMain');
 
         this.clickLoadGame.addEventListener('click', () => {
 
@@ -83,8 +85,8 @@ export class Intro {
                 onComplete: () => {
                     this.wrapperTop.innerHTML = '';
                     this.wrapperTop.className = 'wrapper__top';
-                    this.wrapperBottom.removeChild(this.wrapperBottomMenu);
-                    // gsap.to(this.wrapperIntro, {
+                    this.container.removeChild(this.mainMenu);
+                    // gsap.to(this.wrapperBackIntro, {
                     //     duration: '0.5',
                     //     // delay: '0.2',
                     //     autoAlpha: 0,
@@ -96,7 +98,14 @@ export class Intro {
                     //     autoAlpha: 1,
                     //     zIndex: 1
                     // });
-                    new Category('Ученик', 'Знаток', 'Хранитель');
+                    new Category(
+                        45,
+                        'Ученик',
+                        'Student',
+                        'Знаток',
+                        'Connoisseur',
+                        'Хранитель',
+                        'Keeper');
                 }
             });
             tl
@@ -105,12 +114,12 @@ export class Intro {
                     duration: 0.3,
                     y: '-10%'
                 })
-                .to(this.wrapperBottomMenu, {
+                .to(this.mainMenu, {
                     duration: 0.3,
                     // delay: '-0.4',
                     autoAlpha: 0
                 })
-                .to(this.wrapperIntro, {
+                .to([this.wrapperBackIntro, this.wrapperBackAbout, this.wrapperBackAuthors], {
                     duration: '0.5',
                     // delay: '0.2',
                     autoAlpha: 0
@@ -123,16 +132,8 @@ export class Intro {
                 onComplete: () => {
                     this.wrapperTop.innerHTML = '';
                     this.wrapperTop.className = 'wrapper__top';
-                    this.wrapperBottom.removeChild(this.wrapperBottomMenu);
-                    new Authors(
-                        'Сценарист',
-                        'Инна Ямщикова',
-                        'Художники',
-                        'Елена Расторгуева',
-                        'Анастасия Полякова',
-                        'Программист',
-                        'Александр Суворов'
-                    );
+                    this.container.removeChild(this.mainMenu);
+                    new Authors();
                 }
             });
             tl
@@ -141,12 +142,12 @@ export class Intro {
                     duration: 0.3,
                     y: '-10%'
                 })
-                .to(this.wrapperBottomMenu, {
+                .to(this.mainMenu, {
                     duration: 0.3,
                     // delay: '-0.4',
                     autoAlpha: 0
                 })
-                .to(this.wrapperIntro, {
+                .to([this.wrapperBackIntro, this.wrapperBackAbout], {
                     duration: '0.5',
                     // delay: '0.2',
                     autoAlpha: 0
@@ -159,8 +160,8 @@ export class Intro {
                 onComplete: () => {
                     this.wrapperTop.innerHTML = '';
                     this.wrapperTop.className = 'wrapper__top';
-                    this.wrapperBottom.removeChild(this.wrapperBottomMenu);
-                    new About('МБУК г.о. Самара «Самарская муниципальная информационно-библиотечная система» была создана в декабре 1986 года. На сегодняшний день в ее составе&nbsp;– Центральная городская библиотека имени Н.К. Крупской и 35 библиотек-филиалов, нашими читателями являются жители всех 9 районов города. Библиотеки системы&nbsp;– это информационные, образовательные центры, место культурного отдыха и общения. СМИБС находится в центре мировых событий, активно участвует в общероссийских акциях и в жизни города.', 'В библиотеках системы можно получить информацию и литературу по любой теме, доступ к электронным базам данных, воспользоваться услугами Интернет-залов, Центрами общественного доступа, побывать на презентациях выставок и творческих встречах, а также воспользоваться дополнительными сервисными услугами:<ul><li>ксерокопированием</li><li>сканированием</li><li>ламинированием</li><li>документов</li><li>распечаткой информации</li><li>на принтере</li><li>записью на электронные</li><li>носители</li></ul>');
+                    this.container.removeChild(this.mainMenu);
+                    new About();
                 }
             });
             tl
@@ -169,12 +170,12 @@ export class Intro {
                     duration: 0.3,
                     y: '-10%'
                 })
-                .to(this.wrapperBottomMenu, {
+                .to(this.mainMenu, {
                     duration: 0.3,
                     // delay: '-0.4',
                     autoAlpha: 0
                 })
-                .to(this.wrapperIntro, {
+                .to(this.wrapperBackIntro, {
                     duration: '0.5',
                     // delay: '0.2',
                     autoAlpha: 0
