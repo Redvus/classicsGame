@@ -5,32 +5,36 @@ import '/fonts/fontawesome-free-7.0.0-web/scss/solid.scss';
 import '/fonts/fontawesome-free-7.0.0-web/scss/brands.scss';
 
 import { Intro } from "./Intro.js";
-import { Category } from "./Category.js";
-import { ChoiceCategory } from "./ChoiceCategory.js";
 import { About } from './About.js';
 import { Authors } from './Authors.js';
+import { Category } from "./Category.js";
+import { ChoiceCategory } from "./ChoiceCategory.js";
+import { Question } from "./Question.js";
 
 export class Game {
     constructor(parameters) {
         this.initLayout();
         this.initLayoutBack();
         this.initAppend();
-        new Intro();
+        // new Intro();
 
         //Develop
-        // new Category(
-        //     45,
-        //     'Ученик',
-        //     'Student',
-        //     'Знаток',
-        //     'Connoisseur',
-        //     'Хранитель',
-        //     'Keeper');
+        new Category(
+            45,
+            'Ученик',
+            'Student',
+            'Знаток',
+            'Connoisseur',
+            'Хранитель',
+            'Keeper');
         // new ChoiceCategory(
         //     'Ученик',
         //     '',
         //     '',
         //     'Student');
+
+        //Question
+        // new Question('Ученик');
 
         // new About();
         // new Authors();
@@ -103,10 +107,10 @@ export class Game {
     }
 
     initAppend() {
-        this.wrapperBack.appendChild(this.wrapperBackIntro);
-        this.wrapperBack.appendChild(this.wrapperBackAbout);
-        this.wrapperBack.appendChild(this.wrapperBackAuthors);
-        this.wrapperBack.appendChild(this.wrapperBackCategory);
+        // this.wrapperBack.appendChild(this.wrapperBackIntro);
+        // this.wrapperBack.appendChild(this.wrapperBackAbout);
+        // this.wrapperBack.appendChild(this.wrapperBackAuthors);
+        // this.wrapperBack.appendChild(this.wrapperBackCategory);
         this.wrapperBack.appendChild(this.wrapperBackFirst);
         this.wrapperBack.appendChild(this.wrapperBackSecond);
         this.wrapperBack.appendChild(this.wrapperBackThird);

@@ -181,37 +181,42 @@ export class Category {
     }
 
     initCategoryChoice() {
-        this.categoryStudent.addEventListener('click', () => {
-            let tl = gsap.timeline({
-                onComplete: () => {
-                    this.container.removeChild(this.categoryBlock);
-                    this.container.classList.remove('container--category');
-                    this.wrapperTop.removeChild(this.wrapperTopTitle);
-                    new ChoiceCategory(
-                        'Ученик',
-                        15,
-                        '',
-                        'Student');
-                }
-            });
 
-            tl
-                .to(this.wrapperTopTitle, {
-                    duration: '0.3',
-                    autoAlpha: 0,
-                    y: '-10%'
-                })
-                .to(this.categoryBlock, {
-                    autoAlpha: 0,
-                    duration: 0.3,
-                    delay: '-0.1'
-                })
-                .to(this.wrapperBackCategory, {
-                    duration: '0.5',
-                    autoAlpha: 0
-                })
-            ;
-        });
+        for (let i = 0; i < 3; i++) {
+            this.categoryElem = document.getElementById(`category${this[`category_${i + 1}ID`]}`);
+
+            this.categoryElem.addEventListener('click', () => {
+                let tl = gsap.timeline({
+                    onComplete: () => {
+                        this.container.removeChild(this.categoryBlock);
+                        this.container.classList.remove('container--category');
+                        this.wrapperTop.removeChild(this.wrapperTopTitle);
+                        new ChoiceCategory(
+                            `${this[`category_${i + 1}`]}`,
+                            15,
+                            '',
+                            `${this[`category_${i + 1}ID`]}`);
+                    }
+                });
+
+                tl
+                    .to(this.wrapperTopTitle, {
+                        duration: '0.3',
+                        autoAlpha: 0,
+                        y: '-10%'
+                    })
+                    .to(this.categoryBlock, {
+                        autoAlpha: 0,
+                        duration: 0.3,
+                        delay: '-0.1'
+                    })
+                    .to(this.wrapperBackCategory, {
+                        duration: '0.5',
+                        autoAlpha: 0
+                    })
+                ;
+            });
+        }
     }
 
     categoryProgress(progressID, progressNameValue) {
@@ -229,13 +234,15 @@ export class Category {
 
     initCategoryBack() {
         this.buttonBackClick = document.getElementById('buttonBack');
+        // this.containerCategory = document.querySelector('.container__category');
 
         this.buttonBackClick.addEventListener('click', () => {
             let tl = gsap.timeline({
                 onComplete: () => {
-                    this.wrapperBottom.removeChild(this.buttonBackClick);
                     this.container.removeChild(this.categoryBlock);
                     this.wrapperTop.removeChild(this.wrapperTopTitle);
+                    this.wrapperBottom.removeChild(this.buttonBackClick);
+
                     // this.container.style.width = '45rem';
                     // if (document.body.clientWidth < 570 || screen.width < 570) {
                     //     this.container.style.width = '';

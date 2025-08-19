@@ -1,4 +1,36 @@
-class Question {
+import { gsap } from "gsap";
+
+export class Question {
+
+    constructor(questCatName) {
+        this.questCatName = questCatName;
+        this.initLayout();
+        this.initAppend();
+    }
+
+    initLayout() {
+        this.wrapper = document.querySelector('.wrapper');
+        this.wrapperBack = document.querySelector('.wrapper__back');
+        this.wrapperBottom = document.querySelector('.wrapper__bottom');
+        this.wrapperTop = document.querySelector('.wrapper__top');
+        this.wrapperIntro = document.querySelector('.wrapper__back_intro');
+        this.container = document.querySelector('.container');
+
+        this.containerWrapper = document.createElement('div');
+        this.containerWrapper.className = 'container__category container__question';
+
+        this.wrapperTopTitle = document.createElement('div');
+
+        // this.wrapperTop.className += ' wrapper__top_intro';
+        this.wrapperTopTitle.className = 'wrapper__top_title wrapper__top_title--intro';
+
+        this.wrapperTopTitle.innerHTML = `
+            <h2>${this.questCatName}</h2>
+        `;
+
+        // Sounds
+        // this.backgroundMusicID = document.getElementById('backgroundMusicID');
+    }
 
     questionBlock(
         questionTitleCategory,
@@ -72,7 +104,34 @@ class Question {
                 })
             ;
         }
-        questionBlockAnimation();
+    }
+
+    initAppend() {
+        this.wrapperTop.appendChild(this.wrapperTopTitle);
+        this.container.appendChild(this.containerWrapper);
+        // this.containerWrapper.appendChild(this.containerWrapperSubCat);
+    }
+
+    questionBlockAnimation() {
+        let tl = gsap.timeline();
+        tl
+            // .from('.container__title_category', {
+            //     autoAlpha: 0,
+            //     duration: 0.2,
+            //     delay: 0.3
+            // })
+            .from(questBlockImage, {
+                autoAlpha: 0,
+                duration: 0.4,
+                delay: 0.2
+            })
+            .from(questButtonList, {
+                autoAlpha: 0,
+                duration: 0.4,
+                stagger: 0.1,
+                delay: '-0.2'
+            })
+        ;
     }
 
     questionImageBlock(
@@ -141,7 +200,6 @@ class Question {
                 })
             ;
         }
-        questionBlockImageAnim();
     }
 
     answerBlock(answerVarNum, answerTextRight) {
