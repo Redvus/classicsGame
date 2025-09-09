@@ -1,4 +1,7 @@
 import { gsap } from "gsap";
+import { ButtonBack } from "./Buttons/ButtonBack.js";
+import { Category } from "./Category.js";
+import { Question } from "./Question.js";
 
 export class ChoiceCategory {
 
@@ -13,10 +16,14 @@ export class ChoiceCategory {
         this.choiceCategoryBack = choiceCategoryBack;
         this.choiceCategorySubID = choiceCategorySubID;
         this.choiceCategoryTitle = this.choiceCategoryTitle;
+
+        new ButtonBack();
         this.initLayout();
-        this.choiceCategory();
+        this.initChoiceCategory();
         this.initAppend();
-        this.choiceCategoryAnim();
+        // this.choiceCategoryAnim();
+        this.initChoiceCategoryBack();
+        this.initChoiceQuest();
     }
 
     initLayout() {
@@ -28,6 +35,11 @@ export class ChoiceCategory {
         this.container = document.querySelector('.container');
         // this.backgroundMusicID = document.getElementById('backgroundMusicID');
 
+        this.wrapperBackIntro = document.getElementById('backIntro');
+        this.wrapperBackAbout = document.getElementById('backAbout');
+        this.wrapperBackAuthors = document.getElementById('backAuthors');
+        this.wrapperBackCategory = document.getElementById('backCategory');
+
         this.wrapperTopTitle = document.createElement('div');
 
         // this.wrapperTop.className += ' wrapper__top_intro';
@@ -36,9 +48,11 @@ export class ChoiceCategory {
         this.wrapperTopTitle.innerHTML = `
             <h2>${this.choiceCategoryName}</h2>
         `;
+
+        this.buttonBackClick = document.getElementById('buttonBack');
     }
 
-    choiceCategory() {
+    initChoiceCategory() {
         this.containerWrapper = document.createElement('div');
         this.choiceCategoryTitle = document.createElement('div');
         this.containerWrapperSubCat = document.createElement('ul');
@@ -123,6 +137,95 @@ export class ChoiceCategory {
                     stagger: 0.01
                 })
             ;
+        }
+    }
+
+    initChoiceCategoryBack() {
+        this.buttonBackClick.addEventListener('click', () => {
+            let tl = gsap.timeline({
+                onComplete: () => {
+                    this.container.removeChild(this.containerWrapper);
+                    this.wrapperTop.removeChild(this.wrapperTopTitle);
+                    this.wrapperBottom.removeChild(this.buttonBackClick);
+
+                    // this.container.style.width = '45rem';
+                    // if (document.body.clientWidth < 570 || screen.width < 570) {
+                    //     this.container.style.width = '';
+                    //     this.container.style.padding = '';
+                    // }
+                    new Category(
+                        45,
+                        'Ученик',
+                        'Student',
+                        'Знаток',
+                        'Connoisseur',
+                        'Хранитель',
+                        'Keeper');
+                    gsap.to(this.wrapperBackCategory, {
+                        autoAlpha: 1,
+                        duration: '0.3',
+                        // delay: '0.1'
+                    });
+                }
+            });
+            tl
+                .to(this.wrapperTopTitle, {
+                    autoAlpha: 0,
+                    delay: '-0.1',
+                    y: '-10%'
+                })
+                .to([
+                    this.containerWrapper,
+                    this.buttonBackClick
+                ], {
+                    autoAlpha: 0,
+                    delay: '-0.1'
+                })
+            ;
+        });
+    }
+
+    initChoiceQuest() {
+        this.categoryCat = document.querySelector('.container__category');
+        this.categoryCatSub = document.querySelector('.container__category_subcategory');
+
+        for (let i = 0; i < this.choiceCategoryCount; i++) {
+            this.categoryElem = document.getElementById(`cat${this.choiceCategorySubID}Sub_${i + 1}`);
+
+            this.categoryElem.addEventListener('click', () => {
+                this.wrapperBottom.removeChild(this.buttonBackClick);
+                let tl = gsap.timeline({
+                    onComplete: () => {
+                        this.categoryCat.removeChild(this.categoryCatSub);
+                        this.container.removeChild(this.categoryCat);
+                        // this.container.classList.remove('container--category');
+                        this.wrapperTop.removeChild(this.wrapperTopTitle);
+                        // new Question(`${this[`category_${i + 1}`]}`);
+                        // new ChoiceCategory(
+                        //     `${this[`category_${i + 1}`]}`,
+                        //     15,
+                        //     '',
+                        //     `${this[`category_${i + 1}ID`]}`);
+                    }
+                });
+
+                tl
+                    .to(this.wrapperTopTitle, {
+                        duration: '0.3',
+                        autoAlpha: 0,
+                        y: '-10%'
+                    })
+                    .to(this.categoryBlock, {
+                        autoAlpha: 0,
+                        duration: 0.3,
+                        delay: '-0.1'
+                    })
+                    .to(this.wrapperBackCategory, {
+                        duration: '0.5',
+                        autoAlpha: 0
+                    })
+                ;
+            });
         }
     }
 }

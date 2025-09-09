@@ -19,14 +19,14 @@ export class Game {
         // new Intro();
 
         //Develop
-        new Category(
-            45,
-            'Ученик',
-            'Student',
-            'Знаток',
-            'Connoisseur',
-            'Хранитель',
-            'Keeper');
+        // new Category(
+        //     45,
+        //     'Ученик',
+        //     'Student',
+        //     'Знаток',
+        //     'Connoisseur',
+        //     'Хранитель',
+        //     'Keeper');
         // new ChoiceCategory(
         //     'Ученик',
         //     '',
@@ -34,7 +34,7 @@ export class Game {
         //     'Student');
 
         //Question
-        // new Question('Ученик');
+        new Question('Ученик');
 
         // new About();
         // new Authors();

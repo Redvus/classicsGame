@@ -22,8 +22,8 @@ export class Category {
         this.category_2ID = category_2ID;
         this.category_3ID = category_3ID;
 
-        this.initLayout();
         new ButtonBack();
+        this.initLayout();
         this.initAppend();
         this.initCategoryBack();
         this.initCategoryAnim();
@@ -40,9 +40,6 @@ export class Category {
         this.wrapperBack = document.querySelector('.wrapper__back');
         this.wrapperBottom = document.querySelector('.wrapper__bottom');
         this.wrapperTop = document.querySelector('.wrapper__top');
-        this.wrapperBackCategory = document.getElementById('backCategory');
-        this.wrapperBackAbout = document.getElementById('backAbout');
-        this.wrapperBackAuthors = document.getElementById('backAuthors');
 
         this.wrapperBackIntro = document.getElementById('backIntro');
         this.wrapperBackAbout = document.getElementById('backAbout');
@@ -91,6 +88,7 @@ export class Category {
         }
 
         this.container.className += ' container--category';
+        this.buttonBackClick = document.getElementById('buttonBack');
 
         // this.categoryBlock.innerHTML = `
         //     <div class="container__category_category" id="category${this.category_1ID}">
@@ -186,6 +184,7 @@ export class Category {
             this.categoryElem = document.getElementById(`category${this[`category_${i + 1}ID`]}`);
 
             this.categoryElem.addEventListener('click', () => {
+                this.wrapperBottom.removeChild(this.buttonBackClick);
                 let tl = gsap.timeline({
                     onComplete: () => {
                         this.container.removeChild(this.categoryBlock);
@@ -233,7 +232,6 @@ export class Category {
     }
 
     initCategoryBack() {
-        this.buttonBackClick = document.getElementById('buttonBack');
         // this.containerCategory = document.querySelector('.container__category');
 
         this.buttonBackClick.addEventListener('click', () => {
@@ -249,7 +247,7 @@ export class Category {
                     //     this.container.style.padding = '';
                     // }
                     new Intro();
-                    gsap.to([this.wrapperBackCategory, this.wrapperBackAbout, this.wrapperBackAuthors], {
+                    gsap.to([this.wrapperBackAbout, this.wrapperBackAuthors], {
                         autoAlpha: 1,
                         duration: '0.3',
                         delay: '0.5'

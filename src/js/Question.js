@@ -1,11 +1,19 @@
 import { gsap } from "gsap";
+import { ButtonBack } from "./Buttons/ButtonBack.js";
+import { ChoiceCategory } from "./ChoiceCategory.js";
 
 export class Question {
 
-    constructor(questCatName) {
+    constructor(
+        questCatName
+    ) {
         this.questCatName = questCatName;
+
+        new ButtonBack();
         this.initLayout();
         this.initAppend();
+        this.initQuestionBlock();
+        this.initQuestionBack();
     }
 
     initLayout() {
@@ -30,9 +38,11 @@ export class Question {
 
         // Sounds
         // this.backgroundMusicID = document.getElementById('backgroundMusicID');
+
+        this.buttonBackClick = document.getElementById('buttonBack');
     }
 
-    questionBlock(
+    initQuestionBlock(
         questionTitleCategory,
         questionTitle,
         questionQuest,
@@ -41,7 +51,7 @@ export class Question {
         questionVariant3) {
 
         // Development
-        wrapper.className += ' wrapper__game';
+        this.wrapper.className += ' wrapper__game';
 
         const containerWrapper = document.createElement('div'),
             questionCategoryTitle = document.createElement('div'),
@@ -65,7 +75,7 @@ export class Question {
                 </ul>
             </div>
         `;
-        container.appendChild(containerWrapper);
+        this.container.appendChild(containerWrapper);
         // containerWrapper.appendChild(questionCategoryTitle);
         // wrapper.appendChild(questionCategoryStars);
 
@@ -83,27 +93,27 @@ export class Question {
             el.style.top = positionLiTop[idx];
         });
 
-        function questionBlockAnimation() {
-            let tl = gsap.timeline();
-            tl
-                // .from('.container__title_category', {
-                //     autoAlpha: 0,
-                //     duration: 0.2,
-                //     delay: 0.3
-                // })
-                .from(questBlockImage, {
-                    autoAlpha: 0,
-                    duration: 0.4,
-                    delay: 0.2
-                })
-                .from(questButtonList, {
-                    autoAlpha: 0,
-                    duration: 0.4,
-                    stagger: 0.1,
-                    delay: '-0.2'
-                })
-            ;
-        }
+        // function questionBlockAnimation() {
+        //     let tl = gsap.timeline();
+        //     tl
+        //         // .from('.container__title_category', {
+        //         //     autoAlpha: 0,
+        //         //     duration: 0.2,
+        //         //     delay: 0.3
+        //         // })
+        //         .from(questBlockImage, {
+        //             autoAlpha: 0,
+        //             duration: 0.4,
+        //             delay: 0.2
+        //         })
+        //         .from(questButtonList, {
+        //             autoAlpha: 0,
+        //             duration: 0.4,
+        //             stagger: 0.1,
+        //             delay: '-0.2'
+        //         })
+        //     ;
+        // }
     }
 
     initAppend() {
@@ -333,5 +343,47 @@ export class Question {
                 });
             }
         }
+    }
+
+    initQuestionBack() {
+        this.buttonBackClick.addEventListener('click', () => {
+            let tl = gsap.timeline({
+                onComplete: () => {
+                    this.container.removeChild(this.containerWrapper);
+                    this.wrapperTop.removeChild(this.wrapperTopTitle);
+                    this.wrapperBottom.removeChild(this.buttonBackClick);
+
+                    // this.container.style.width = '45rem';
+                    // if (document.body.clientWidth < 570 || screen.width < 570) {
+                    //     this.container.style.width = '';
+                    //     this.container.style.padding = '';
+                    // }
+                    new ChoiceCategory(
+                        'Ученик',
+                        '',
+                        '',
+                        'Student');
+                    // gsap.to(this.wrapperBackCategory, {
+                    //     autoAlpha: 1,
+                    //     duration: '0.3',
+                    //     // delay: '0.1'
+                    // });
+                }
+            });
+            tl
+                .to(this.wrapperTopTitle, {
+                    autoAlpha: 0,
+                    delay: '-0.1',
+                    y: '-10%'
+                })
+                .to([
+                    this.containerWrapper,
+                    this.buttonBackClick
+                ], {
+                    autoAlpha: 0,
+                    delay: '-0.1'
+                })
+            ;
+        });
     }
 }
