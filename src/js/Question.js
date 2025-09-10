@@ -5,9 +5,17 @@ import { ChoiceCategory } from "./ChoiceCategory.js";
 export class Question {
 
     constructor(
-        questCatName
+        questCatName,
+        questionQuest,
+        questionVariant1,
+        questionVariant2,
+        questionVariant3
     ) {
         this.questCatName = questCatName;
+        this.questionQuest = questionQuest;
+        this.questionVariant1 = questionVariant1;
+        this.questionVariant2 = questionVariant2;
+        this.questionVariant3 = questionVariant3;
 
         new ButtonBack();
         this.initLayout();
@@ -40,44 +48,37 @@ export class Question {
         // this.backgroundMusicID = document.getElementById('backgroundMusicID');
 
         this.buttonBackClick = document.getElementById('buttonBack');
+
+        this.bookEmpty = document.createElement('picture');
+        this.bookEmpty.className = 'wrapper__back--book';
+        this.bookEmpty.innerHTML = `
+            <img src="assets/games/classics/images/bookPagesEmpty.png" alt="Пустая книга">
+        `;
+
+        this.questionCategoryStars = document.createElement('ul');
+        this.questionCategoryStars.className = 'wrapper__stars';
     }
 
-    initQuestionBlock(
-        questionTitleCategory,
-        questionTitle,
-        questionQuest,
-        questionVariant1,
-        questionVariant2,
-        questionVariant3) {
-
+    initQuestionBlock() {
         // Development
         this.wrapper.className += ' wrapper__game';
 
-        const containerWrapper = document.createElement('div'),
-            questionCategoryTitle = document.createElement('div'),
-            questionCategoryStars = document.createElement('ul')
-        ;
-        containerWrapper.className = 'container__wrapper container__wrapper_category';
-        questionCategoryTitle.className = 'container__title container__title_category';
-        questionCategoryStars.className = 'wrapper__stars';
-        containerWrapper.innerHTML = `
-            <div class="question__block">
-                <div class="question__block_imageblock">
-                    <div class="question__block_image">
-                        <p>${questionQuest}</p>
-                        <img src="assets/games/kraevedia/images/kraevedia_catBack.png" alt="Изображение по вопросом">
-                    </div>
-                </div>
-                <ul class="question__block_list">
-                    <li id="answerVar_1"><a href="javascript:void(0);">${questionVariant1}</a></li>
-                    <li id="answerVar_2"><a href="javascript:void(0);">${questionVariant2}</a></li>
-                    <li id="answerVar_3"><a href="javascript:void(0);">${questionVariant3}</a></li>
-                </ul>
+        // const containerWrapper = document.createElement('div'),
+        //     questionCategoryTitle = document.createElement('div')
+        // ;
+        // containerWrapper.className = 'container__wrapper container__wrapper_category';
+        // questionCategoryTitle.className = 'container__title container__title_category';
+        // questionCategoryStars.className = 'wrapper__stars';
+        this.containerWrapper.innerHTML = `
+            <div class="container__question_block container__question_block_image">
+                <p>${this.questionQuest}</p>
             </div>
+            <ul class="container__question_block container__question_block_list">
+                <li id="answerVar_1"><a href="javascript:void(0);">${this.questionVariant1}</a></li>
+                <li id="answerVar_2"><a href="javascript:void(0);">${this.questionVariant2}</a></li>
+                <li id="answerVar_3"><a href="javascript:void(0);">${this.questionVariant3}</a></li>
+            </ul>
         `;
-        this.container.appendChild(containerWrapper);
-        // containerWrapper.appendChild(questionCategoryTitle);
-        // wrapper.appendChild(questionCategoryStars);
 
         const questButtonLi_1 = document.getElementById('answerVar_1'),
             questButtonLi_2 = document.getElementById('answerVar_2'),
@@ -92,34 +93,13 @@ export class Question {
         questButtonList.forEach((el, idx) => {
             el.style.top = positionLiTop[idx];
         });
-
-        // function questionBlockAnimation() {
-        //     let tl = gsap.timeline();
-        //     tl
-        //         // .from('.container__title_category', {
-        //         //     autoAlpha: 0,
-        //         //     duration: 0.2,
-        //         //     delay: 0.3
-        //         // })
-        //         .from(questBlockImage, {
-        //             autoAlpha: 0,
-        //             duration: 0.4,
-        //             delay: 0.2
-        //         })
-        //         .from(questButtonList, {
-        //             autoAlpha: 0,
-        //             duration: 0.4,
-        //             stagger: 0.1,
-        //             delay: '-0.2'
-        //         })
-        //     ;
-        // }
     }
 
     initAppend() {
         this.wrapperTop.appendChild(this.wrapperTopTitle);
         this.container.appendChild(this.containerWrapper);
-        // this.containerWrapper.appendChild(this.containerWrapperSubCat);
+        this.wrapperBack.appendChild(this.bookEmpty);
+        this.wrapperTop.appendChild(this.questionCategoryStars);
     }
 
     questionBlockAnimation() {
@@ -142,74 +122,6 @@ export class Question {
                 delay: '-0.2'
             })
         ;
-    }
-
-    questionImageBlock(
-        questionTitleCategory,
-        questionTitle,
-        questionImage,
-        questionVariant1,
-        questionVariant2,
-        questionVariant3) {
-
-        // Development
-        wrapper.className += ' wrapper__game';
-
-        const containerWrapper = document.createElement('div'),
-            questionCategoryTitle = document.createElement('div'),
-            questionCategoryStars = document.createElement('ul')
-        ;
-        containerWrapper.className = 'container__wrapper container__wrapper_category';
-        questionCategoryTitle.className = 'container__title container__title_category';
-        questionCategoryStars.className = 'wrapper__stars';
-        questionCategoryTitle.innerHTML = `<h1>${questionTitleCategory}</h1>`;
-        containerWrapper.innerHTML = `
-            <div class="question__block">
-                <div class="question__block_imageblock">
-                    <h4>${questionTitle}</h4>
-                    <div class="question__block_image-single">
-                        <img src="assets/games/cosmicpuzzles/images/${questionImage}.png" alt="${questionImage}">
-                    </div>
-                </div>
-                <ul class="question__block_list">
-                    <li id="answerVar_1"><a href="javascript:void(0);">${questionVariant1}</a></li>
-                    <li id="answerVar_2"><a href="javascript:void(0);">${questionVariant2}</a></li>
-                    <li id="answerVar_3"><a href="javascript:void(0);">${questionVariant3}</a></li>
-                </ul>
-            </div>
-        `;
-        container.appendChild(containerWrapper);
-        containerWrapper.appendChild(questionCategoryTitle);
-
-        const questButtonLi_1 = document.getElementById('answerVar_1'),
-            questButtonLi_2 = document.getElementById('answerVar_2'),
-            questButtonLi_3 = document.getElementById('answerVar_3'),
-            questButtonList = [questButtonLi_1, questButtonLi_2, questButtonLi_3],
-            questButtonLiPosition = ['0', '33%', '66%'],
-            questButtonLi = document.querySelectorAll('.question__block_list li'),
-            positionLiTop = questButtonLiPosition.sort(() => Math.floor(Math.random() * questButtonLiPosition.length))
-        ;
-
-        questButtonList.forEach((el, idx) => {
-            el.style.top = positionLiTop[idx];
-        });
-
-        function questionBlockImageAnim() {
-            let tl = gsap.timeline();
-            tl
-                .from('.question__block_imageblock', {
-                    autoAlpha: 0,
-                    duration: 0.4,
-                    delay: 0.2
-                })
-                .from(questButtonList, {
-                    autoAlpha: 0,
-                    duration: 0.4,
-                    stagger: 0.1,
-                    delay: '-0.2'
-                })
-            ;
-        }
     }
 
     answerBlock(answerVarNum, answerTextRight) {
@@ -350,6 +262,7 @@ export class Question {
             let tl = gsap.timeline({
                 onComplete: () => {
                     this.container.removeChild(this.containerWrapper);
+                    this.wrapperBack.removeChild(this.bookEmpty);
                     this.wrapperTop.removeChild(this.wrapperTopTitle);
                     this.wrapperBottom.removeChild(this.buttonBackClick);
 
@@ -378,10 +291,12 @@ export class Question {
                 })
                 .to([
                     this.containerWrapper,
+                    this.bookEmpty,
                     this.buttonBackClick
                 ], {
                     autoAlpha: 0,
-                    delay: '-0.1'
+                    delay: '-0.1',
+                    stagger: 0.03
                 })
             ;
         });
