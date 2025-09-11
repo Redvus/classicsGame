@@ -19,9 +19,14 @@ export class Question {
 
         new ButtonBack();
         this.initLayout();
-        this.initAppend();
+
         this.initQuestionBlock();
+        this.initQuestionStars();
+        this.initAppend();
         this.initQuestionBack();
+
+
+
     }
 
     initLayout() {
@@ -54,52 +59,111 @@ export class Question {
         this.bookEmpty.innerHTML = `
             <img src="assets/games/classics/images/bookPagesEmpty.png" alt="Пустая книга">
         `;
-
-        this.questionCategoryStars = document.createElement('ul');
-        this.questionCategoryStars.className = 'wrapper__stars';
     }
 
     initQuestionBlock() {
         // Development
         this.wrapper.className += ' wrapper__game';
 
-        // const containerWrapper = document.createElement('div'),
-        //     questionCategoryTitle = document.createElement('div')
-        // ;
-        // containerWrapper.className = 'container__wrapper container__wrapper_category';
-        // questionCategoryTitle.className = 'container__title container__title_category';
-        // questionCategoryStars.className = 'wrapper__stars';
-        this.containerWrapper.innerHTML = `
-            <div class="container__question_block container__question_block_image">
-                <p>${this.questionQuest}</p>
-            </div>
-            <ul class="container__question_block container__question_block_list">
+        this.questionBlockLeft = document.createElement('div');
+        this.questionBlockLeft.className = 'container__question_block container__question_block_left';
+        this.questionBlockRight = document.createElement('div');
+        this.questionBlockRight.className = 'container__question_block container__question_block_right';
+
+        // Block Left
+        this.questionBlockLeftStars = document.createElement('ul');
+        this.questionBlockLeftStars.className = 'container__question_stars';
+        this.questionBlockLeftImage = document.createElement('div');
+        this.questionBlockLeftImage.className = 'container__question_image';
+
+        // Block Right
+        this.questionBlockRightQuest = document.createElement('div');
+        this.questionBlockRightQuest.className = 'container__question_quest';
+        this.questionBlockRightText = document.createElement('div');
+        this.questionBlockRightText.className = 'container__question_text';
+
+        this.questionBlockRightQuest.innerHTML = `
+            <h3>${this.questionQuest}</h3>
+        `;
+
+        this.questionBlockRightText.innerHTML = `
+            <ul class="container__question_list">
                 <li id="answerVar_1"><a href="javascript:void(0);">${this.questionVariant1}</a></li>
                 <li id="answerVar_2"><a href="javascript:void(0);">${this.questionVariant2}</a></li>
                 <li id="answerVar_3"><a href="javascript:void(0);">${this.questionVariant3}</a></li>
             </ul>
         `;
 
-        const questButtonLi_1 = document.getElementById('answerVar_1'),
-            questButtonLi_2 = document.getElementById('answerVar_2'),
-            questButtonLi_3 = document.getElementById('answerVar_3'),
-            questButtonList = [questButtonLi_1, questButtonLi_2, questButtonLi_3],
-            questButtonLiPosition = ['0', '33%', '66%'],
-            questButtonLi = document.querySelectorAll('.question__block_list li'),
-            positionLiTop = questButtonLiPosition.sort(() => Math.floor(Math.random() * questButtonLiPosition.length)),
-            questBlockImage = document.querySelector('.question__block_imageblock')
-        ;
+        // this.questionBlockRight.innerHTML = `
+        //     <div class="container__question_block container__question_block_imageblock">
+        //         <div class="container__question_imageblock">
 
-        questButtonList.forEach((el, idx) => {
-            el.style.top = positionLiTop[idx];
-        });
+        //     <div class="container__question_block container__question_block_text">
+        //         <div class="container__question_top">
+        //             <p>${this.questionQuest}</p>
+        //         </div>
+        //         <ul class="container__question_bottom">
+        //             <li id="answerVar_1"><a href="javascript:void(0);">${this.questionVariant1}</a></li>
+        //             <li id="answerVar_2"><a href="javascript:void(0);">${this.questionVariant2}</a></li>
+        //             <li id="answerVar_3"><a href="javascript:void(0);">${this.questionVariant3}</a></li>
+        //         </ul>
+        //     </div>
+        // `;
+
+        // const questButtonLi_1 = document.getElementById('answerVar_1'),
+        //     questButtonLi_2 = document.getElementById('answerVar_2'),
+        //     questButtonLi_3 = document.getElementById('answerVar_3'),
+        //     questButtonList = [questButtonLi_1, questButtonLi_2, questButtonLi_3],
+        //     questButtonLiPosition = ['0', '33%', '66%'],
+        //     questButtonLi = document.querySelectorAll('.question__block_list li'),
+        //     positionLiTop = questButtonLiPosition.sort(() => Math.floor(Math.random() * questButtonLiPosition.length)),
+        //     questBlockImage = document.querySelector('.question__block_imageblock')
+        // ;
+
+        // questButtonList.forEach((el, idx) => {
+        //     el.style.top = positionLiTop[idx];
+        // });
+    }
+
+    initQuestionStars() {
+        this.questionCategoryStars = document.createElement('ul');
+        this.questionCategoryStars.className = 'wrapper__stars';
+
+        this.questionStar = document.createElement('li');
+        this.questStars = [];
+
+        for (let j = 0; j < 3; j++) {
+            const li = document.createElement('li');
+            li.className = 'container__category_star';
+            // li.id = `cat${this.choiceCategorySubID}Sub_${i + 1}_${j + 1}`;
+            li.innerHTML = `
+                <svg version="1.1" id="Layer_2_00000034071295812620418580000010800723389410754238_"
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
+                    style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                    <polygon class="st0" points="256,12.5 335.1,172.8 512,198.5 384,323.3 414.2,499.5 256,416.3 97.8,499.5 128,323.3 0,198.5
+                    176.9,172.8 "/>
+                </svg>
+            `;
+
+            this.questionBlockLeftStars.appendChild(li);
+            this.questStars.push[j];
+        }
     }
 
     initAppend() {
         this.wrapperTop.appendChild(this.wrapperTopTitle);
         this.container.appendChild(this.containerWrapper);
         this.wrapperBack.appendChild(this.bookEmpty);
-        this.wrapperTop.appendChild(this.questionCategoryStars);
+
+        // Append Left
+        this.containerWrapper.appendChild(this.questionBlockLeft);
+        this.questionBlockLeft.appendChild(this.questionBlockLeftStars);
+        this.questionBlockLeft.appendChild(this.questionBlockLeftImage);
+
+        // Append Right
+        this.containerWrapper.appendChild(this.questionBlockRight);
+        this.questionBlockRight.appendChild(this.questionBlockRightQuest);
+        this.questionBlockRight.appendChild(this.questionBlockRightText);
     }
 
     questionBlockAnimation() {

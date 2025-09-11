@@ -89,7 +89,7 @@ $font-width-extended: 125%;
 }
 
 // Headings mixin
-@mixin hx($size) {
+@mixin hx($size, $color: light) {
     font-family: var(--heading-font);
     font-weight: $font-weight-regular;
     color: var(--heading-font-color);
@@ -111,6 +111,12 @@ $font-width-extended: 125%;
         font-size: var(--font-size-h5);
     } @else if $size == h6 {
         font-size: var(--font-size-h6);
+    }
+
+    @if $color == light {
+        color: var(--heading-font-color);
+    } @else {
+        color: $color;
     }
 }
 
