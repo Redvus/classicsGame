@@ -20,13 +20,12 @@ export class Question {
         new ButtonBack();
         this.initLayout();
 
-        this.initQuestionBlock();
         this.initQuestionStars();
         this.initAppend();
         this.initQuestionBack();
+        this.initQuestAnim();
 
-
-
+        // this.initQuestionBlock();
     }
 
     initLayout() {
@@ -59,10 +58,8 @@ export class Question {
         this.bookEmpty.innerHTML = `
             <img src="assets/games/classics/images/bookPagesEmpty.png" alt="Пустая книга">
         `;
-    }
 
-    initQuestionBlock() {
-        // Development
+        // Блоки для воросов и ответов
         this.wrapper.className += ' wrapper__game';
 
         this.questionBlockLeft = document.createElement('div');
@@ -81,7 +78,10 @@ export class Question {
         this.questionBlockRightQuest.className = 'container__question_quest';
         this.questionBlockRightText = document.createElement('div');
         this.questionBlockRightText.className = 'container__question_text';
+    }
 
+    initQuestionBlock() {
+        // Development
         this.questionBlockRightQuest.innerHTML = `
             <h3>${this.questionQuest}</h3>
         `;
@@ -166,24 +166,22 @@ export class Question {
         this.questionBlockRight.appendChild(this.questionBlockRightText);
     }
 
-    questionBlockAnimation() {
-        let tl = gsap.timeline();
+    initQuestAnim() {
+        let tl = gsap.timeline({});
         tl
-            // .from('.container__title_category', {
-            //     autoAlpha: 0,
-            //     duration: 0.2,
-            //     delay: 0.3
-            // })
-            .from(questBlockImage, {
+            .from(this.wrapperTopTitle, {
                 autoAlpha: 0,
-                duration: 0.4,
-                delay: 0.2
+                // delay: '-0.1',
+                y: '-10%'
             })
-            .from(questButtonList, {
+            .from([
+                this.bookEmpty,
+                this.containerWrapper,
+                // this.buttonBackClick
+            ], {
                 autoAlpha: 0,
-                duration: 0.4,
-                stagger: 0.1,
-                delay: '-0.2'
+                // delay: '-0.1',
+                stagger: 0.3
             })
         ;
     }
@@ -323,18 +321,12 @@ export class Question {
 
     initQuestionBack() {
         this.buttonBackClick.addEventListener('click', () => {
+            this.wrapperBottom.removeChild(this.buttonBackClick);
             let tl = gsap.timeline({
                 onComplete: () => {
                     this.container.removeChild(this.containerWrapper);
                     this.wrapperBack.removeChild(this.bookEmpty);
                     this.wrapperTop.removeChild(this.wrapperTopTitle);
-                    this.wrapperBottom.removeChild(this.buttonBackClick);
-
-                    // this.container.style.width = '45rem';
-                    // if (document.body.clientWidth < 570 || screen.width < 570) {
-                    //     this.container.style.width = '';
-                    //     this.container.style.padding = '';
-                    // }
                     new ChoiceCategory(
                         'Ученик',
                         '',
@@ -356,7 +348,7 @@ export class Question {
                 .to([
                     this.containerWrapper,
                     this.bookEmpty,
-                    this.buttonBackClick
+                    // this.buttonBackClick
                 ], {
                     autoAlpha: 0,
                     delay: '-0.1',

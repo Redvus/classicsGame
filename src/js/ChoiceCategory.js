@@ -21,7 +21,7 @@ export class ChoiceCategory {
         this.initLayout();
         this.initChoiceCategory();
         this.initAppend();
-        // this.choiceCategoryAnim();
+        this.choiceCategoryAnim();
         this.initChoiceCategoryBack();
         this.initChoiceQuest();
     }
@@ -190,39 +190,32 @@ export class ChoiceCategory {
         this.categoryCatSub = document.querySelector('.container__category_subcategory');
 
         for (let i = 0; i < this.choiceCategoryCount; i++) {
-            this.categoryElem = document.getElementById(`cat${this.choiceCategorySubID}Sub_${i + 1}`);
+            this.categoryElem = document.getElementById(`categorySub${this.choiceCategorySubID}_${i + 1}`);
 
             this.categoryElem.addEventListener('click', () => {
                 this.wrapperBottom.removeChild(this.buttonBackClick);
                 let tl = gsap.timeline({
                     onComplete: () => {
+                        this.wrapperTop.removeChild(this.wrapperTopTitle);
                         this.categoryCat.removeChild(this.categoryCatSub);
                         this.container.removeChild(this.categoryCat);
-                        // this.container.classList.remove('container--category');
-                        this.wrapperTop.removeChild(this.wrapperTopTitle);
-                        // new Question(`${this[`category_${i + 1}`]}`);
-                        // new ChoiceCategory(
-                        //     `${this[`category_${i + 1}`]}`,
-                        //     15,
-                        //     '',
-                        //     `${this[`category_${i + 1}ID`]}`);
+                        this.container.classList.remove('container--category');
+                        new Question(`${this.choiceCategoryName}. Группа ${i + 1}`);
                     }
                 });
 
                 tl
                     .to(this.wrapperTopTitle, {
-                        duration: '0.3',
                         autoAlpha: 0,
+                        delay: '-0.1',
                         y: '-10%'
                     })
-                    .to(this.categoryBlock, {
+                    .to([
+                        this.containerWrapper,
+                        this.buttonBackClick
+                    ], {
                         autoAlpha: 0,
-                        duration: 0.3,
                         delay: '-0.1'
-                    })
-                    .to(this.wrapperBackCategory, {
-                        duration: '0.5',
-                        autoAlpha: 0
                     })
                 ;
             });
