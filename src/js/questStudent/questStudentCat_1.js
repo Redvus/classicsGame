@@ -1,3 +1,43 @@
+import { Question } from '../Question.js';
+
+export class QuestStudentCat_1 {
+
+    constructor() {
+        this.questStudentCat_1_1();
+    }
+
+    questStudentCat_1_1() {
+        new Question(
+            'Какой город является столицей Франции?',
+            'Париж',
+            'Лондон',
+            'Берлин'
+        );
+        this.questStudentCat_1_2();
+    }
+
+    questStudentCat_1_2() {
+        new Question(
+            'Какой город является столицей Франции?',
+            'Париж',
+            'Лондон',
+            'Берлин'
+        );
+        this.questStudentCat_1_3();
+    }
+
+    questStudentCat_1_3() {
+        new Question(
+            'Какой город является столицей Франции?',
+            'Париж',
+            'Лондон',
+            'Берлин'
+        );
+    }
+
+}
+
+
 
 if (localStorage.getItem('progressChicheroneQuest_1') === null) {
     localStorage.setItem('progressChicheroneQuest_1', JSON.stringify(0));

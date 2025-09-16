@@ -63,7 +63,7 @@ $font-width-extended: 125%;
 }
 
 // Base fonts styles
-@mixin px($size: base) {
+@mixin px($size: base, $color: light) {
     font-family: var(--primary-font);
     font-weight: $font-weight-regular;
     font-stretch: $font-width-normal;
@@ -85,6 +85,12 @@ $font-width-extended: 125%;
             font-weight: $font-weight-regular;
             line-height: 1.2;
         }
+    }
+
+    @if $color == light {
+        color: var(--heading-font-color);
+    } @else {
+        color: $color;
     }
 }
 

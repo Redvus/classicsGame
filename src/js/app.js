@@ -9,13 +9,14 @@ import { About } from './About.js';
 import { Authors } from './Authors.js';
 import { Category } from "./Category.js";
 import { ChoiceCategory } from "./ChoiceCategory.js";
-import { Question } from "./Question.js";
+import { QuestionBase } from "./QuestionBase.js";
+import { Question } from './Question.js';
 
 export class Game {
     constructor(parameters) {
         this.initLayout();
         this.initLayoutBack();
-        this.initAppend();
+        // this.initAppend();
         // new Intro();
 
         //Develop
@@ -27,20 +28,28 @@ export class Game {
         //     'Connoisseur',
         //     'Хранитель',
         //     'Keeper');
-        new ChoiceCategory(
+        if(new ChoiceCategory(
             'Ученик',
             '',
             '',
-            'Student');
+            'Student')) {
+            this.initAppendDev();
+        } else {
+            this.initAppend();
+        }
 
         //Question
-        // new Question(
-        //     'Ученик',
-        //     'Какое из этих названий не является названием района города Калининграда?',
-        //     'Ленинградский',
-        //     'Московский',
-        //     'Парижский'
-        // );
+        // if(new QuestionBase('Ученик')) {
+        //     this.initAppendDev();
+        //     // new Question(
+        //     //     'Какой город является столицей Франции?',
+        //     //     'Париж',
+        //     //     'Лондон',
+        //     //     'Берлин'
+        //     // );
+        // } else {
+        //     this.initAppend();
+        // }
 
         // new About();
         // new Authors();
@@ -113,13 +122,15 @@ export class Game {
     }
 
     initAppend() {
-        // this.wrapperBack.appendChild(this.wrapperBackIntro);
-        // this.wrapperBack.appendChild(this.wrapperBackAbout);
-        // this.wrapperBack.appendChild(this.wrapperBackAuthors);
-        // this.wrapperBack.appendChild(this.wrapperBackCategory);
+        this.wrapperBack.appendChild(this.wrapperBackIntro);
+        this.wrapperBack.appendChild(this.wrapperBackAbout);
+        this.wrapperBack.appendChild(this.wrapperBackAuthors);
+        this.wrapperBack.appendChild(this.wrapperBackCategory);
         this.wrapperBack.appendChild(this.wrapperBackFirst);
-        this.wrapperBack.appendChild(this.wrapperBackSecond);
-        this.wrapperBack.appendChild(this.wrapperBackThird);
+    }
+
+    initAppendDev() {
+        this.wrapperBack.appendChild(this.wrapperBackFirst);
     }
 
     initMobile() {

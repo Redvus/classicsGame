@@ -1,7 +1,8 @@
 import { gsap } from "gsap";
 import { ButtonBack } from "./Buttons/ButtonBack.js";
 import { Category } from "./Category.js";
-import { Question } from "./Question.js";
+import { QuestionBase } from "./QuestionBase.js";
+import { QuestStudentCat_1 } from "./questStudent/questStudentCat_1.js";
 
 export class ChoiceCategory {
 
@@ -200,7 +201,10 @@ export class ChoiceCategory {
                         this.categoryCat.removeChild(this.categoryCatSub);
                         this.container.removeChild(this.categoryCat);
                         this.container.classList.remove('container--category');
-                        new Question(`${this.choiceCategoryName}. Группа ${i + 1}`);
+                        new QuestionBase(`${this.choiceCategoryName}`, `${this.choiceCategorySubID}`);
+                        if ((i + 1) === 1) {
+                            new QuestStudentCat_1();
+                        }
                     }
                 });
 

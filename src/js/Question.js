@@ -1,29 +1,23 @@
 import { gsap } from "gsap";
-import { ButtonBack } from "./Buttons/ButtonBack.js";
 import { ChoiceCategory } from "./ChoiceCategory.js";
 
 export class Question {
 
     constructor(
-        questCatName,
         questionQuest,
         questionVariant1,
         questionVariant2,
         questionVariant3
     ) {
-        this.questCatName = questCatName;
         this.questionQuest = questionQuest;
         this.questionVariant1 = questionVariant1;
         this.questionVariant2 = questionVariant2;
         this.questionVariant3 = questionVariant3;
 
-        new ButtonBack();
         this.initLayout();
 
-        this.initQuestionStars();
-        this.initAppend();
-        this.initQuestionBack();
-        this.initQuestAnim();
+        // this.initQuestionStars();
+        // this.initQuestAnim();
 
         // this.initQuestionBlock();
     }
@@ -35,56 +29,24 @@ export class Question {
         this.wrapperTop = document.querySelector('.wrapper__top');
         this.wrapperIntro = document.querySelector('.wrapper__back_intro');
         this.container = document.querySelector('.container');
-
-        this.containerWrapper = document.createElement('div');
-        this.containerWrapper.className = 'container__category container__question';
-
-        this.wrapperTopTitle = document.createElement('div');
-
-        // this.wrapperTop.className += ' wrapper__top_intro';
-        this.wrapperTopTitle.className = 'wrapper__top_title wrapper__top_title--intro';
-
-        this.wrapperTopTitle.innerHTML = `
-            <h2>${this.questCatName}</h2>
-        `;
+		this.containerWrapper = document.querySelector('.container__question');
 
         // Sounds
         // this.backgroundMusicID = document.getElementById('backgroundMusicID');
 
-        this.buttonBackClick = document.getElementById('buttonBack');
+        this.questionBlockLeftStars = document.querySelector('.container__question_stars');
+        this.questionBlockLeftImage = document.querySelector('.container__question_image');
+		this.questionBlockRightQuest = document.querySelector('.container__question_quest h3');
+		this.questionBlockRightText = document.querySelector('.container__question_text');
 
-        this.bookEmpty = document.createElement('picture');
-        this.bookEmpty.className = 'wrapper__back--book';
-        this.bookEmpty.innerHTML = `
-            <img src="assets/games/classics/images/bookPagesEmpty.png" alt="Пустая книга">
-        `;
+		this.questionBlockRightQuest.innerHTML = `
+			<h3>${this.questionQuest}</h3>
+		`;
 
-        // Блоки для воросов и ответов
-        this.wrapper.className += ' wrapper__game';
-
-        this.questionBlockLeft = document.createElement('div');
-        this.questionBlockLeft.className = 'container__question_block container__question_block_left';
-        this.questionBlockRight = document.createElement('div');
-        this.questionBlockRight.className = 'container__question_block container__question_block_right';
-
-        // Block Left
-        this.questionBlockLeftStars = document.createElement('ul');
-        this.questionBlockLeftStars.className = 'container__question_stars';
-        this.questionBlockLeftImage = document.createElement('div');
-        this.questionBlockLeftImage.className = 'container__question_image';
-
-        // Block Right
-        this.questionBlockRightQuest = document.createElement('div');
-        this.questionBlockRightQuest.className = 'container__question_quest';
-        this.questionBlockRightText = document.createElement('div');
-        this.questionBlockRightText.className = 'container__question_text';
-    }
-
-    initQuestionBlock() {
-        // Development
-        this.questionBlockRightQuest.innerHTML = `
-            <h3>${this.questionQuest}</h3>
-        `;
+		// Answer
+		this.answerVar_1 = document.getElementById('answerVar_1');
+		this.answerVar_2 = document.getElementById('answerVar_2');
+		this.answerVar_3 = document.getElementById('answerVar_3');
 
         this.questionBlockRightText.innerHTML = `
             <ul class="container__question_list">
@@ -93,36 +55,6 @@ export class Question {
                 <li id="answerVar_3"><a href="javascript:void(0);">${this.questionVariant3}</a></li>
             </ul>
         `;
-
-        // this.questionBlockRight.innerHTML = `
-        //     <div class="container__question_block container__question_block_imageblock">
-        //         <div class="container__question_imageblock">
-
-        //     <div class="container__question_block container__question_block_text">
-        //         <div class="container__question_top">
-        //             <p>${this.questionQuest}</p>
-        //         </div>
-        //         <ul class="container__question_bottom">
-        //             <li id="answerVar_1"><a href="javascript:void(0);">${this.questionVariant1}</a></li>
-        //             <li id="answerVar_2"><a href="javascript:void(0);">${this.questionVariant2}</a></li>
-        //             <li id="answerVar_3"><a href="javascript:void(0);">${this.questionVariant3}</a></li>
-        //         </ul>
-        //     </div>
-        // `;
-
-        // const questButtonLi_1 = document.getElementById('answerVar_1'),
-        //     questButtonLi_2 = document.getElementById('answerVar_2'),
-        //     questButtonLi_3 = document.getElementById('answerVar_3'),
-        //     questButtonList = [questButtonLi_1, questButtonLi_2, questButtonLi_3],
-        //     questButtonLiPosition = ['0', '33%', '66%'],
-        //     questButtonLi = document.querySelectorAll('.question__block_list li'),
-        //     positionLiTop = questButtonLiPosition.sort(() => Math.floor(Math.random() * questButtonLiPosition.length)),
-        //     questBlockImage = document.querySelector('.question__block_imageblock')
-        // ;
-
-        // questButtonList.forEach((el, idx) => {
-        //     el.style.top = positionLiTop[idx];
-        // });
     }
 
     initQuestionStars() {
@@ -148,22 +80,6 @@ export class Question {
             this.questionBlockLeftStars.appendChild(li);
             this.questStars.push[j];
         }
-    }
-
-    initAppend() {
-        this.wrapperTop.appendChild(this.wrapperTopTitle);
-        this.container.appendChild(this.containerWrapper);
-        this.wrapperBack.appendChild(this.bookEmpty);
-
-        // Append Left
-        this.containerWrapper.appendChild(this.questionBlockLeft);
-        this.questionBlockLeft.appendChild(this.questionBlockLeftStars);
-        this.questionBlockLeft.appendChild(this.questionBlockLeftImage);
-
-        // Append Right
-        this.containerWrapper.appendChild(this.questionBlockRight);
-        this.questionBlockRight.appendChild(this.questionBlockRightQuest);
-        this.questionBlockRight.appendChild(this.questionBlockRightText);
     }
 
     initQuestAnim() {
@@ -317,44 +233,5 @@ export class Question {
                 });
             }
         }
-    }
-
-    initQuestionBack() {
-        this.buttonBackClick.addEventListener('click', () => {
-            this.wrapperBottom.removeChild(this.buttonBackClick);
-            let tl = gsap.timeline({
-                onComplete: () => {
-                    this.container.removeChild(this.containerWrapper);
-                    this.wrapperBack.removeChild(this.bookEmpty);
-                    this.wrapperTop.removeChild(this.wrapperTopTitle);
-                    new ChoiceCategory(
-                        'Ученик',
-                        '',
-                        '',
-                        'Student');
-                    // gsap.to(this.wrapperBackCategory, {
-                    //     autoAlpha: 1,
-                    //     duration: '0.3',
-                    //     // delay: '0.1'
-                    // });
-                }
-            });
-            tl
-                .to(this.wrapperTopTitle, {
-                    autoAlpha: 0,
-                    delay: '-0.1',
-                    y: '-10%'
-                })
-                .to([
-                    this.containerWrapper,
-                    this.bookEmpty,
-                    // this.buttonBackClick
-                ], {
-                    autoAlpha: 0,
-                    delay: '-0.1',
-                    stagger: 0.03
-                })
-            ;
-        });
     }
 }
