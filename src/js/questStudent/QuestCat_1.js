@@ -1,11 +1,19 @@
 import { Question } from '../Question.js';
 
-export class QuestStudentCat_1 {
+export class QuestCat_1 {
 
-    constructor() {
-        this.questStudentCat_1_1();
+    constructor(questCatName) {
+        this.questCatName = questCatName;
+        if (this.questCatName === 'Ученик') {
+            this.questStudentCat_1_1();
+        } else if (this.questCatName === 'Знаток') {
+            this.questConnoisseurCat_1_1();
+        } else if (this.questCatName === 'Хранитель') {
+            this.questKeeperCat_1_1();
+        }
     }
 
+    // Ученик. Quest 1
     questStudentCat_1_1() {
         new Question(
             'Какой город является столицей Франции?',
@@ -13,27 +21,31 @@ export class QuestStudentCat_1 {
             'Лондон',
             'Берлин'
         );
-        this.questStudentCat_1_2();
+        // this.questStudentCat_1_2();
     }
 
-    questStudentCat_1_2() {
+    // Знаток. Quest 1
+    questConnoisseurCat_1_1() {
         new Question(
-            'Какой город является столицей Франции?',
-            'Париж',
-            'Лондон',
-            'Берлин'
+            'Какой город я?',
+            'иж',
+            'дон',
+            'рлин'
         );
-        this.questStudentCat_1_3();
     }
 
-    questStudentCat_1_3() {
+    // Хранитель. Quest 1
+    questKeeperCat_1_1() {
         new Question(
-            'Какой город является столицей Франции?',
-            'Париж',
-            'Лондон',
-            'Берлин'
+            'Какой город является столицей?',
+            'Пар',
+            'Лонд',
+            'Берл'
         );
+        // this.questStudentCat_1_3();
     }
+
+
 
 }
 

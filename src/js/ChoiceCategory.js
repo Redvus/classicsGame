@@ -2,19 +2,19 @@ import { gsap } from "gsap";
 import { ButtonBack } from "./Buttons/ButtonBack.js";
 import { Category } from "./Category.js";
 import { QuestionBase } from "./QuestionBase.js";
-import { QuestStudentCat_1 } from "./questStudent/questStudentCat_1.js";
+import { QuestCat_1 } from "./questStudent/QuestCat_1.js";
 
 export class ChoiceCategory {
 
     constructor(
         choiceCategoryName,
-        choiceCategoryCount ,
-        choiceCategoryBack,
-        choiceCategorySubID
+        // choiceCategoryBack,
+        choiceCategorySubID,
+        choiceCategoryCount
         ) {
         this.choiceCategoryCount = choiceCategoryCount || 15;
         this.choiceCategoryName = choiceCategoryName;
-        this.choiceCategoryBack = choiceCategoryBack;
+        // this.choiceCategoryBack = choiceCategoryBack;
         this.choiceCategorySubID = choiceCategorySubID;
         this.choiceCategoryTitle = this.choiceCategoryTitle;
 
@@ -57,13 +57,13 @@ export class ChoiceCategory {
         this.containerWrapper = document.createElement('div');
         this.choiceCategoryTitle = document.createElement('div');
         this.containerWrapperSubCat = document.createElement('ul');
-        this.wrapperCategoryBack = document.createElement('div');
+        // this.wrapperCategoryBack = document.createElement('div');
 
         // container.className = 'container container--wide';
         this.containerWrapper.className = 'container__category';
         this.containerWrapperSubCat.className = 'container__category_subcategory';
         this.choiceCategoryTitle.className = 'container__title';
-        this.wrapperCategoryBack.className = `wrapper__${this.choiceCategoryBack}`;
+        // this.wrapperCategoryBack.className = `wrapper__${this.choiceCategoryBack}`;
         this.container.className += ' container--category';
 
         this.subCatElems = [];
@@ -197,14 +197,9 @@ export class ChoiceCategory {
                 this.wrapperBottom.removeChild(this.buttonBackClick);
                 let tl = gsap.timeline({
                     onComplete: () => {
-                        this.wrapperTop.removeChild(this.wrapperTopTitle);
-                        this.categoryCat.removeChild(this.categoryCatSub);
-                        this.container.removeChild(this.categoryCat);
-                        this.container.classList.remove('container--category');
+                        this.cleanupDOM();
                         new QuestionBase(`${this.choiceCategoryName}`, `${this.choiceCategorySubID}`);
-                        if ((i + 1) === 1) {
-                            new QuestStudentCat_1();
-                        }
+                        this.handleQuestCreation(i);
                     }
                 });
 
@@ -224,5 +219,32 @@ export class ChoiceCategory {
                 ;
             });
         }
+    }
+
+    cleanupDOM() {
+        this.wrapperTop.removeChild(this.wrapperTopTitle);
+        this.categoryCat.removeChild(this.categoryCatSub);
+        this.container.removeChild(this.categoryCat);
+        this.container.classList.remove('container--category');
+    }
+
+    handleQuestCreation(selectedIndex) {
+        // Используем switch вместо множества if-else
+        switch(selectedIndex + 1) {
+            case 1:
+                new QuestCat_1(this.choiceCategoryName);
+                break;
+            case 2:
+                // new QuestCat_2();
+                break;
+            case 3:
+                // new QuestCat_3();
+                break;
+            // ... остальные cases
+            default:
+                // console.log('Unknown category index:', selectedIndex + 1);
+        }
+
+        // console.log('Selected:', selectedIndex + 1);
     }
 }

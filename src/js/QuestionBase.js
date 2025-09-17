@@ -4,7 +4,10 @@ import { ChoiceCategory } from "./ChoiceCategory.js";
 
 export class QuestionBase {
 
-    constructor(questCatName, questCatID) {
+    constructor(
+        questCatName,
+        questCatID
+    ) {
         this.questCatName = questCatName;
         this.questCatID = questCatID;
 

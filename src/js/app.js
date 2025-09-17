@@ -30,8 +30,6 @@ export class Game {
         //     'Keeper');
         if(new ChoiceCategory(
             'Ученик',
-            '',
-            '',
             'Student')) {
             this.initAppendDev();
         } else {
