@@ -19,7 +19,9 @@ export class QuestCat_1 {
             'Какой город является столицей Франции?',
             'Париж',
             'Лондон',
-            'Берлин'
+            'Берлин',
+            0,
+            ''
         );
         // this.questStudentCat_1_2();
     }
@@ -30,7 +32,9 @@ export class QuestCat_1 {
             'Какой город я?',
             'иж',
             'дон',
-            'рлин'
+            'рлин',
+            1,
+            'asdasdasdas asdasdasdas asdasdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd asdasd'
         );
     }
 
@@ -40,7 +44,9 @@ export class QuestCat_1 {
             'Какой город является столицей?',
             'Пар',
             'Лонд',
-            'Берл'
+            'Берл',
+            2,
+            ''
         );
         // this.questStudentCat_1_3();
     }

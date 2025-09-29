@@ -7,14 +7,20 @@ export class Question {
         questionQuest,
         questionVariant1,
         questionVariant2,
-        questionVariant3
+        questionVariant3,
+        answerRightNum,
+        answerRightText
     ) {
         this.questionQuest = questionQuest;
         this.questionVariant1 = questionVariant1;
         this.questionVariant2 = questionVariant2;
         this.questionVariant3 = questionVariant3;
+        this.answerRightNum = answerRightNum;
+        this.answerRightText = answerRightText;
 
         this.initLayout();
+        this.answerBlock();
+        // Sounds
 
         // this.initQuestionStars();
         // this.initQuestAnim();
@@ -102,42 +108,53 @@ export class Question {
         ;
     }
 
-    answerBlock(answerVarNum, answerTextRight) {
-        const questionBlock = document.querySelector('.question__block_list'),
+    answerBlock() {
+        const
+            questionBlock = document.querySelector('.container__question_list'),
             questionBlockText = document.createElement('div'),
             questionBlockWrongText = document.createElement('div'),
             answerWrongVar = ['Неправильно', 'В следующий раз повезет', 'Не отчаивайтесь', 'Не совсем так', 'К сожалению нет'],
-            answerWrongVarView = answerWrongVar[Math.floor(Math.random() * answerWrongVar.length)]
+            answerWrongVarView = answerWrongVar[Math.floor(Math.random() * answerWrongVar.length)],
+            answerRightVar = ['Правильно!', 'Отлично!', 'Вам везёт!', 'Продолжайте в том же духе!', 'Невероятно!'],
+            answerRightVarView = answerRightVar[Math.floor(Math.random() * answerRightVar.length)]
         ;
 
-        questionBlockText.innerHTML = `
-            <div class="question__block_text-inside" id="answerWright"><p>${answerTextRight}</p></div>
-        `;
+        if (this.answerRightText === '') {
+            questionBlockText.innerHTML = `
+                <div class="container__question_text_inside" id="answerWrong"><p>${answerRightVarView}</p></div>
+            `;
+        } else {
+            questionBlockText.innerHTML = `
+                <div class="container__question_text_inside" id="answerWright"><p>${this.answerRightText}</p></div>
+            `;
+        }
+
         questionBlockWrongText.innerHTML = `
-            <div class="question__block_text-inside" id="answerWrong"><p>${answerWrongVarView}</p></div>
+            <div class="container__question_text_inside" id="answerWrong"><p>${answerWrongVarView}</p></div>
         `;
 
-        let answerVar_1 = document.getElementById('answerVar_1'),
+        const
+            answerVar_1 = document.getElementById('answerVar_1'),
             answerVar_2 = document.getElementById('answerVar_2'),
             answerVar_3 = document.getElementById('answerVar_3'),
             answerVarArray = [answerVar_1, answerVar_2, answerVar_3],
-            answerLi = document.querySelectorAll('ul.question__block_list > li'),
-            answerLiRight = document.querySelectorAll('ul.question__block_list > li > a')
+            answerLi = document.querySelectorAll('ul.container__question_list > li'),
+            answerLiRight = document.querySelectorAll('ul.container__question_list > li > a')
         ;
 
         for (let i = 0; i < answerVarArray.length; i++) {
-            if (answerVarArray[i] === answerVarArray[answerVarNum]) {
+            if (answerVarArray[i] === answerVarArray[this.answerRightNum]) {
                 answerVarArray[i].addEventListener('click', () => {
                     answerLi.forEach((el, idx) => {
-                        if (idx !== answerVarNum) {
+                        if (idx !== this.answerVarNum) {
                             el.remove();
                             questionBlock.appendChild(questionBlockText);
-                            questionBlockText.className = 'question__block_text';
+                            // questionBlockText.className = 'question__block_text';
                         } else {
                             let tl = gsap.timeline();
                             let answerBlockText = document.getElementById('answerWright');
                             answerLiRight[i].className += 'question__block_list--right';
-                            soundsLoad.rightAnswer('assets/games/kraevedia/sounds/cp_rightAnswer.ogg');
+                            // soundsLoad.rightAnswer('assets/games/kraevedia/sounds/cp_rightAnswer.ogg');
                             tl
                                 .to(el, {
                                     top: 0,
@@ -153,65 +170,13 @@ export class Question {
                         }
                     });
                 });
-            } else if (answerVarArray[i] === answerVarArray[0]) {
+            } else if (answerVarArray[i] !== answerVarArray[this.answerRightNum]) {
                 answerVarArray[i].addEventListener('click', () => {
                     answerLi.forEach((el, idx) => {
-                        if (idx !== 0) {
+                        if (idx !== 0 || idx !== 1 || idx !== 2) {
                             el.remove();
                             questionBlock.appendChild(questionBlockWrongText);
-                            questionBlockWrongText.className = 'question__block_text';
-                        } else {
-                            let tl = gsap.timeline();
-                            let answerBlockWrongText = document.getElementById('answerWrong');
-                            answerLiRight[i].className += 'question__block_list--wrong';
-                            tl
-                                .to(el, {
-                                    top: 0,
-                                    duration: 0.3,
-                                    delay: 0.1,
-                                    ease: 'back'
-                                })
-                                .from(answerBlockWrongText, {
-                                    autoAlpha: 0,
-                                    duration: 0.2
-                                })
-                            ;
-                        }
-                    });
-                });
-            } else if (answerVarArray[i] === answerVarArray[1]) {
-                answerVarArray[i].addEventListener('click', () => {
-                    answerLi.forEach((el, idx) => {
-                        if (idx !== 1) {
-                            el.remove();
-                            questionBlock.appendChild(questionBlockWrongText);
-                            questionBlockWrongText.className = 'question__block_text';
-                        } else {
-                            let tl = gsap.timeline();
-                            let answerBlockWrongText = document.getElementById('answerWrong');
-                            answerLiRight[i].className += 'question__block_list--wrong';
-                            tl
-                                .to(el, {
-                                    top: 0,
-                                    duration: 0.3,
-                                    delay: 0.1,
-                                    ease: 'back'
-                                })
-                                .from(answerBlockWrongText, {
-                                    autoAlpha: 0,
-                                    duration: 0.2
-                                })
-                            ;
-                        }
-                    });
-                });
-            } else if (answerVarArray[i] === answerVarArray[2]) {
-                answerVarArray[i].addEventListener('click', () => {
-                    answerLi.forEach((el, idx) => {
-                        if (idx !== 2) {
-                            el.remove();
-                            questionBlock.appendChild(questionBlockWrongText);
-                            questionBlockWrongText.className = 'question__block_text';
+                            // questionBlockWrongText.className = 'question__block_text';
                         } else {
                             let tl = gsap.timeline();
                             let answerBlockWrongText = document.getElementById('answerWrong');

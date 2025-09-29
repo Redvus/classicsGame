@@ -1,3 +1,5 @@
+// Задний фон - книга
+
 import { gsap } from "gsap";
 import { ButtonBack } from "./Buttons/ButtonBack.js";
 import { ChoiceCategory } from "./ChoiceCategory.js";

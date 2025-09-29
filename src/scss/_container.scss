@@ -350,6 +350,16 @@
 			height: 60%;
 			display: block;
 			position: relative;
+
+			&_inside {
+
+				p {
+					@include px(base);
+					color: var(--third);
+					// text-align: center;
+					// margin-top: 0;
+				}
+			}
 		}
 
 		&_list {
