@@ -22,9 +22,9 @@ export class ChoiceCategory {
         this.initLayout();
         this.initChoiceCategory();
         this.initAppend();
-        this.choiceCategoryAnim();
         this.initChoiceCategoryBack();
         this.initChoiceQuest();
+        // this.choiceCategoryAnim();
     }
 
     initLayout() {

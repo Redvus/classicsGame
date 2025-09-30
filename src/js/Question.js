@@ -9,7 +9,8 @@ export class Question {
         questionVariant2,
         questionVariant3,
         answerRightNum,
-        answerRightText
+        answerRightText,
+        answerNext
     ) {
         this.questionQuest = questionQuest;
         this.questionVariant1 = questionVariant1;
@@ -17,6 +18,7 @@ export class Question {
         this.questionVariant3 = questionVariant3;
         this.answerRightNum = answerRightNum;
         this.answerRightText = answerRightText;
+        this.answerNext = answerNext;
 
         this.initLayout();
         this.answerBlock();
@@ -113,24 +115,30 @@ export class Question {
             questionBlock = document.querySelector('.container__question_list'),
             questionBlockText = document.createElement('div'),
             questionBlockWrongText = document.createElement('div'),
+            questionBlockButton = document.createElement('div'),
             answerWrongVar = ['Неправильно', 'В следующий раз повезет', 'Не отчаивайтесь', 'Не совсем так', 'К сожалению нет'],
             answerWrongVarView = answerWrongVar[Math.floor(Math.random() * answerWrongVar.length)],
-            answerRightVar = ['Правильно!', 'Отлично!', 'Вам везёт!', 'Продолжайте в том же духе!', 'Невероятно!'],
+            answerRightVar = ['Правильно!', 'Отлично!', 'Так держать!', 'Точно так!', 'Молодец!'],
             answerRightVarView = answerRightVar[Math.floor(Math.random() * answerRightVar.length)]
         ;
 
         if (this.answerRightText === '') {
             questionBlockText.innerHTML = `
-                <div class="container__question_text_inside" id="answerWrong"><p>${answerRightVarView}</p></div>
+                <p id="answerWrong">${answerRightVarView}</p>
             `;
         } else {
             questionBlockText.innerHTML = `
-                <div class="container__question_text_inside" id="answerWright"><p>${this.answerRightText}</p></div>
+                <p id="answerWright">${this.answerRightText}</p>
             `;
         }
 
         questionBlockWrongText.innerHTML = `
-            <div class="container__question_text_inside" id="answerWrong"><p>${answerWrongVarView}</p></div>
+            <p id="answerWrong">${answerWrongVarView}</p>
+        `;
+
+        questionBlockButton.classList = 'container__question_text_button';
+        questionBlockButton.innerHTML = `
+            <p id="nextQuestion">Следующий вопрос</p>
         `;
 
         const
@@ -149,7 +157,11 @@ export class Question {
                         if (idx !== this.answerVarNum) {
                             el.remove();
                             questionBlock.appendChild(questionBlockText);
-                            // questionBlockText.className = 'question__block_text';
+                            questionBlock.appendChild(questionBlockButton);
+                            questionBlockText.className = 'container__question_text_inside';
+                            questionBlockButton.addEventListener('click', () => {
+                                this.answerNext();
+                            });
                         } else {
                             let tl = gsap.timeline();
                             let answerBlockText = document.getElementById('answerWright');
@@ -176,7 +188,11 @@ export class Question {
                         if (idx !== 0 || idx !== 1 || idx !== 2) {
                             el.remove();
                             questionBlock.appendChild(questionBlockWrongText);
-                            // questionBlockWrongText.className = 'question__block_text';
+                            questionBlock.appendChild(questionBlockButton);
+                            questionBlockWrongText.className = 'container__question_text_inside';
+                            questionBlockButton.addEventListener('click', () => {
+                                this.answerNext();
+                            });
                         } else {
                             let tl = gsap.timeline();
                             let answerBlockWrongText = document.getElementById('answerWrong');

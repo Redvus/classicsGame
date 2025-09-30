@@ -1,9 +1,18 @@
+import { gsap } from "gsap";
 import { Question } from '../Question.js';
+import { ChoiceCategory } from "../ChoiceCategory.js";
 
 export class QuestCat_1 {
 
-    constructor(questCatName) {
+    constructor(
+        questCatName,
+        questCatID
+    ) {
         this.questCatName = questCatName;
+        this.questCatID = questCatID;
+
+        this.initLayout();
+
         if (this.questCatName === 'Ученик') {
             this.questStudentCat_1_1();
         } else if (this.questCatName === 'Знаток') {
@@ -11,6 +20,17 @@ export class QuestCat_1 {
         } else if (this.questCatName === 'Хранитель') {
             this.questKeeperCat_1_1();
         }
+    }
+
+    initLayout() {
+        this.wrapper = document.querySelector('.wrapper');
+        this.wrapperBack = document.querySelector('.wrapper__back');
+        this.wrapperBottom = document.querySelector('.wrapper__bottom');
+        this.wrapperTop = document.querySelector('.wrapper__top');
+        this.wrapperIntro = document.querySelector('.wrapper__back_intro');
+        this.container = document.querySelector('.container');
+        this.containerWrapper = document.querySelector('.container__category');
+        this.bookEmpty = document.querySelector('.wrapper__back--book');
     }
 
     // Ученик. Quest 1
@@ -21,9 +41,33 @@ export class QuestCat_1 {
             'Лондон',
             'Берлин',
             0,
-            ''
+            '',
+            this.questStudentCat_1_2.bind(this)
         );
-        // this.questStudentCat_1_2();
+    }
+
+    questStudentCat_1_2() {
+        new Question(
+            'Какой город Фран?',
+            'Пиж',
+            'Лодон',
+            'Блин',
+            0,
+            '',
+            this.questStudentCat_1_3.bind(this)
+        );
+    }
+
+    questStudentCat_1_3() {
+        new Question(
+            'город Ф?',
+            'Пи',
+            'одон',
+            'ин',
+            0,
+            '',
+            this.initQuestBack.bind(this)
+        );
     }
 
     // Знаток. Quest 1
@@ -51,8 +95,52 @@ export class QuestCat_1 {
         // this.questStudentCat_1_3();
     }
 
+    initQuestBack() {
+        this.buttonBack = document.querySelector('.container__question_text_button');
 
+        this.buttonBack.addEventListener('click', () => {
 
+            let tl = gsap.timeline({
+                onComplete: () => {
+                    if (this.containerWrapper && this.container.contains(this.containerWrapper)) {
+                        this.container.removeChild(this.containerWrapper);
+                    }
+                    if (this.bookEmpty && this.wrapperBack.contains(this.bookEmpty)) {
+                        this.wrapperBack.removeChild(this.bookEmpty);
+                    }
+                    // this.wrapperTop.removeChild(this.wrapperTopTitle);
+                    if (this.questCatName === this.questCatName) {
+                        new ChoiceCategory(
+                        `${this.questCatName}`,
+                        '',
+                        '',
+                        `${this.questCatID}`);
+                    }
+
+                    // gsap.to(this.wrapperBackCategory, {
+                    //     autoAlpha: 1,
+                    //     duration: '0.3',
+                    //     // delay: '0.1'
+                    // });
+                }
+            });
+            tl
+                // .to(this.wrapperTopTitle, {
+                //     autoAlpha: 0,
+                //     delay: '-0.1',
+                //     y: '-10%'
+                // })
+                .to([
+                    this.containerWrapper,
+                    this.bookEmpty
+                ], {
+                    autoAlpha: 0,
+                    delay: '-0.1',
+                    stagger: 0.03
+                })
+            ;
+        });
+    }
 }
 
 

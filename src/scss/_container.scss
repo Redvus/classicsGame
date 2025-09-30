@@ -352,12 +352,40 @@
 			position: relative;
 
 			&_inside {
+				width: 100%;
+				height: inherit;
+				display: flex;
+				align-items: center;
+				justify-content: center;
 
 				p {
 					@include px(base);
 					color: var(--third);
 					// text-align: center;
 					// margin-top: 0;
+				}
+			}
+
+			&_button {
+				width: 100%;
+				// height: inherit;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				position: relative;
+				margin-top: calc(var(--marginBase) * 1);
+				border: var(--border_normal) solid var(--third);
+				background-color: transparent;
+				border-radius: 0.6rem;
+				padding: calc(var(--marginBase) * 0.5);
+				@include px(large, var(--third));
+				// text-shadow: var(--border_thin) var(--border_thin) var(--border_normal) var(--third);
+				transition: all var(--base-duration);
+				cursor: pointer;
+
+				&:hover {
+					// letter-spacing: 0.05rem;
+					background-color: var(--third-opacity-10);
 				}
 			}
 		}
