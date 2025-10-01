@@ -31,6 +31,7 @@ export class QuestCat_1 {
         this.container = document.querySelector('.container');
         this.containerWrapper = document.querySelector('.container__category');
         this.bookEmpty = document.querySelector('.wrapper__back--book');
+        this.wrapperTopTitle = document.querySelector('.wrapper__top_title');
     }
 
     // Ученик. Quest 1
@@ -108,13 +109,15 @@ export class QuestCat_1 {
                     if (this.bookEmpty && this.wrapperBack.contains(this.bookEmpty)) {
                         this.wrapperBack.removeChild(this.bookEmpty);
                     }
-                    // this.wrapperTop.removeChild(this.wrapperTopTitle);
-                    if (this.questCatName === this.questCatName) {
+                    // if (this.wrapperTopTitle && this.wrapperTop.contains(this.wrapperTopTitle)) {
+                    //     this.wrapperTop.removeChild(this.wrapperTopTitle);
+                    // }
+                    if (this.questCatName === 'Ученик') {
                         new ChoiceCategory(
-                        `${this.questCatName}`,
+                        'Ученик',
                         '',
                         '',
-                        `${this.questCatID}`);
+                        'Ученик');
                     }
 
                     // gsap.to(this.wrapperBackCategory, {
@@ -125,11 +128,11 @@ export class QuestCat_1 {
                 }
             });
             tl
-                // .to(this.wrapperTopTitle, {
-                //     autoAlpha: 0,
-                //     delay: '-0.1',
-                //     y: '-10%'
-                // })
+                .to(this.wrapperTopTitle, {
+                    autoAlpha: 0,
+                    delay: '-0.1',
+                    y: '-10%'
+                })
                 .to([
                     this.containerWrapper,
                     this.bookEmpty
