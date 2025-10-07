@@ -2,7 +2,7 @@ import { gsap } from "gsap";
 import { ButtonBack } from "./Buttons/ButtonBack.js";
 import { Category } from "./Category.js";
 import { QuestionBase } from "./QuestionBase.js";
-import { QuestCat_1 } from "./questStudent/QuestCat_1.js";
+import { QuestCat_1 } from "./questAll/QuestCat_1.js";
 
 export class ChoiceCategory {
 
