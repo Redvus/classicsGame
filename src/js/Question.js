@@ -37,7 +37,7 @@ export class Question {
         this.wrapperTop = document.querySelector('.wrapper__top');
         this.wrapperIntro = document.querySelector('.wrapper__back_intro');
         this.container = document.querySelector('.container');
-		this.containerWrapper = document.querySelector('.container__question');
+        this.containerWrapper = document.querySelector('.container__question');
 
         // Sounds
         // this.backgroundMusicID = document.getElementById('backgroundMusicID');
@@ -159,9 +159,6 @@ export class Question {
                             questionBlock.appendChild(questionBlockText);
                             questionBlock.appendChild(questionBlockButton);
                             questionBlockText.className = 'container__question_text_inside';
-                            questionBlockButton.addEventListener('click', () => {
-                                this.answerNext();
-                            });
                         } else {
                             let tl = gsap.timeline();
                             let answerBlockText = document.getElementById('answerWright');
@@ -181,6 +178,9 @@ export class Question {
                             ;
                         }
                     });
+                    questionBlockButton.addEventListener('click', () => {
+                        this.answerNext();
+                    });
                 });
             } else if (answerVarArray[i] !== answerVarArray[this.answerRightNum]) {
                 answerVarArray[i].addEventListener('click', () => {
@@ -190,9 +190,6 @@ export class Question {
                             questionBlock.appendChild(questionBlockWrongText);
                             questionBlock.appendChild(questionBlockButton);
                             questionBlockWrongText.className = 'container__question_text_inside';
-                            questionBlockButton.addEventListener('click', () => {
-                                this.answerNext();
-                            });
                         } else {
                             let tl = gsap.timeline();
                             let answerBlockWrongText = document.getElementById('answerWrong');
@@ -210,6 +207,9 @@ export class Question {
                                 })
                             ;
                         }
+                    });
+                    questionBlockButton.addEventListener('click', () => {
+                        this.answerNext();
                     });
                 });
             }

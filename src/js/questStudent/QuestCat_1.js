@@ -32,6 +32,7 @@ export class QuestCat_1 {
         this.containerWrapper = document.querySelector('.container__category');
         this.bookEmpty = document.querySelector('.wrapper__back--book');
         this.wrapperTopTitle = document.querySelector('.wrapper__top_title');
+        this.buttonBackClick = document.getElementById('buttonBack');
     }
 
     // Ученик. Quest 1
@@ -97,52 +98,48 @@ export class QuestCat_1 {
     }
 
     initQuestBack() {
-        this.buttonBack = document.querySelector('.container__question_text_button');
-
-        this.buttonBack.addEventListener('click', () => {
-
-            let tl = gsap.timeline({
-                onComplete: () => {
-                    if (this.containerWrapper && this.container.contains(this.containerWrapper)) {
-                        this.container.removeChild(this.containerWrapper);
-                    }
-                    if (this.bookEmpty && this.wrapperBack.contains(this.bookEmpty)) {
-                        this.wrapperBack.removeChild(this.bookEmpty);
-                    }
-                    // if (this.wrapperTopTitle && this.wrapperTop.contains(this.wrapperTopTitle)) {
-                    //     this.wrapperTop.removeChild(this.wrapperTopTitle);
-                    // }
-                    if (this.questCatName === 'Ученик') {
-                        new ChoiceCategory(
-                        'Ученик',
-                        '',
-                        '',
-                        'Ученик');
-                    }
-
-                    // gsap.to(this.wrapperBackCategory, {
-                    //     autoAlpha: 1,
-                    //     duration: '0.3',
-                    //     // delay: '0.1'
-                    // });
+        let tl = gsap.timeline({
+            onComplete: () => {
+                this.wrapperBottom.removeChild(this.buttonBackClick);
+                if (this.containerWrapper && this.container.contains(this.containerWrapper)) {
+                    this.container.removeChild(this.containerWrapper);
                 }
-            });
-            tl
-                .to(this.wrapperTopTitle, {
-                    autoAlpha: 0,
-                    delay: '-0.1',
-                    y: '-10%'
-                })
-                .to([
-                    this.containerWrapper,
-                    this.bookEmpty
-                ], {
-                    autoAlpha: 0,
-                    delay: '-0.1',
-                    stagger: 0.03
-                })
-            ;
+                if (this.bookEmpty && this.wrapperBack.contains(this.bookEmpty)) {
+                    this.wrapperBack.removeChild(this.bookEmpty);
+                }
+                if (this.wrapperTopTitle && this.wrapperTop.contains(this.wrapperTopTitle)) {
+                    this.wrapperTop.removeChild(this.wrapperTopTitle);
+                }
+                if (this.questCatName === 'Ученик') {
+                    new ChoiceCategory(
+                    'Ученик',
+                    '',
+                    '',
+                    'Ученик');
+                }
+
+                // gsap.to(this.wrapperBackCategory, {
+                //     autoAlpha: 1,
+                //     duration: '0.3',
+                //     // delay: '0.1'
+                // });
+            }
         });
+        tl
+            .to(this.wrapperTopTitle, {
+                autoAlpha: 0,
+                delay: '-0.1',
+                y: '-10%'
+            })
+            .to([
+                this.containerWrapper,
+                this.bookEmpty
+            ], {
+                autoAlpha: 0,
+                delay: '-0.1',
+                stagger: 0.03
+            })
+        ;
     }
 }
 
