@@ -16,47 +16,29 @@ export class Game {
     constructor(parameters) {
         this.initLayout();
         this.initLayoutBack();
-        // this.initAppend();
-        // new Intro();
-
-        //Develop
-        // new Category(
-        //     45,
-        //     'Ученик',
-        //     'Student',
-        //     'Знаток',
-        //     'Connoisseur',
-        //     'Хранитель',
-        //     'Keeper');
-        if(new ChoiceCategory(
-            'Ученик',
-            'Student')) {
-            this.initAppendDev();
-        } else {
+        if (import.meta.env.PROD) {
             this.initAppend();
+            new Intro();
+        } else if (import.meta.env.DEV) {
+            this.initAppendDev();
+            new ChoiceCategory(
+                'Ученик',
+                'Student'
+            );
+
+            //Question
+            // if(new QuestionBase('Ученик')) {
+            //     // new Question(
+            //     //     'Какой город является столицей Франции?',
+            //     //     'Париж',
+            //     //     'Лондон',
+            //     //     'Берлин'
+            //     // );
+            // }
+
+            // new About();
+            // new Authors();
         }
-
-        //Question
-        // if(new QuestionBase('Ученик')) {
-        //     this.initAppendDev();
-        //     // new Question(
-        //     //     'Какой город является столицей Франции?',
-        //     //     'Париж',
-        //     //     'Лондон',
-        //     //     'Берлин'
-        //     // );
-        // } else {
-        //     this.initAppend();
-        // }
-
-        // new About();
-        // new Authors();
-
-        // if (import.meta.env.DEV
-        //     || import.meta.env.PROD
-        // ) {
-        //     this.initLayoutDev(); // Скрывать для build
-        // }
     }
 
     initLayout() {
