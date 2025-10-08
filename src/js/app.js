@@ -5,41 +5,40 @@ import '/fonts/fontawesome-free-7.0.0-web/scss/solid.scss';
 import '/fonts/fontawesome-free-7.0.0-web/scss/brands.scss';
 
 import { Intro } from "./Intro.js";
-import { Category } from "./Category.js";
-import { ChoiceCategory } from "./ChoiceCategory.js";
 import { About } from './About.js';
 import { Authors } from './Authors.js';
+import { Category } from "./Category.js";
+import { ChoiceCategory } from "./ChoiceCategory.js";
+import { QuestionBase } from "./QuestionBase.js";
+import { Question } from './Question.js';
 
 export class Game {
     constructor(parameters) {
         this.initLayout();
         this.initLayoutBack();
-        this.initAppend();
-        new Intro();
+        if (import.meta.env.PROD) {
+            this.initAppend();
+            new Intro();
+        } else if (import.meta.env.DEV) {
+            this.initAppendDev();
+            new ChoiceCategory(
+                'Ученик',
+                'Student'
+            );
 
-        //Develop
-        // new Category(
-        //     45,
-        //     'Ученик',
-        //     'Student',
-        //     'Знаток',
-        //     'Connoisseur',
-        //     'Хранитель',
-        //     'Keeper');
-        // new ChoiceCategory(
-        //     'Ученик',
-        //     '',
-        //     '',
-        //     'Student');
+            //Question
+            // if(new QuestionBase('Ученик')) {
+            //     // new Question(
+            //     //     'Какой город является столицей Франции?',
+            //     //     'Париж',
+            //     //     'Лондон',
+            //     //     'Берлин'
+            //     // );
+            // }
 
-        // new About();
-        // new Authors();
-
-        // if (import.meta.env.DEV
-        //     || import.meta.env.PROD
-        // ) {
-        //     this.initLayoutDev(); // Скрывать для build
-        // }
+            // new About();
+            // new Authors();
+        }
     }
 
     initLayout() {
@@ -108,8 +107,10 @@ export class Game {
         this.wrapperBack.appendChild(this.wrapperBackAuthors);
         this.wrapperBack.appendChild(this.wrapperBackCategory);
         this.wrapperBack.appendChild(this.wrapperBackFirst);
-        this.wrapperBack.appendChild(this.wrapperBackSecond);
-        this.wrapperBack.appendChild(this.wrapperBackThird);
+    }
+
+    initAppendDev() {
+        this.wrapperBack.appendChild(this.wrapperBackFirst);
     }
 
     initMobile() {

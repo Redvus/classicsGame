@@ -421,6 +421,26 @@ body {
                 width: 105%;
             }
         }
+
+        &--book {
+            width: calc(var(--containerWidth) * 1.2);
+            height: calc(var(--containerHeight) * 1.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            //margin-top: -7vh;
+            transform: translate(-50%, -50%);
+            //background-color: cornflowerblue;
+            z-index: 5;
+
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
     }
 
     // &__lightbox {
